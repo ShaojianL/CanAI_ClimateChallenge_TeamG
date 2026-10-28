@@ -22,10 +22,22 @@ python3 -m venv .venv                      # once
 
 ### Project layout
 
-- `app.py` — single-page Streamlit app (map, street search/selection, legend, details)
+- `app.py` — single-page Streamlit entry point with Map and Simulation tabs
+- `components/map_tab.py` — map rendering, street search/selection, priority legend, source links, and details
+- `components/simulation_tab.py` — future simulation tab; currently an unavailable-data placeholder
+- `services/street_data.py` — cached local data loading and validation, shared independently of the tabs
 - `scripts/fetch_pilot_streets.py` — one-time data prep: road geometry from the City's public ArcGIS layer + priorities verified via the City's [street priority lookup](https://apps.stjohns.ca/snowclearing/StreetPriority.aspx)
 - `data/pilot_streets.geojson` — prepared road segments (WGS84)
 - `data/street_priorities.json` — verified priorities per pilot street, incl. section-level detail
+
+Keep feature-specific UI in `components/` and shared data logic in `services/` rather than adding them to `app.py`.
+Map data failures are shown within the Map tab without preventing other tabs from rendering.
+
+Run the tab and map regression checks with:
+
+```bash
+.venv/bin/python -m unittest discover -s tests -v
+```
 
 ### Data sources and network access
 
