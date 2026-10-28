@@ -6,6 +6,11 @@ import streamlit as st
 def render():
     st.header("Dev note")
     st.caption("Team: please read and update these notes as work progresses.")
+    st.markdown(
+        "**Folder convention:** Keep `app.py` for the entry point and tab wiring "
+        "only. Add and modify feature UI in `components/`; keep shared data logic "
+        "in `services/`."
+    )
     st.subheader("Map component progress")
     st.markdown(
         "- Interactive OpenStreetMap basemap with City road geometry.\n"
