@@ -1,0 +1,5205 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "id": 4432,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.713375834322086,
+      47.55534456468472
+     ],
+     [
+      -52.7134438436108,
+      47.555240352521444
+     ],
+     [
+      -52.713991913413295,
+      47.55429767600808
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4432,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1086,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4647,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.697422175195705,
+      47.5708522099956
+     ],
+     [
+      -52.700673542958334,
+      47.569494349947234
+     ],
+     [
+      -52.70083647268851,
+      47.56940038860414
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4647,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1175,
+    "STREETCLS": "RES",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4757,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.704897798961156,
+      47.56614921723637
+     ],
+     [
+      -52.705630231836814,
+      47.56548317092267
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4757,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1483,
+    "STREETCLS": "COLLECTOR",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5020,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.711856680446374,
+      47.557360619256734
+     ],
+     [
+      -52.71194699186582,
+      47.557248406143096
+     ],
+     [
+      -52.71216438704462,
+      47.556832377136615
+     ],
+     [
+      -52.712348833962814,
+      47.55656219235719
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5020,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1087,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5021,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.712348833962814,
+      47.55656219235719
+     ],
+     [
+      -52.712506372075104,
+      47.556379194144824
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5021,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1088,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5098,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.708096888518455,
+      47.5630590241818
+     ],
+     [
+      -52.70854960442454,
+      47.562659553123005
+     ],
+     [
+      -52.70873130729176,
+      47.56250644162679
+     ],
+     [
+      -52.70894248138874,
+      47.56237566232237
+     ],
+     [
+      -52.709265477522855,
+      47.56224071529987
+     ],
+     [
+      -52.709459875374684,
+      47.5621699839743
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5098,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1684,
+    "STREETCLS": "COLLECTOR",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5150,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.705630231836814,
+      47.56548317092267
+     ],
+     [
+      -52.706727735400506,
+      47.56445549032901
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5150,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 910,
+    "STREETCLS": "COLLECTOR",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5243,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.703924332535486,
+      47.566942708489556
+     ],
+     [
+      -52.70415274556724,
+      47.566751937949725
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5243,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1415,
+    "STREETCLS": "COLLECTOR",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5260,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.706727735400506,
+      47.56445549032901
+     ],
+     [
+      -52.706843512096135,
+      47.56433337260918
+     ],
+     [
+      -52.707280324441285,
+      47.56384038621612
+     ],
+     [
+      -52.70766068469704,
+      47.56344518305853
+     ],
+     [
+      -52.708096888518455,
+      47.5630590241818
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5260,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1643,
+    "STREETCLS": "COLLECTOR",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5335,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.7031048114658,
+      47.567610347991774
+     ],
+     [
+      -52.70362685701643,
+      47.56718372533172
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5335,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1404,
+    "STREETCLS": "COLLECTOR",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5430,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.713991913413295,
+      47.55429767600808
+     ],
+     [
+      -52.71443715649842,
+      47.55358884990211
+     ],
+     [
+      -52.71454576329653,
+      47.55345362551809
+     ],
+     [
+      -52.71475705324907,
+      47.553228441752665
+     ],
+     [
+      -52.71534414632028,
+      47.55264670890248
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5430,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 2580,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5561,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71130400974496,
+      47.55987795233445
+     ],
+     [
+      -52.711592614511844,
+      47.559557398882255
+     ],
+     [
+      -52.71163171986262,
+      47.559432661914975
+     ],
+     [
+      -52.71168302588062,
+      47.5591525906191
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5561,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1503,
+    "STREETCLS": "COLLECTOR",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5575,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71613216030986,
+      47.55197153531462
+     ],
+     [
+      -52.71666424026386,
+      47.551580143690124
+     ],
+     [
+      -52.71772249603428,
+      47.550815602301505
+     ],
+     [
+      -52.71802703891718,
+      47.55044582265292
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5575,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 2007,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5615,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71170312479715,
+      47.55794941873044
+     ],
+     [
+      -52.71178615296439,
+      47.557499867600406
+     ],
+     [
+      -52.711856680446374,
+      47.557360619256734
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5615,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1909,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5852,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71534414632028,
+      47.55264670890248
+     ],
+     [
+      -52.71613216030986,
+      47.55197153531462
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5852,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1986,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5987,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71802703891718,
+      47.55044582265292
+     ],
+     [
+      -52.718557021654824,
+      47.54972041953997
+     ],
+     [
+      -52.71920573437924,
+      47.54913229446013
+     ],
+     [
+      -52.71946126048077,
+      47.548916342098494
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5987,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1506,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6049,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71057099409051,
+      47.56098694281961
+     ],
+     [
+      -52.710783659148895,
+      47.56062870245816
+     ],
+     [
+      -52.71097635256671,
+      47.56026862671172
+     ],
+     [
+      -52.711055770578994,
+      47.56015942727897
+     ],
+     [
+      -52.71130400974496,
+      47.55987795233445
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6049,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1699,
+    "STREETCLS": "COLLECTOR",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6058,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71257569339531,
+      47.556298294159745
+     ],
+     [
+      -52.71300185813344,
+      47.5557977557557
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6058,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1708,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6071,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70083647268851,
+      47.56940038860414
+     ],
+     [
+      -52.70091124553416,
+      47.56935403535034
+     ],
+     [
+      -52.70129670296691,
+      47.5691003251138
+     ],
+     [
+      -52.70146751254199,
+      47.56896371565738
+     ],
+     [
+      -52.70173838596306,
+      47.56870065469179
+     ],
+     [
+      -52.70210686336389,
+      47.56840681503218
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6071,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1743,
+    "STREETCLS": "COLLECTOR",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6089,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71168302588062,
+      47.5591525906191
+     ],
+     [
+      -52.71170979874091,
+      47.55830835818641
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6089,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 2230,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6108,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.709459875374684,
+      47.5621699839743
+     ],
+     [
+      -52.70961835030868,
+      47.562054651385
+     ],
+     [
+      -52.70984910935139,
+      47.561853548817325
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6108,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 3495,
+    "STREETCLS": "COLLECTOR",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6153,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70210686336389,
+      47.56840681503218
+     ],
+     [
+      -52.7031048114658,
+      47.567610347991774
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6153,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1771,
+    "STREETCLS": "COLLECTOR",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6161,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71170979874091,
+      47.55830835818641
+     ],
+     [
+      -52.71170312479715,
+      47.55794941873044
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6161,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1880,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6178,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71946126048077,
+      47.548916342098494
+     ],
+     [
+      -52.71971293582992,
+      47.548699077243725
+     ],
+     [
+      -52.72052615267575,
+      47.54794730983101
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6178,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 2047,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 7245,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71300185813344,
+      47.5557977557557
+     ],
+     [
+      -52.713375821063835,
+      47.55534455925448
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 7245,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 3672,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 7407,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70362685701643,
+      47.56718372533172
+     ],
+     [
+      -52.703924332535486,
+      47.566942708489556
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 7407,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 1409,
+    "STREETCLS": "COLLECTOR",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 7440,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70984910935139,
+      47.561853548817325
+     ],
+     [
+      -52.709875293356625,
+      47.56183073308741
+     ],
+     [
+      -52.71007447845544,
+      47.56162847256757
+     ],
+     [
+      -52.710220164937844,
+      47.56144633371648
+     ],
+     [
+      -52.71057099409051,
+      47.56098694281961
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 7440,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 3494,
+    "STREETCLS": "COLLECTOR",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45595,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.712506372075104,
+      47.556379194144824
+     ],
+     [
+      -52.71257569339531,
+      47.556298294159745
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45595,
+    "STREETNAME": "WATER ST",
+    "STREET_ID": 5296,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3964,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.69806998969266,
+      47.57155568826252
+     ],
+     [
+      -52.69858170276509,
+      47.57135051385365
+     ],
+     [
+      -52.69941433062974,
+      47.570957096382216
+     ],
+     [
+      -52.70026582340863,
+      47.570636268240484
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3964,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1307,
+    "STREETCLS": "RES",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3973,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.707680873858045,
+      47.56454472512596
+     ],
+     [
+      -52.70785304373343,
+      47.56433372294384
+     ],
+     [
+      -52.70805493244007,
+      47.56410054025291
+     ],
+     [
+      -52.708207168880556,
+      47.56392509693022
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3973,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1573,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4264,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.6978187297481,
+      47.57159535557462
+     ],
+     [
+      -52.69806998969266,
+      47.57155568826252
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4264,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1131,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4319,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70997376709993,
+      47.56259861715495
+     ],
+     [
+      -52.710362710218845,
+      47.56243044903689
+     ],
+     [
+      -52.71066604712436,
+      47.5622820923723
+     ],
+     [
+      -52.71102511676746,
+      47.562095912932016
+     ],
+     [
+      -52.711214386098874,
+      47.56208754284994
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4319,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 486,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4620,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.69749279677179,
+      47.571643971720135
+     ],
+     [
+      -52.6978187297481,
+      47.57159535557462
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4620,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1128,
+    "STREETCLS": "RES",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4640,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.700706839493165,
+      47.57035684587177
+     ],
+     [
+      -52.70109658133171,
+      47.570022984307634
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4640,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1336,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4709,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70697635848446,
+      47.565277404123634
+     ],
+     [
+      -52.7072541092976,
+      47.56500435390099
+     ],
+     [
+      -52.70756507652397,
+      47.56467129445094
+     ],
+     [
+      -52.707680873858045,
+      47.56454472512596
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4709,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 906,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4776,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70109658133171,
+      47.570022984307634
+     ],
+     [
+      -52.702482518032774,
+      47.568869381251154
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4776,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1376,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4929,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70026582340863,
+      47.570636268240484
+     ],
+     [
+      -52.70042862941595,
+      47.570564287783604
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4929,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1310,
+    "STREETCLS": "RES",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5076,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.708207168880556,
+      47.56392509693022
+     ],
+     [
+      -52.70840897727467,
+      47.563690970700854
+     ],
+     [
+      -52.70863077917952,
+      47.56343874980648
+     ],
+     [
+      -52.70883595852612,
+      47.563203346857755
+     ],
+     [
+      -52.70901439923581,
+      47.56304577762644
+     ],
+     [
+      -52.70937735110202,
+      47.56282190268727
+     ],
+     [
+      -52.70997376709993,
+      47.56259861715495
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5076,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1663,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5121,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -52.70415274556724,
+       47.566751937949725
+      ],
+      [
+       -52.704897798961156,
+       47.56614921723637
+      ]
+     ],
+     [
+      [
+       -52.70470307482012,
+       47.56706884049089
+      ],
+      [
+       -52.70542705830421,
+       47.566496892216534
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5121,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1429,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5222,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.702482518032774,
+      47.568869381251154
+     ],
+     [
+      -52.70287605006094,
+      47.568536815101844
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5222,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1206,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5232,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70042862941595,
+      47.570564287783604
+     ],
+     [
+      -52.70057629244603,
+      47.57046770173923
+     ],
+     [
+      -52.700706839493165,
+      47.57035684587177
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5232,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1318,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5330,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70354670130855,
+      47.56799424125625
+     ],
+     [
+      -52.704414434396824,
+      47.56729961861256
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5330,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1399,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5334,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.704414434396824,
+      47.56729961861256
+     ],
+     [
+      -52.70470307482012,
+      47.56706884049089
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5334,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1403,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5407,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70607135395454,
+      47.565987307439904
+     ],
+     [
+      -52.70622655718377,
+      47.56587196942313
+     ],
+     [
+      -52.70662272414211,
+      47.56559477316349
+     ],
+     [
+      -52.70697635848446,
+      47.565277404123634
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5407,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1537,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6197,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70287605006094,
+      47.568536815101844
+     ],
+     [
+      -52.70354670130855,
+      47.56799424125625
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6197,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 1762,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6388,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70542705830421,
+      47.566496892216534
+     ],
+     [
+      -52.70589628210472,
+      47.56612707739108
+     ],
+     [
+      -52.70607135395454,
+      47.565987307439904
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6388,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 3143,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45574,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.711214386098874,
+      47.56208754284994
+     ],
+     [
+      -52.71145730023237,
+      47.561982798034116
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45574,
+    "STREETNAME": "DUCKWORTH ST",
+    "STREET_ID": 5284,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4348,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.709306763375665,
+      47.56488270991268
+     ],
+     [
+      -52.71000157981054,
+      47.56435120355445
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4348,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 1222,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4682,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70325321196182,
+      47.569877974107875
+     ],
+     [
+      -52.70382563869045,
+      47.5694251971224
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4682,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 1179,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4771,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.7040433373016,
+      47.569217347952396
+     ],
+     [
+      -52.704346577834464,
+      47.56896778695853
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4771,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 1371,
+    "STREETCLS": "RES",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4894,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.701662143426745,
+      47.571236616071985
+     ],
+     [
+      -52.70179587713063,
+      47.57109304102079
+     ],
+     [
+      -52.702340423445726,
+      47.57065369001175
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4894,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 1302,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4963,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70774016140772,
+      47.56619337592284
+     ],
+     [
+      -52.708111860697535,
+      47.56588308817526
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4963,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 1455,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5223,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70658321158419,
+      47.56711602553421
+     ],
+     [
+      -52.70713730750822,
+      47.5666698917419
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5223,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 1418,
+    "STREETCLS": "RES",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5268,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.702340423445726,
+      47.57065369001175
+     ],
+     [
+      -52.70325321196182,
+      47.569877974107875
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5268,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 1343,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5284,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.7088374694774,
+      47.56527775747665
+     ],
+     [
+      -52.709306763375665,
+      47.56488270991268
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5284,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 1559,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5293,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70382563869045,
+      47.5694251971224
+     ],
+     [
+      -52.7040433373016,
+      47.569217347952396
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5293,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 1357,
+    "STREETCLS": "RES",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5297,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70573584207994,
+      47.567797488525805
+     ],
+     [
+      -52.70602616148454,
+      47.567559689765154
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5297,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 1390,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5365,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70602616148454,
+      47.567559689765154
+     ],
+     [
+      -52.70658321158419,
+      47.56711602553421
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5365,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 1217,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5406,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.708111860697535,
+      47.56588308817526
+     ],
+     [
+      -52.7088374694774,
+      47.56527775747665
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5406,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 1536,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6068,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.704346577834464,
+      47.56896778695853
+     ],
+     [
+      -52.704873736055774,
+      47.5685103903975
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6068,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 1740,
+    "STREETCLS": "RES",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6149,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.705540610108535,
+      47.567954091923454
+     ],
+     [
+      -52.70573584207994,
+      47.567797488525805
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6149,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 1767,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6310,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70713730750822,
+      47.5666698917419
+     ],
+     [
+      -52.70759607228634,
+      47.566311440169706
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6310,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 2709,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6311,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70759607228634,
+      47.566311440169706
+     ],
+     [
+      -52.70774016140772,
+      47.56619337592284
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6311,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 2710,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6602,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.704873736055774,
+      47.5685103903975
+     ],
+     [
+      -52.705378318922435,
+      47.56808438414424
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6602,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 3137,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6777,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.705378318922435,
+      47.56808438414424
+     ],
+     [
+      -52.705471530872124,
+      47.568008218468215
+     ],
+     [
+      -52.705540610108535,
+      47.567954091923454
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6777,
+    "STREETNAME": "GOWER ST",
+    "STREET_ID": 2567,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3917,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.701662143426745,
+      47.571236616071985
+     ],
+     [
+      -52.70264542174852,
+      47.57129314035759
+     ],
+     [
+      -52.70396265578757,
+      47.57132984948631
+     ],
+     [
+      -52.7043296527301,
+      47.57131098690121
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3917,
+    "STREETNAME": "MILITARY RD",
+    "STREET_ID": 1139,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3921,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.7043296527301,
+      47.57131098690121
+     ],
+     [
+      -52.705134393077735,
+      47.57120128979664
+     ],
+     [
+      -52.70540763232352,
+      47.57113898427495
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3921,
+    "STREETNAME": "MILITARY RD",
+    "STREET_ID": 1144,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4139,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70623858364733,
+      47.570665301185635
+     ],
+     [
+      -52.70666008216748,
+      47.570395957910435
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4139,
+    "STREETNAME": "MILITARY RD",
+    "STREET_ID": 1321,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4895,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.705845539367786,
+      47.57090980643466
+     ],
+     [
+      -52.70623858364733,
+      47.570665301185635
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4895,
+    "STREETNAME": "MILITARY RD",
+    "STREET_ID": 1303,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5000,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70540763232352,
+      47.57113898427495
+     ],
+     [
+      -52.70550733759028,
+      47.57110665078357
+     ],
+     [
+      -52.7056200433887,
+      47.57104610572067
+     ],
+     [
+      -52.705845539367786,
+      47.57090980643466
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5000,
+    "STREETNAME": "MILITARY RD",
+    "STREET_ID": 1155,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5132,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70779362619554,
+      47.569259968235706
+     ],
+     [
+      -52.708199425910216,
+      47.56881039143359
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5132,
+    "STREETNAME": "MILITARY RD",
+    "STREET_ID": 1381,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5215,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.707287896703505,
+      47.569808802247586
+     ],
+     [
+      -52.70779362619554,
+      47.569259968235706
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5215,
+    "STREETNAME": "MILITARY RD",
+    "STREET_ID": 1193,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5270,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.707000119914944,
+      47.570129524547234
+     ],
+     [
+      -52.707287896703505,
+      47.569808802247586
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5270,
+    "STREETNAME": "MILITARY RD",
+    "STREET_ID": 1345,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5370,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.70666008216748,
+      47.570395957910435
+     ],
+     [
+      -52.70675917084412,
+      47.57033415715106
+     ],
+     [
+      -52.70685141897299,
+      47.57026052635754
+     ],
+     [
+      -52.707000119914944,
+      47.570129524547234
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5370,
+    "STREETNAME": "MILITARY RD",
+    "STREET_ID": 1333,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6069,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.708199425910216,
+      47.56881039143359
+     ],
+     [
+      -52.708500391428295,
+      47.56845471912208
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6069,
+    "STREETNAME": "MILITARY RD",
+    "STREET_ID": 1741,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6601,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.708500391428295,
+      47.56845471912208
+     ],
+     [
+      -52.70935275587091,
+      47.567299684577
+     ],
+     [
+      -52.70957107112147,
+      47.5671204292907
+     ],
+     [
+      -52.70971620450803,
+      47.567050146727034
+     ],
+     [
+      -52.70989954438066,
+      47.566985429686014
+     ],
+     [
+      -52.7101535672668,
+      47.566910028404024
+     ],
+     [
+      -52.71030485458624,
+      47.566800874473735
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6601,
+    "STREETNAME": "MILITARY RD",
+    "STREET_ID": 3136,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3765,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.77582098001699,
+      47.55156598506428
+     ],
+     [
+      -52.776769504645074,
+      47.55114662483258
+     ],
+     [
+      -52.77721860771134,
+      47.55093924829403
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3765,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 496,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3837,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74701127843921,
+      47.56101542146879
+     ],
+     [
+      -52.747655662899476,
+      47.560898500242025
+     ],
+     [
+      -52.748059873403655,
+      47.560821288978296
+     ],
+     [
+      -52.748574048606535,
+      47.56067012237152
+     ],
+     [
+      -52.74906254046235,
+      47.560460322398406
+     ],
+     [
+      -52.74918367035549,
+      47.56034990693195
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3837,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 864,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3863,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.774717402000036,
+      47.552059512347824
+     ],
+     [
+      -52.77535107153926,
+      47.551775026250176
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3863,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 3679,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3905,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.78480052690954,
+      47.54770399079817
+     ],
+     [
+      -52.787942529033366,
+      47.54664233126498
+     ],
+     [
+      -52.79050020531498,
+      47.54576100343343
+     ],
+     [
+      -52.7919638686156,
+      47.54518797411646
+     ],
+     [
+      -52.7939900612851,
+      47.54431251315218
+     ],
+     [
+      -52.79912218502177,
+      47.54209648930817
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3905,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 3283,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4058,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.766763723025186,
+      47.55521412606628
+     ],
+     [
+      -52.768460043367185,
+      47.5547318223163
+     ],
+     [
+      -52.76941816897965,
+      47.55440992536456
+     ],
+     [
+      -52.769854846320705,
+      47.55421689202449
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4058,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 493,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4059,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.770938206974115,
+      47.553737979513635
+     ],
+     [
+      -52.77232002903418,
+      47.553127100822856
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4059,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 494,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4060,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.772669661385834,
+      47.55297252998475
+     ],
+     [
+      -52.77377814921349,
+      47.55247892960967
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4060,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 495,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4855,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.84139641691922,
+      47.52635525949868
+     ],
+     [
+      -52.841445336794536,
+      47.52635004693432
+     ],
+     [
+      -52.84290623406237,
+      47.52622251324561
+     ],
+     [
+      -52.84336941391028,
+      47.52621119566718
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4855,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 1084,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5621,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.75163820690872,
+      47.55922131346831
+     ],
+     [
+      -52.752308431905895,
+      47.559051754282834
+     ],
+     [
+      -52.75731003193808,
+      47.55796503266346
+     ],
+     [
+      -52.75938949409064,
+      47.55737123336328
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5621,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 1915,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5780,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.84336941391028,
+      47.52621119566718
+     ],
+     [
+      -52.84381912352384,
+      47.52620020689085
+     ],
+     [
+      -52.84484490172197,
+      47.526219264025194
+     ],
+     [
+      -52.845244769979246,
+      47.52623157904658
+     ],
+     [
+      -52.84562929003097,
+      47.526251634906934
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5780,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 532,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6428,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.75938949409064,
+      47.55737123336328
+     ],
+     [
+      -52.766763723025186,
+      47.55521412606628
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6428,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 2237,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6524,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.81544239494419,
+      47.53691458262504
+     ],
+     [
+      -52.818168197843676,
+      47.53643518864604
+     ],
+     [
+      -52.82045220974516,
+      47.536025006647044
+     ],
+     [
+      -52.8205722521754,
+      47.53599725534129
+     ],
+     [
+      -52.8207446784967,
+      47.535953502333015
+     ],
+     [
+      -52.821807427630056,
+      47.53570970032062
+     ],
+     [
+      -52.82278933963124,
+      47.53548443047026
+     ],
+     [
+      -52.82794427611806,
+      47.53422844850339
+     ],
+     [
+      -52.831033526099986,
+      47.53350892727702
+     ],
+     [
+      -52.83106883532276,
+      47.53349998406236
+     ],
+     [
+      -52.83116564713627,
+      47.53346864332057
+     ],
+     [
+      -52.83206983981871,
+      47.533216715551205
+     ],
+     [
+      -52.83264295352294,
+      47.53305702802339
+     ],
+     [
+      -52.8333695767401,
+      47.532730339461125
+     ],
+     [
+      -52.83340994423735,
+      47.53271090004463
+     ],
+     [
+      -52.833944487181135,
+      47.53235113205902
+     ],
+     [
+      -52.83406871740716,
+      47.532267519498625
+     ],
+     [
+      -52.83467437182488,
+      47.53160140684488
+     ],
+     [
+      -52.835079064635416,
+      47.53107167386452
+     ],
+     [
+      -52.835287119936915,
+      47.530763690080995
+     ],
+     [
+      -52.836247471675655,
+      47.52934202305485
+     ],
+     [
+      -52.83647309665024,
+      47.528882217160636
+     ],
+     [
+      -52.836542563950935,
+      47.52869191585432
+     ],
+     [
+      -52.8365517844182,
+      47.528664322619406
+     ],
+     [
+      -52.83655746380592,
+      47.52864624129581
+     ],
+     [
+      -52.836592692946006,
+      47.52861725667548
+     ],
+     [
+      -52.836700493601704,
+      47.52852887371613
+     ],
+     [
+      -52.837025586920525,
+      47.5281723368321
+     ],
+     [
+      -52.8375882748511,
+      47.52769059099414
+     ],
+     [
+      -52.838043597730596,
+      47.52736458184892
+     ],
+     [
+      -52.838600847843466,
+      47.526997566548935
+     ],
+     [
+      -52.83927091484951,
+      47.52668854605895
+     ],
+     [
+      -52.8393714383724,
+      47.52665809048901
+     ],
+     [
+      -52.83940578283962,
+      47.52664562620905
+     ],
+     [
+      -52.83945364151547,
+      47.5266358056476
+     ],
+     [
+      -52.83960155555106,
+      47.526594794627705
+     ],
+     [
+      -52.8400210387268,
+      47.526519579453726
+     ],
+     [
+      -52.8402956049327,
+      47.526480638530444
+     ],
+     [
+      -52.84050152318502,
+      47.52645411387807
+     ],
+     [
+      -52.84139641691922,
+      47.52635525949868
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6524,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 5073,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6932,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.77721860771134,
+      47.55093924829403
+     ],
+     [
+      -52.779112823935236,
+      47.55012108672776
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6932,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 3431,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6933,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.779112823935236,
+      47.55012108672776
+     ],
+     [
+      -52.7824572078696,
+      47.548676419045194
+     ],
+     [
+      -52.78373264363365,
+      47.54812815532042
+     ],
+     [
+      -52.78461984087678,
+      47.547765038534614
+     ],
+     [
+      -52.78480052690954,
+      47.54770399079817
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6933,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 3432,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 7214,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74918367035549,
+      47.56034990693195
+     ],
+     [
+      -52.74924531152143,
+      47.560317399064104
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 7214,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 3613,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 7215,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74924531152143,
+      47.560317399064104
+     ],
+     [
+      -52.74928641166956,
+      47.5602946384292
+     ],
+     [
+      -52.75078147914112,
+      47.55957466536842
+     ],
+     [
+      -52.75112372586857,
+      47.55940852971098
+     ],
+     [
+      -52.75163820690872,
+      47.55922131346831
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 7215,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 1493,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 8666,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.79912218502177,
+      47.54209648930817
+     ],
+     [
+      -52.80378024684262,
+      47.5400815259936
+     ],
+     [
+      -52.804027016773226,
+      47.53992003397461
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 8666,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 3284,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 35249,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.77232002903418,
+      47.553127100822856
+     ],
+     [
+      -52.772669661385834,
+      47.55297252998475
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 35249,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 5080,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 35251,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.769854846320705,
+      47.55421689202449
+     ],
+     [
+      -52.770938206974115,
+      47.553737979513635
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 35251,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 5368,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 35267,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.77535107153926,
+      47.551775026250176
+     ],
+     [
+      -52.77582098001699,
+      47.55156598506428
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 35267,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 5078,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 35271,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.804027016773226,
+      47.53992003397461
+     ],
+     [
+      -52.80457855092635,
+      47.5397410706617
+     ],
+     [
+      -52.807159700842334,
+      47.53863003230086
+     ],
+     [
+      -52.80883532262753,
+      47.53811111457343
+     ],
+     [
+      -52.81005830551566,
+      47.5378612802609
+     ],
+     [
+      -52.81544239494419,
+      47.53691458262504
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 35271,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 3102,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 36473,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.77377814921349,
+      47.55247892960967
+     ],
+     [
+      -52.77439764385573,
+      47.55220306522665
+     ],
+     [
+      -52.774717402000036,
+      47.552059512347824
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 36473,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 5079,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45661,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74918367035549,
+      47.56034990693195
+     ],
+     [
+      -52.74903580533294,
+      47.560363768912545
+     ],
+     [
+      -52.74864969105613,
+      47.56053556541287
+     ],
+     [
+      -52.7484589761485,
+      47.560605437534655
+     ],
+     [
+      -52.74799105586648,
+      47.56073522745118
+     ],
+     [
+      -52.74754062859385,
+      47.56082600494736
+     ],
+     [
+      -52.746940146491056,
+      47.560928164145324
+     ],
+     [
+      -52.74679994526843,
+      47.56095538001553
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45661,
+    "STREETNAME": "KENMOUNT RD",
+    "STREET_ID": 5331,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3786,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.72885701298518,
+      47.57756096478361
+     ],
+     [
+      -52.73012658034509,
+      47.5766192416414
+     ],
+     [
+      -52.733221175416446,
+      47.57432357051665
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3786,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 817,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4382,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.73742538527153,
+      47.57122727152904
+     ],
+     [
+      -52.73698003779065,
+      47.57150435405565
+     ],
+     [
+      -52.736160246281365,
+      47.5720722066358
+     ],
+     [
+      -52.73455801831453,
+      47.573210091685986
+     ],
+     [
+      -52.73311615320735,
+      47.57425103654006
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4382,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 229,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4594,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.731176123451526,
+      47.57567354552366
+     ],
+     [
+      -52.73014474864151,
+      47.576462107369174
+     ],
+     [
+      -52.729880125478346,
+      47.57666442623384
+     ],
+     [
+      -52.72878508139519,
+      47.57750162364405
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4594,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 794,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4615,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.72250851107646,
+      47.58477294333563
+     ],
+     [
+      -52.722380627888526,
+      47.58423225728236
+     ],
+     [
+      -52.722321213996004,
+      47.58396460210091
+     ],
+     [
+      -52.72231404661066,
+      47.583676495151224
+     ],
+     [
+      -52.7223545962877,
+      47.58340320177564
+     ],
+     [
+      -52.72244731445859,
+      47.583124156279396
+     ],
+     [
+      -52.72259202811295,
+      47.582871693002964
+     ],
+     [
+      -52.722788941119745,
+      47.582607597225426
+     ],
+     [
+      -52.72300734277475,
+      47.58238764814617
+     ],
+     [
+      -52.723234245937576,
+      47.58220299546159
+     ],
+     [
+      -52.72343048745635,
+      47.58206530317499
+     ],
+     [
+      -52.72366584491497,
+      47.581924765170186
+     ],
+     [
+      -52.72405793506868,
+      47.58172287095868
+     ],
+     [
+      -52.72454580604151,
+      47.58148298861782
+     ],
+     [
+      -52.72491613593164,
+      47.58128691843884
+     ],
+     [
+      -52.7253300020689,
+      47.58107331270947
+     ],
+     [
+      -52.725661316236,
+      47.580859508075946
+     ],
+     [
+      -52.726001700160765,
+      47.58057223189627
+     ],
+     [
+      -52.726206939153506,
+      47.58037282343906
+     ],
+     [
+      -52.726381825255395,
+      47.58016158283774
+     ],
+     [
+      -52.72663994570572,
+      47.57981825392814
+     ],
+     [
+      -52.726924404361775,
+      47.5794220739899
+     ],
+     [
+      -52.72716931516729,
+      47.57911104910436
+     ],
+     [
+      -52.72741849245928,
+      47.5788147328124
+     ],
+     [
+      -52.72765431248582,
+      47.57858011804881
+     ],
+     [
+      -52.728038404385124,
+      47.578237084925455
+     ],
+     [
+      -52.72885701298518,
+      47.57756096478361
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4615,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 781,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4808,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74596475487152,
+      47.566442912834056
+     ],
+     [
+      -52.74622608919808,
+      47.566224376830476
+     ],
+     [
+      -52.74746875622678,
+      47.5651278894302
+     ],
+     [
+      -52.74771929492394,
+      47.5648942161032
+     ],
+     [
+      -52.74804837057326,
+      47.56453621603412
+     ],
+     [
+      -52.74829622068137,
+      47.56421179930706
+     ],
+     [
+      -52.74854747835543,
+      47.563826196161365
+     ],
+     [
+      -52.74872075288911,
+      47.563448861809306
+     ],
+     [
+      -52.74891962974434,
+      47.56293231346469
+     ],
+     [
+      -52.74895467969032,
+      47.56277413069117
+     ],
+     [
+      -52.7489882612936,
+      47.5624269603315
+     ],
+     [
+      -52.7489528498338,
+      47.56190424360945
+     ],
+     [
+      -52.74891055793512,
+      47.561708309624386
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4808,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 1679,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4948,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.737549742917864,
+      47.571317933334036
+     ],
+     [
+      -52.7381026213537,
+      47.57106869044918
+     ],
+     [
+      -52.73941335895129,
+      47.57047856633117
+     ],
+     [
+      -52.73985606851231,
+      47.57027541316271
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4948,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 1326,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5125,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74375493622491,
+      47.56831764610216
+     ],
+     [
+      -52.74394618497376,
+      47.5681850920875
+     ],
+     [
+      -52.744531103221526,
+      47.56772317975207
+     ],
+     [
+      -52.74578965785908,
+      47.56660237195137
+     ],
+     [
+      -52.74596475487152,
+      47.566442912834056
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5125,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 1433,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6138,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71984859194759,
+      47.589795901297
+     ],
+     [
+      -52.72010483649648,
+      47.58918192811863
+     ],
+     [
+      -52.720283330866,
+      47.58879024080144
+     ],
+     [
+      -52.720421172415435,
+      47.58859573386876
+     ],
+     [
+      -52.72075383020884,
+      47.58832376272999
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6138,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 3154,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 7060,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.72222690052248,
+      47.586844093285094
+     ],
+     [
+      -52.72236147702424,
+      47.58658381611169
+     ],
+     [
+      -52.72245638845203,
+      47.586335620439414
+     ],
+     [
+      -52.72251887353997,
+      47.58609221711784
+     ],
+     [
+      -52.72258891913227,
+      47.585780637098736
+     ],
+     [
+      -52.722619172170674,
+      47.58550549371216
+     ],
+     [
+      -52.72261345242911,
+      47.58522539244717
+     ],
+     [
+      -52.72250851107646,
+      47.58477294333563
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 7060,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 3053,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 7061,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.72075383020884,
+      47.58832376272999
+     ],
+     [
+      -52.72108271580005,
+      47.58808344436211
+     ],
+     [
+      -52.72141896743963,
+      47.58781148091055
+     ],
+     [
+      -52.72167224668744,
+      47.58757097629413
+     ],
+     [
+      -52.72190782049931,
+      47.58727441179853
+     ],
+     [
+      -52.72222690052248,
+      47.586844093285094
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 7061,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 3054,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 7365,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.73985606851231,
+      47.57027541316271
+     ],
+     [
+      -52.740541449926496,
+      47.57003126144353
+     ],
+     [
+      -52.741908016867136,
+      47.56941456430692
+     ],
+     [
+      -52.74281613098501,
+      47.56895295129972
+     ],
+     [
+      -52.74345407136481,
+      47.56854688670528
+     ],
+     [
+      -52.74375493622491,
+      47.56831764610216
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 7365,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 1751,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45489,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74870181672318,
+      47.561699370021884
+     ],
+     [
+      -52.74877214490932,
+      47.5619302848107
+     ],
+     [
+      -52.74881253967525,
+      47.56240376205743
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45489,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 5243,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45490,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74881253967525,
+      47.56240376205743
+     ],
+     [
+      -52.748773286259265,
+      47.562760927988215
+     ],
+     [
+      -52.748740798890765,
+      47.562907537717855
+     ],
+     [
+      -52.74854542730325,
+      47.563414977719695
+     ],
+     [
+      -52.74837649622764,
+      47.56378285300736
+     ],
+     [
+      -52.74813171088405,
+      47.56415852042195
+     ],
+     [
+      -52.747889772723994,
+      47.56447519774262
+     ],
+     [
+      -52.74756794688679,
+      47.564825310148876
+     ],
+     [
+      -52.747321892174426,
+      47.56505480037177
+     ],
+     [
+      -52.746127967194084,
+      47.56613942150181
+     ],
+     [
+      -52.74580975425291,
+      47.56638571451063
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45490,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 5244,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45491,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74580975425291,
+      47.56638571451063
+     ],
+     [
+      -52.74562673289246,
+      47.5665435609743
+     ],
+     [
+      -52.74438920055563,
+      47.567645643610625
+     ],
+     [
+      -52.74382087592781,
+      47.56809445213516
+     ],
+     [
+      -52.74364052279636,
+      47.568247798360154
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45491,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 5245,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45492,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74364052279636,
+      47.568247798360154
+     ],
+     [
+      -52.74331063432373,
+      47.56846199405098
+     ],
+     [
+      -52.74270212634482,
+      47.56885659925909
+     ],
+     [
+      -52.74180262196305,
+      47.56931383570922
+     ],
+     [
+      -52.74044817207968,
+      47.56992506386734
+     ],
+     [
+      -52.739786444806015,
+      47.57016422510241
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45492,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 5246,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45493,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.739786444806015,
+      47.57016422510241
+     ],
+     [
+      -52.73881306708305,
+      47.570595402089786
+     ],
+     [
+      -52.73796486661051,
+      47.57097801392747
+     ],
+     [
+      -52.73742538527153,
+      47.57122727152904
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45493,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 5247,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45494,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.733221175416446,
+      47.57432357051665
+     ],
+     [
+      -52.7334937897164,
+      47.574125100675914
+     ],
+     [
+      -52.736098650325964,
+      47.57224877868092
+     ],
+     [
+      -52.736770911344394,
+      47.57176016298352
+     ],
+     [
+      -52.737549742917864,
+      47.571317933334036
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45494,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 5248,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45542,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.73311615320735,
+      47.57425103654006
+     ],
+     [
+      -52.731176123451526,
+      47.57567354552366
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45542,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 5268,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45553,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.72878508139519,
+      47.57750162364405
+     ],
+     [
+      -52.72791108001564,
+      47.57816919602495
+     ],
+     [
+      -52.727522625845765,
+      47.578516124962896
+     ],
+     [
+      -52.727280829675955,
+      47.578756684544835
+     ],
+     [
+      -52.72702733260841,
+      47.57905813639288
+     ],
+     [
+      -52.72677994146156,
+      47.57937231057289
+     ],
+     [
+      -52.72649480975528,
+      47.57976942584753
+     ],
+     [
+      -52.72623883319104,
+      47.5801099008886
+     ],
+     [
+      -52.72606940509308,
+      47.58031454916273
+     ],
+     [
+      -52.72587181954954,
+      47.580506521378155
+     ],
+     [
+      -52.72554162249142,
+      47.58078519879107
+     ],
+     [
+      -52.725224598783996,
+      47.5809897812965
+     ],
+     [
+      -52.72481703817547,
+      47.58120013293523
+     ],
+     [
+      -52.724448189658276,
+      47.58139541837991
+     ],
+     [
+      -52.72396120143458,
+      47.58163486616826
+     ],
+     [
+      -52.72356300344916,
+      47.58183990533159
+     ],
+     [
+      -52.72331834118936,
+      47.58198599948049
+     ],
+     [
+      -52.72311342608072,
+      47.582129777452735
+     ],
+     [
+      -52.72287741540349,
+      47.58232184149559
+     ],
+     [
+      -52.7226487699141,
+      47.582552106393585
+     ],
+     [
+      -52.72244375831161,
+      47.58282706287792
+     ],
+     [
+      -52.72229182214119,
+      47.58309212508883
+     ],
+     [
+      -52.7221942976781,
+      47.58338563292485
+     ],
+     [
+      -52.72215181842741,
+      47.58367192496626
+     ],
+     [
+      -52.722159324704826,
+      47.58397370807996
+     ],
+     [
+      -52.72222044800799,
+      47.58424906553697
+     ],
+     [
+      -52.72234845181081,
+      47.584790271979635
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45553,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 5273,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45554,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.72234845181081,
+      47.584790271979635
+     ],
+     [
+      -52.72245153032766,
+      47.58523469755164
+     ],
+     [
+      -52.72245699151411,
+      47.58550217710204
+     ],
+     [
+      -52.72242772926654,
+      47.58576830610444
+     ],
+     [
+      -52.72235887412187,
+      47.5860745871658
+     ],
+     [
+      -52.72229780561043,
+      47.586312464511806
+     ],
+     [
+      -52.72220623572737,
+      47.58655192126281
+     ],
+     [
+      -52.7220571957872,
+      47.58678901059662
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45554,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 5274,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45555,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.7220571957872,
+      47.58678901059662
+     ],
+     [
+      -52.721763949932054,
+      47.587223857399124
+     ],
+     [
+      -52.72153429320646,
+      47.58751297179223
+     ],
+     [
+      -52.721290592498114,
+      47.58774438099832
+     ],
+     [
+      -52.72096099201527,
+      47.588010964067266
+     ],
+     [
+      -52.720620586176885,
+      47.58822011373171
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45555,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 5275,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45556,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.720620586176885,
+      47.58822011373171
+     ],
+     [
+      -52.72028359681045,
+      47.588536187026435
+     ],
+     [
+      -52.72013195860485,
+      47.58875016161366
+     ],
+     [
+      -52.71994935307259,
+      47.58915086978813
+     ],
+     [
+      -52.71969861478339,
+      47.58971594047977
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45556,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 5276,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45562,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71969861478339,
+      47.58971594047977
+     ],
+     [
+      -52.71961473769456,
+      47.589918310651306
+     ],
+     [
+      -52.71952094961793,
+      47.59022203719515
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45562,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 5279,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45651,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74891055793512,
+      47.561708309624386
+     ],
+     [
+      -52.74887339556306,
+      47.56157310346326
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45651,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 5326,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45658,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74863619029102,
+      47.561548883359976
+     ],
+     [
+      -52.74870181672318,
+      47.561699370021884
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45658,
+    "STREETNAME": "PRINCE PHILIP DR",
+    "STREET_ID": 5329,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4524,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.69749279677179,
+      47.571643971720135
+     ],
+     [
+      -52.69636818974635,
+      47.57191852122793
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4524,
+    "STREETNAME": "SIGNAL HILL RD",
+    "STREET_ID": 472,
+    "STREETCLS": "RES",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5754,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.695949509590726,
+      47.57202635993511
+     ],
+     [
+      -52.695702370458356,
+      47.5721024873765
+     ],
+     [
+      -52.69533191002044,
+      47.57236546557434
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5754,
+    "STREETNAME": "SIGNAL HILL RD",
+    "STREET_ID": 1116,
+    "STREETCLS": "RES",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5918,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.69636818974635,
+      47.57191852122793
+     ],
+     [
+      -52.695949509590726,
+      47.57202635993511
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5918,
+    "STREETNAME": "SIGNAL HILL RD",
+    "STREET_ID": 1118,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6731,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.69387383194503,
+      47.572824453527815
+     ],
+     [
+      -52.69213260217075,
+      47.57266173547213
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6731,
+    "STREETNAME": "SIGNAL HILL RD",
+    "STREET_ID": 2975,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6732,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.69213260217075,
+      47.57266173547213
+     ],
+     [
+      -52.69194191830146,
+      47.57263615396654
+     ],
+     [
+      -52.6917748378588,
+      47.57260531942392
+     ],
+     [
+      -52.69151701793562,
+      47.57254309395131
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6732,
+    "STREETNAME": "SIGNAL HILL RD",
+    "STREET_ID": 2976,
+    "STREETCLS": "RES",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6782,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.69151701793562,
+      47.57254309395131
+     ],
+     [
+      -52.69130071287246,
+      47.57248401820304
+     ],
+     [
+      -52.69060377124991,
+      47.572265637378436
+     ],
+     [
+      -52.69039868309804,
+      47.57220810856611
+     ],
+     [
+      -52.6901285096362,
+      47.57214736680656
+     ],
+     [
+      -52.689951321033426,
+      47.57211802068187
+     ],
+     [
+      -52.68974716756253,
+      47.57209240091334
+     ],
+     [
+      -52.689427382848905,
+      47.57206874533444
+     ],
+     [
+      -52.689117586010056,
+      47.57206486753952
+     ],
+     [
+      -52.68843960375681,
+      47.57205923023576
+     ],
+     [
+      -52.687936741154395,
+      47.57205330449648
+     ],
+     [
+      -52.68786086506052,
+      47.57203713160729
+     ],
+     [
+      -52.68775293067848,
+      47.57200494634521
+     ],
+     [
+      -52.68765103125268,
+      47.57196288632052
+     ],
+     [
+      -52.6875666862115,
+      47.571902374543875
+     ],
+     [
+      -52.687381198181654,
+      47.57176528461404
+     ],
+     [
+      -52.68709894728433,
+      47.57158327840862
+     ],
+     [
+      -52.686890080599106,
+      47.571461883447185
+     ],
+     [
+      -52.68666158968295,
+      47.57137720857561
+     ],
+     [
+      -52.68635119010133,
+      47.57131203932298
+     ],
+     [
+      -52.68616148447404,
+      47.57129131366553
+     ],
+     [
+      -52.685643433080266,
+      47.571250922562996
+     ],
+     [
+      -52.68523630195508,
+      47.57120938892999
+     ],
+     [
+      -52.685029587924845,
+      47.571179954168834
+     ],
+     [
+      -52.68489751658236,
+      47.571152166936656
+     ],
+     [
+      -52.68478681642676,
+      47.57111722055388
+     ],
+     [
+      -52.68435770769259,
+      47.57082880114135
+     ],
+     [
+      -52.684149341013665,
+      47.57071997060674
+     ],
+     [
+      -52.68391949737021,
+      47.57063561935498
+     ],
+     [
+      -52.68382155256234,
+      47.57060792491558
+     ],
+     [
+      -52.68368525150767,
+      47.57057434972053
+     ],
+     [
+      -52.68352121591118,
+      47.57054214246954
+     ],
+     [
+      -52.683282486826656,
+      47.57051694469676
+     ],
+     [
+      -52.68311187030826,
+      47.57051503063883
+     ],
+     [
+      -52.682953955000855,
+      47.57052902972252
+     ],
+     [
+      -52.68278315543608,
+      47.57055742482082
+     ],
+     [
+      -52.68259098190538,
+      47.570592978250914
+     ],
+     [
+      -52.682437210648544,
+      47.57062719485779
+     ],
+     [
+      -52.682285518772076,
+      47.570670077575116
+     ],
+     [
+      -52.68216796875472,
+      47.5707101672485
+     ],
+     [
+      -52.68202898348011,
+      47.57076751849606
+     ],
+     [
+      -52.68190513107261,
+      47.57083378798325
+     ],
+     [
+      -52.681868477981624,
+      47.570856566464464
+     ],
+     [
+      -52.68183173819889,
+      47.57088487492847
+     ],
+     [
+      -52.681681986774514,
+      47.571010494471714
+     ],
+     [
+      -52.68140544151407,
+      47.57124211528562
+     ],
+     [
+      -52.68117615783548,
+      47.57141757498526
+     ],
+     [
+      -52.68107123604561,
+      47.57148512492368
+     ],
+     [
+      -52.680957912202935,
+      47.57153099820732
+     ],
+     [
+      -52.68088748603829,
+      47.571538020028605
+     ],
+     [
+      -52.68081925935366,
+      47.57153349991962
+     ],
+     [
+      -52.68072135838957,
+      47.5714985852296
+     ],
+     [
+      -52.680668335676714,
+      47.571449361744115
+     ],
+     [
+      -52.68063658825414,
+      47.57140885802738
+     ],
+     [
+      -52.68062401918005,
+      47.571371293355256
+     ],
+     [
+      -52.68062983641624,
+      47.57125202361373
+     ],
+     [
+      -52.681273487148516,
+      47.57043996355732
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6782,
+    "STREETNAME": "SIGNAL HILL RD",
+    "STREET_ID": 2977,
+    "STREETCLS": "RES",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6799,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.69533191002044,
+      47.57236546557434
+     ],
+     [
+      -52.695097900413145,
+      47.57250948977232
+     ],
+     [
+      -52.69473317806163,
+      47.57273740189545
+     ],
+     [
+      -52.694682542136135,
+      47.57276217476023
+     ],
+     [
+      -52.69462411092145,
+      47.572785689113694
+     ],
+     [
+      -52.69455987535498,
+      47.57280524269832
+     ],
+     [
+      -52.69449953897881,
+      47.57282217644329
+     ],
+     [
+      -52.69443923814377,
+      47.57283253657849
+     ],
+     [
+      -52.6943419996028,
+      47.572846741742296
+     ],
+     [
+      -52.69414961612692,
+      47.57284885911629
+     ],
+     [
+      -52.69387383194503,
+      47.572824453527815
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6799,
+    "STREETNAME": "SIGNAL HILL RD",
+    "STREET_ID": 3359,
+    "STREETCLS": "RES",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3832,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.736819717997435,
+      47.56315954549512
+     ],
+     [
+      -52.73810270903326,
+      47.5632209508275
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3832,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 859,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3834,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.72238627352331,
+      47.56359489425429
+     ],
+     [
+      -52.722760823732784,
+      47.563570709002605
+     ],
+     [
+      -52.72299091206486,
+      47.56354250729854
+     ],
+     [
+      -52.72317609701012,
+      47.56350607771544
+     ],
+     [
+      -52.72333619598345,
+      47.56347060018553
+     ],
+     [
+      -52.72352142604767,
+      47.563416913788465
+     ],
+     [
+      -52.72413460246214,
+      47.56325599287266
+     ],
+     [
+      -52.724431458378696,
+      47.563183908407574
+     ],
+     [
+      -52.724675098451904,
+      47.5631321091245
+     ],
+     [
+      -52.72491014266877,
+      47.56311068344351
+     ],
+     [
+      -52.725047578873834,
+      47.56311608806128
+     ],
+     [
+      -52.72513998010081,
+      47.56312984187945
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3834,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 861,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3948,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71571841079946,
+      47.56404689103768
+     ],
+     [
+      -52.71661282789714,
+      47.56384984296503
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3948,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 854,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3950,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.73291214475888,
+      47.56323146974072
+     ],
+     [
+      -52.73549063800284,
+      47.563178976206146
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3950,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 856,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3951,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.73549063800284,
+      47.563178976206146
+     ],
+     [
+      -52.736819717997435,
+      47.56315954549512
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3951,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 857,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 3982,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71524758143041,
+      47.56413275696159
+     ],
+     [
+      -52.71571841079946,
+      47.56404689103768
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 3982,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1582,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4494,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.72026249325036,
+      47.56358361224031
+     ],
+     [
+      -52.72238627352331,
+      47.56359489425429
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4494,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1611,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 4968,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.72761108242636,
+      47.563264301397716
+     ],
+     [
+      -52.727779074717986,
+      47.56324724955672
+     ],
+     [
+      -52.727976178745536,
+      47.563226260058464
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 4968,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1629,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5008,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.717696402294074,
+      47.563715093730316
+     ],
+     [
+      -52.71863679855703,
+      47.56361561666012
+     ],
+     [
+      -52.718900968920046,
+      47.56363680757442
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5008,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1601,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5041,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.718900968920046,
+      47.56363680757442
+     ],
+     [
+      -52.72026249325036,
+      47.56358361224031
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5041,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1604,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5094,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71462086720945,
+      47.56425945814833
+     ],
+     [
+      -52.71524758143041,
+      47.56413275696159
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5094,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1572,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5143,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.73810270903326,
+      47.5632209508275
+     ],
+     [
+      -52.73938361164773,
+      47.56334658247354
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5143,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1634,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5148,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.72513998010081,
+      47.56312984187945
+     ],
+     [
+      -52.725971678010026,
+      47.56323840504251
+     ],
+     [
+      -52.726223961125086,
+      47.56326607400053
+     ],
+     [
+      -52.72655928094687,
+      47.563292959912665
+     ],
+     [
+      -52.72761108242636,
+      47.563264301397716
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5148,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1640,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5392,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71661282789714,
+      47.56384984296503
+     ],
+     [
+      -52.71689067627804,
+      47.5637818184687
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5392,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1598,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5555,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.731088215871225,
+      47.56314563258295
+     ],
+     [
+      -52.73198184405933,
+      47.56323379730732
+     ],
+     [
+      -52.73291214475888,
+      47.56323146974072
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5555,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1646,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5557,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.72853737079612,
+      47.56317699527742
+     ],
+     [
+      -52.72879725806423,
+      47.563148789480294
+     ],
+     [
+      -52.729457545749064,
+      47.563083948117566
+     ],
+     [
+      -52.72970904813346,
+      47.56305950025413
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5557,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1648,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5878,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74210891872478,
+      47.56276677617492
+     ],
+     [
+      -52.742856157182,
+      47.56257505731171
+     ],
+     [
+      -52.74361147427918,
+      47.5623304923204
+     ],
+     [
+      -52.74509576890451,
+      47.56168464127068
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5878,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1805,
+    "STREETCLS": "ART-MA",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 5938,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.72970904813346,
+      47.56305950025413
+     ],
+     [
+      -52.73007157959588,
+      47.563033289262876
+     ],
+     [
+      -52.730224032915096,
+      47.56303364793289
+     ],
+     [
+      -52.73038893439488,
+      47.563044184030105
+     ],
+     [
+      -52.730548807690106,
+      47.56305978496139
+     ],
+     [
+      -52.73075111004912,
+      47.56308732653837
+     ],
+     [
+      -52.731088215871225,
+      47.56314563258295
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 5938,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1650,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6033,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74509576890451,
+      47.56168464127068
+     ],
+     [
+      -52.74623626360064,
+      47.56118385792813
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6033,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1830,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6073,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.71689067627804,
+      47.5637818184687
+     ],
+     [
+      -52.717696402294074,
+      47.563715093730316
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6073,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1792,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 6806,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.73938361164773,
+      47.56334658247354
+     ],
+     [
+      -52.73980354801664,
+      47.56337226002022
+     ],
+     [
+      -52.74032137397333,
+      47.563299262824174
+     ],
+     [
+      -52.74210891872478,
+      47.56276677617492
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 6806,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 3133,
+    "STREETCLS": "ART-MI",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 7405,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.727976178745536,
+      47.563226260058464
+     ],
+     [
+      -52.72853737079612,
+      47.56317699527742
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 7405,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 1635,
+    "STREETCLS": "ART-MI",
+    "LENGTH": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45666,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74679994526843,
+      47.56095538001553
+     ],
+     [
+      -52.74656774111639,
+      47.561007638365574
+     ],
+     [
+      -52.74633968350627,
+      47.56107708712458
+     ],
+     [
+      -52.74623626360064,
+      47.56118385792813
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45666,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 5332,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45668,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74623626360064,
+      47.56118385792813
+     ],
+     [
+      -52.746547972439714,
+      47.561120792833194
+     ],
+     [
+      -52.74687738447537,
+      47.561045873421165
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45668,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 5333,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  },
+  {
+   "type": "Feature",
+   "id": 45672,
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -52.74687738447537,
+      47.561045873421165
+     ],
+     [
+      -52.74701127843921,
+      47.56101542146879
+     ]
+    ]
+   },
+   "properties": {
+    "OBJECTID": 45672,
+    "STREETNAME": "FRESHWATER RD",
+    "STREET_ID": 5334,
+    "STREETCLS": "ART-MA",
+    "LENGTH": 99
+   }
+  }
+ ]
+}

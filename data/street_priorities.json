@@ -1,0 +1,146 @@
+{
+  "WATER ST": {
+    "segments": 28,
+    "approx_length_m": 2475,
+    "sections": [
+      {
+        "section": "WATER ST (TEMPERANCE ST - WALDEGRAVE ST)",
+        "priority": 2
+      },
+      {
+        "section": "WATER ST (WALDEGRAVE ST - WATERFORD BRIDGE RD)",
+        "priority": 1
+      }
+    ],
+    "priority_source": "https://apps.stjohns.ca/snowclearing/StreetPriority.aspx",
+    "priority": "mixed",
+    "priority_levels": [
+      1,
+      2
+    ]
+  },
+  "DUCKWORTH ST": {
+    "segments": 19,
+    "approx_length_m": 1287,
+    "sections": [
+      {
+        "section": "DUCKWORTH ST (CAVENDISH SQ - NEW GOWER ST)",
+        "priority": 1
+      },
+      {
+        "section": "DUCKWORTH ST (QUIDI VIDI RD - TEMPERANCE ST)",
+        "priority": 1
+      },
+      {
+        "section": "DUCKWORTH ST (TEMPERANCE ST - CAVENDISH SQ)",
+        "priority": 3
+      }
+    ],
+    "priority_source": "https://apps.stjohns.ca/snowclearing/StreetPriority.aspx",
+    "priority": "mixed",
+    "priority_levels": [
+      1,
+      3
+    ]
+  },
+  "GOWER ST": {
+    "segments": 18,
+    "approx_length_m": 396,
+    "sections": [
+      {
+        "section": "GOWER ST (CHURCH HILL - QUEEN'S RD)",
+        "priority": 1
+      },
+      {
+        "section": "GOWER ST (MILITARY RD - CHURCH HILL)",
+        "priority": 3
+      }
+    ],
+    "priority_source": "https://apps.stjohns.ca/snowclearing/StreetPriority.aspx",
+    "priority": "mixed",
+    "priority_levels": [
+      1,
+      3
+    ]
+  },
+  "MILITARY RD": {
+    "segments": 11,
+    "approx_length_m": 594,
+    "sections": [
+      {
+        "section": "MILITARY RD",
+        "priority": 1
+      }
+    ],
+    "priority_source": "https://apps.stjohns.ca/snowclearing/StreetPriority.aspx",
+    "priority": 1,
+    "priority_levels": [
+      1
+    ]
+  },
+  "KENMOUNT RD": {
+    "segments": 23,
+    "approx_length_m": 1584,
+    "sections": [
+      {
+        "section": "KENMOUNT RD (THORBURN RD - OLD SCALES)",
+        "priority": 1
+      }
+    ],
+    "priority_source": "https://apps.stjohns.ca/snowclearing/StreetPriority.aspx",
+    "priority": 1,
+    "priority_levels": [
+      1
+    ]
+  },
+  "PRINCE PHILIP DR": {
+    "segments": 25,
+    "approx_length_m": 693,
+    "sections": [
+      {
+        "section": "PRINCE PHILIP DR",
+        "priority": 1
+      }
+    ],
+    "priority_source": "https://apps.stjohns.ca/snowclearing/StreetPriority.aspx",
+    "priority": 1,
+    "priority_levels": [
+      1
+    ]
+  },
+  "SIGNAL HILL RD": {
+    "segments": 7,
+    "approx_length_m": 396,
+    "sections": [
+      {
+        "section": "SIGNAL HILL RD (PARK GATE - PARKING LOT)",
+        "priority": 4
+      },
+      {
+        "section": "SIGNAL HILL RD (QUIDI VIDI RD - PARK GATE)",
+        "priority": 1
+      }
+    ],
+    "priority_source": "https://apps.stjohns.ca/snowclearing/StreetPriority.aspx",
+    "priority": "mixed",
+    "priority_levels": [
+      1,
+      4
+    ]
+  },
+  "FRESHWATER RD": {
+    "segments": 25,
+    "approx_length_m": 1188,
+    "sections": [
+      {
+        "section": "FRESHWATER RD",
+        "priority": 1
+      }
+    ],
+    "priority_source": "https://apps.stjohns.ca/snowclearing/StreetPriority.aspx",
+    "priority": 1,
+    "priority_levels": [
+      1
+    ]
+  }
+}

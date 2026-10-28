@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+
+# accidentally misnamed SSH keypair — never commit keys
+eval*
