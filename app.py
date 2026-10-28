@@ -9,8 +9,8 @@ from components import map_tab, simulation_tab
 
 
 def main():
-    st.set_page_config(page_title="SnowStorm AI", layout="wide")
-    st.title("SnowStorm AI")
+    st.set_page_config(page_title="Flurry", layout="wide")
+    st.title("Flurry")
 
     map_view, simulation_view = st.tabs(["Map", "Simulation"])
     with map_view:
