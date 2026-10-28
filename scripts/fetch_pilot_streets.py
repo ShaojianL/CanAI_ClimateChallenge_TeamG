@@ -51,7 +51,17 @@ def fetch_street_segments(street_name: str) -> list[dict]:
     }
     resp = requests.get(ARCGIS_QUERY_URL, params=params, headers=HEADERS, timeout=30)
     resp.raise_for_status()
-    return resp.json().get("features", [])
+    payload = resp.json()
+    if not isinstance(payload, dict) or not isinstance(payload.get("features"), list):
+        raise ValueError("The road service returned an invalid feature collection.")
+    features = payload["features"]
+    if any(
+        not isinstance(feature, dict)
+        or not isinstance(feature.get("properties"), dict)
+        for feature in features
+    ):
+        raise ValueError("The road service returned invalid street attributes.")
+    return features
 
 
 def _hidden_field(page: str, name: str) -> str:
@@ -95,9 +105,15 @@ def lookup_priority(page: str, street_value: str) -> list[dict]:
     return sections
 
 
-def main() -> None:
-    DATA_DIR.mkdir(exist_ok=True)
+def fetch_pilot_data() -> tuple[dict, dict]:
+    """Fetch the complete pilot dataset without changing saved files.
 
+    Returns:
+        Road GeoJSON and street priorities; absent priorities remain unknown.
+    Raises:
+        ValueError: A pilot street has no returned geometry.
+        requests.RequestException: A City source cannot be reached.
+    """
     print("Fetching City priority lookup page...")
     lookup_page, street_values = fetch_priority_page()
 
@@ -109,8 +125,7 @@ def main() -> None:
 
         features = fetch_street_segments(street)
         if not features:
-            print("  WARNING: no segments returned from ArcGIS; skipping street")
-            continue
+            raise ValueError(f"No road geometry returned for {street}.")
         total_len_m = sum(f["properties"].get("LENGTH") or 0 for f in features)
         print(f"  {len(features)} segments, approx {total_len_m:.0f} m total")
         all_features.extend(features)
@@ -145,14 +160,21 @@ def main() -> None:
         entry["priority_levels"] = levels
         priorities[street] = entry
 
+    return {"type": "FeatureCollection", "features": all_features}, priorities
+
+
+def main() -> None:
+    """Fetch the pilot streets and save them for local application startup."""
+    geojson, priorities = fetch_pilot_data()
+    DATA_DIR.mkdir(exist_ok=True)
     geojson_path = DATA_DIR / "pilot_streets.geojson"
     geojson_path.write_text(
-        json.dumps({"type": "FeatureCollection", "features": all_features}, indent=1)
+        json.dumps(geojson, indent=1), encoding="utf-8"
     )
     priorities_path = DATA_DIR / "street_priorities.json"
-    priorities_path.write_text(json.dumps(priorities, indent=2))
+    priorities_path.write_text(json.dumps(priorities, indent=2), encoding="utf-8")
 
-    print(f"\nSaved {len(all_features)} segments -> {geojson_path}")
+    print(f"\nSaved {len(geojson['features'])} segments -> {geojson_path}")
     print(f"Saved priorities for {len(priorities)} streets -> {priorities_path}")
 
 

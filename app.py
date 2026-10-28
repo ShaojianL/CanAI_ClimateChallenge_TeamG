@@ -12,8 +12,11 @@ import math
 from pathlib import Path
 
 import folium
+import requests
 import streamlit as st
 from streamlit_folium import st_folium
+
+from scripts.fetch_pilot_streets import fetch_pilot_data
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
 
@@ -296,9 +299,55 @@ def main():
         "conditions, travel safety, or simulated snow depth."
     )
 
+    with st.sidebar:
+        st.header("SnowStorm AI")
+        st.caption("St. John's pilot streets")
+        st.subheader("Street data")
+        st.caption(
+            "Fetch the eight pilot streets from the City's public sources. "
+            "Refresh applies to this session; saved files remain unchanged. "
+            "Requests may take several minutes."
+        )
+        if st.button("Fetch / refresh data", width="stretch"):
+            try:
+                with st.spinner("Fetching pilot streets and priorities from the City…"):
+                    refreshed_geojson, refreshed_priorities = fetch_pilot_data()
+                    validate_data(refreshed_geojson, refreshed_priorities)
+                st.session_state["refreshed_data"] = (
+                    refreshed_geojson, refreshed_priorities
+                )
+                st.success("Street data refreshed for this session.")
+            except (requests.RequestException, ValueError, KeyError, TypeError) as exc:
+                if isinstance(exc, requests.Timeout):
+                    reason = "The City's data service timed out."
+                elif isinstance(exc, requests.ConnectionError):
+                    reason = "Could not connect to the City's data service."
+                elif isinstance(exc, requests.HTTPError):
+                    reason = "The City's data service returned an HTTP error."
+                    if exc.response is not None:
+                        reason = (
+                            "The City's data service returned HTTP "
+                            f"{exc.response.status_code}."
+                        )
+                elif isinstance(exc, requests.RequestException):
+                    reason = "The request to the City's data service failed."
+                else:
+                    reason = "The returned street data was incomplete or invalid."
+                st.error(
+                    f"Refresh failed. {reason} The current dataset has been kept. "
+                    "Check your connection and try again later."
+                )
+        if "refreshed_data" in st.session_state:
+            st.caption("Using data fetched during this session. Verification dates are not recorded.")
+        else:
+            st.caption("Using the saved local pilot dataset.")
+
     # Stop before drawing a partial or misleading map when required data fails
     try:
-        geojson, priorities = load_data()
+        if "refreshed_data" in st.session_state:
+            geojson, priorities = st.session_state["refreshed_data"]
+        else:
+            geojson, priorities = load_data()
     except DataLoadError as exc:
         st.error(f"Street data could not be loaded. {exc}")
         st.stop()
@@ -306,9 +355,12 @@ def main():
 
     # ---- Sidebar: search/selection, details, legend ----
     with st.sidebar:
-        st.header("SnowStorm AI")
-        st.caption("St. John's pilot streets")
-
+        # Keep valid selections when the refreshed source changes its street list.
+        if "selected_streets" in st.session_state:
+            st.session_state["selected_streets"] = [
+                name for name in st.session_state["selected_streets"]
+                if name in street_names
+            ]
         selected = st.multiselect(
             "Search and select streets",
             options=street_names,
@@ -375,7 +427,8 @@ def main():
         st.markdown(
             "**Road geometry:** [City of St. John's public ArcGIS road layer]"
             "(https://map.stjohns.ca/mapsrv/rest/services/community/Basemap/MapServer/0). "
-            "The map displays a locally prepared pilot dataset, not a live road feed."
+            "The map displays a pilot snapshot loaded from saved files or fetched "
+            "using the sidebar refresh button, not a live road-conditions feed."
         )
         st.markdown(
             "**Snow-clearing priorities:** source links recorded in the local street "

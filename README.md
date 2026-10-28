@@ -27,7 +27,15 @@ python3 -m venv .venv                      # once
 - `data/pilot_streets.geojson` — prepared road segments (WGS84)
 - `data/street_priorities.json` — verified priorities per pilot street, incl. section-level detail
 
-The app reads only the local `data/` files; rerun the fetch script to refresh or add pilot streets.
+The app starts from local `data/` files. Use **Fetch / refresh data** in the sidebar
+to retrieve the eight pilot streets from the City's public geometry and priority
+sources for the current session. Requests may take several minutes. Successful
+responses are validated before replacing the session dataset; failures keep the
+current dataset. Missing priorities remain explicitly unavailable. Saved files are
+unchanged, and valid street selections are preserved.
+
+Rerun the fetch script separately to update the saved startup dataset. Refreshing
+does not add streets outside the configured pilot set or provide live road conditions.
 
 ### Map Explorer presentation
 
