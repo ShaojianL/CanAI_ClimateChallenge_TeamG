@@ -1,4 +1,4 @@
-# SnowStorm AI ? Project Context
+# SnowStorm AI Project Context
 
 Last updated: 2026-10-28
 
