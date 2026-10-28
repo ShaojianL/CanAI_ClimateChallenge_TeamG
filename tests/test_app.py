@@ -17,8 +17,14 @@ class AppTests(unittest.TestCase):
     def test_tabs_selection_and_sources(self):
         app = AppTest.from_file(str(APP_PATH)).run()
         self.assertFalse(app.exception)
-        self.assertEqual([tab.label for tab in app.tabs], ["Map", "Simulation"])
+        self.assertEqual(
+            [tab.label for tab in app.tabs], ["Map", "Simulation", "Dev note"]
+        )
         self.assertIn("No simulation data exists yet.", app.tabs[1].info[0].value)
+        notes = "\n".join(item.value for item in app.tabs[2].markdown)
+        self.assertIn("Map component progress", app.tabs[2].subheader[0].value)
+        self.assertIn("Eight is our MVP scope, not a City data limit.", notes)
+        self.assertIn("five-hour hackathon", notes)
         links = "\n".join(item.value for item in app.sidebar.markdown)
         self.assertIn(
             "https://apps.stjohns.ca/snowclearing/StreetPriority.aspx", links
@@ -46,6 +52,7 @@ class AppTests(unittest.TestCase):
         self.assertFalse(app.exception)
         self.assertIn("Missing pilot data", app.tabs[0].error[0].value)
         self.assertIn("No simulation data exists yet.", app.tabs[1].info[0].value)
+        self.assertEqual(app.tabs[2].header[0].value, "Dev note")
 
     def test_map_highlights_every_selected_segment(self):
         geojson, priorities = load_data()

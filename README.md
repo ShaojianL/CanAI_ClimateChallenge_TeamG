@@ -14,6 +14,7 @@ Explore eight pilot streets in St. John's, select multiple streets, and review r
 
 The **Map** tab contains Map Explorer. The **Simulation** tab is a placeholder;
 no snow-depth simulation or clearing-time prediction is currently implemented.
+The **Dev note** tab briefly summarizes map progress and explains the eight-street pilot scope.
 
 ### Quickstart
 
@@ -42,9 +43,10 @@ highlighted geometries and details in the Map tab.
 
 ### Project layout
 
-- `app.py` — single-page Streamlit entry point with Map and Simulation tabs
+- `app.py` — single-page Streamlit entry point with Map, Simulation, and Dev note tabs
 - `components/map_tab.py` — map rendering, session data refresh, street search/selection, priority legend, source links, and details
 - `components/simulation_tab.py` — future simulation tab; currently an unavailable-data placeholder
+- `components/dev_note_tab.py` — brief map progress, pilot scope rationale, and limitations
 - `services/street_data.py` — cached local data loading and validation, shared independently of the tabs
 - `scripts/fetch_pilot_streets.py` — shared City-source fetching logic and command-line preparation of saved data files
 - `data/pilot_streets.geojson` — prepared road segments (WGS84)
