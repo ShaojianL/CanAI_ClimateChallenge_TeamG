@@ -1,10 +1,12 @@
-"""Map tab: street selection, priority styling, and road details."""
+"""Map tab: exploration, data refresh, priority styling, and source details."""
 
 import folium
+import requests
 import streamlit as st
 from streamlit_folium import st_folium
 
-from services.street_data import DataLoadError, load_data
+from services.street_data import DataLoadError, load_data, validate_data
+from scripts.fetch_pilot_streets import fetch_pilot_data
 
 PRIORITY_COLORS = {
     1: "#d62728",  # red — major/minor arterials
@@ -115,9 +117,65 @@ def render():
     Returns:
         None. Renders the Streamlit interface.
     """
+    st.header("Map Explorer")
+    st.write(
+        "Explore pilot streets in St. John's, review snow-clearing priorities, "
+        "and inspect available source information."
+    )
+    st.caption(
+        "Planning context only. Priority colours do not represent current road "
+        "conditions, travel safety, or simulated snow depth."
+    )
+
+    with st.sidebar:
+        st.header("SnowStorm AI")
+        st.caption("St. John's pilot streets")
+        st.subheader("Street data")
+        st.caption(
+            "Fetch the eight pilot streets from the City's public sources. "
+            "Refresh applies to this session; saved files remain unchanged. "
+            "Requests may take several minutes."
+        )
+        if st.button("Fetch / refresh data", width="stretch"):
+            try:
+                with st.spinner("Fetching pilot streets and priorities from the City…"):
+                    refreshed_geojson, refreshed_priorities = fetch_pilot_data()
+                    validate_data(refreshed_geojson, refreshed_priorities)
+                st.session_state["refreshed_data"] = (
+                    refreshed_geojson, refreshed_priorities
+                )
+                st.success("Street data refreshed for this session.")
+            except (requests.RequestException, ValueError, KeyError, TypeError) as exc:
+                if isinstance(exc, requests.Timeout):
+                    reason = "The City's data service timed out."
+                elif isinstance(exc, requests.ConnectionError):
+                    reason = "Could not connect to the City's data service."
+                elif isinstance(exc, requests.HTTPError):
+                    reason = "The City's data service returned an HTTP error."
+                    if exc.response is not None:
+                        reason = (
+                            "The City's data service returned HTTP "
+                            f"{exc.response.status_code}."
+                        )
+                elif isinstance(exc, requests.RequestException):
+                    reason = "The request to the City's data service failed."
+                else:
+                    reason = "The returned street data was incomplete or invalid."
+                st.error(
+                    f"Refresh failed. {reason} The current dataset has been kept. "
+                    "Check your connection and try again later."
+                )
+        if "refreshed_data" in st.session_state:
+            st.caption("Using data fetched during this session. Verification dates are not recorded.")
+        else:
+            st.caption("Using the saved local pilot dataset.")
+
     # Stop before drawing a partial or misleading map when required data fails
     try:
-        geojson, priorities = load_data()
+        if "refreshed_data" in st.session_state:
+            geojson, priorities = st.session_state["refreshed_data"]
+        else:
+            geojson, priorities = load_data()
     except DataLoadError as exc:
         st.error(f"Street data could not be loaded. {exc}")
         return
@@ -125,12 +183,17 @@ def render():
 
     # ---- Sidebar: search/selection, details, legend ----
     with st.sidebar:
-        st.caption("Map controls — St. John's pilot streets")
-
+        # Keep valid selections when the refreshed source changes its street list.
+        if "selected_streets" in st.session_state:
+            st.session_state["selected_streets"] = [
+                name for name in st.session_state["selected_streets"]
+                if name in street_names
+            ]
         selected = st.multiselect(
             "Search and select streets",
             options=street_names,
             placeholder="Type a street name…",
+            key="selected_streets",
         )
 
         st.subheader("Legend")
@@ -142,6 +205,8 @@ def render():
                 f"<span style='color:{color}'>▬▬</span> {label}",
                 unsafe_allow_html=True,
             )
+        st.caption("Mixed priorities vary by section. Grey means priority unavailable.")
+
         st.subheader("Data sources")
         st.markdown(
             "- [City snow-clearing priority lookup form]"
@@ -149,14 +214,16 @@ def render():
             "- [City road geometry (ArcGIS REST API)]"
             "(https://map.stjohns.ca/mapsrv/rest/services/community/Basemap/MapServer/0)"
         )
-        st.caption(
-            "Road geometry and priorities are saved locally, not updated live."
-        )
 
     # ---- Main area: map + details ----
-    col_map, col_details = st.columns([3, 1])
+    col_map, col_details = st.columns([2, 1], gap="large")
 
     with col_map:
+        st.header("Pilot street map")
+        st.caption(
+            "Search and select streets in the sidebar. Selected streets use thicker "
+            "lines; their priority and section details are also available as text."
+        )
         st_folium(
             build_map(geojson, priorities, selected),
             use_container_width=True,
@@ -165,15 +232,49 @@ def render():
         )
 
     with col_details:
-        st.subheader("Selected streets")
+        st.header("Selected streets")
+        st.caption(f"{len(selected)} of {len(street_names)} pilot streets selected")
         if not selected:
             st.info("Use the sidebar to search and select streets.")
         for name in selected:
             info = priorities.get(name, {})
             with st.expander(name, expanded=True):
                 st.markdown(f"**{priority_text(info)}**")
-                if info.get("approx_length_m"):
+                if info.get("approx_length_m") is not None:
                     st.markdown(f"Approx. length: **{info['approx_length_m']:,} m**")
-                st.markdown(f"Segments: {info.get('segments', '?')}")
+                else:
+                    st.write("Length unavailable")
+                if info.get("segments") is not None:
+                    st.write(f"Segments: {info['segments']:,}")
+                else:
+                    st.write("Segment count unavailable")
                 for s in info.get("sections", []):
-                    st.caption(f"P{s['priority']}: {s['section']}")
+                    st.write(f"Priority {s['priority']}: {s['section']}")
+                source = info.get("priority_source")
+                if (
+                    isinstance(source, str)
+                    and source == "https://apps.stjohns.ca/snowclearing/StreetPriority.aspx"
+                ):
+                    st.link_button("View recorded priority source", source)
+                else:
+                    st.caption("Priority source unavailable")
+
+    with st.container(border=True):
+        st.subheader("Data sources and limitations")
+        st.markdown(
+            "**Road geometry:** [City of St. John's public ArcGIS road layer]"
+            "(https://map.stjohns.ca/mapsrv/rest/services/community/Basemap/MapServer/0). "
+            "The map displays a pilot snapshot loaded from saved files or fetched "
+            "using the sidebar refresh button, not a live road-conditions feed."
+        )
+        st.markdown(
+            "**Snow-clearing priorities:** source links recorded in the local street "
+            "dataset appear with selected streets. Verification dates are not recorded. "
+            "Mixed priorities are listed by section; the map uses one mixed-priority "
+            "colour for the whole street."
+        )
+        st.write(
+            "Missing attributes are labelled unavailable. Approximate lengths describe "
+            "the prepared pilot geometry and may not cover an entire street. "
+            "The basemap is provided by OpenStreetMap contributors."
+        )

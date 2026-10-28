@@ -33,6 +33,28 @@ python3 -m venv .venv                      # once
 Keep feature-specific UI in `components/` and shared data logic in `services/` rather than adding them to `app.py`.
 Map data failures are shown within the Map tab without preventing other tabs from rendering.
 
+The app starts from local `data/` files. Use **Fetch / refresh data** in the sidebar
+to retrieve the eight pilot streets from the City's public geometry and priority
+sources for the current session. Requests may take several minutes. Successful
+responses are validated before replacing the session dataset; failures keep the
+current dataset. Missing priorities remain explicitly unavailable. Saved files are
+unchanged, and valid street selections are preserved.
+
+Rerun the fetch script separately to update the saved startup dataset. Refreshing
+does not add streets outside the configured pilot set or provide live road conditions.
+
+### Map Explorer presentation
+
+The theme in `.streamlit/config.toml` follows the colours and typography in
+`documents/DESIGN.md`. Noto Sans is used when installed, with Arial and sans-serif fallbacks;
+no external font download is configured. Map and street details appear side by
+side on wider screens and stack on narrow screens using Streamlit's native layout.
+
+Selected streets show recorded priority-source links and explicit unavailable
+labels for missing attributes. Verification dates are not recorded in the current
+dataset. The source and limitations panel explains pilot coverage, mixed priorities,
+and the distinction between clearing priorities and current road conditions.
+
 Run the tab and map regression checks with:
 
 ```bash
