@@ -29,3 +29,15 @@ python3 -m venv .venv                      # once
 
 The app reads only the local `data/` files; rerun the fetch script to refresh or add pilot streets.
 
+### Map Explorer presentation
+
+The theme in `.streamlit/config.toml` follows the colours and typography in
+`DESIGN.md`. Noto Sans is used when installed, with Arial and sans-serif fallbacks;
+no external font download is configured. Map and street details appear side by
+side on wider screens and stack on narrow screens using Streamlit's native layout.
+
+Selected streets show recorded priority-source links and explicit unavailable
+labels for missing attributes. Verification dates are not recorded in the current
+dataset. The source and limitations panel explains pilot coverage, mixed priorities,
+and the distinction between clearing priorities and current road conditions.
+

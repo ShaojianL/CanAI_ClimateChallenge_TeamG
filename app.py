@@ -284,7 +284,17 @@ def main():
     Returns:
         None. Renders the Streamlit interface.
     """
-    st.set_page_config(page_title="SnowStorm AI — Map MVP", layout="wide")
+    st.set_page_config(page_title="Map Explorer | SnowStorm AI", layout="wide")
+
+    st.title("Map Explorer")
+    st.write(
+        "Explore pilot streets in St. John's, review snow-clearing priorities, "
+        "and inspect available source information."
+    )
+    st.caption(
+        "Planning context only. Priority colours do not represent current road "
+        "conditions, travel safety, or simulated snow depth."
+    )
 
     # Stop before drawing a partial or misleading map when required data fails
     try:
@@ -296,13 +306,14 @@ def main():
 
     # ---- Sidebar: search/selection, details, legend ----
     with st.sidebar:
-        st.title("🌨️ SnowStorm AI")
-        st.caption("Map MVP — St. John's pilot streets")
+        st.header("SnowStorm AI")
+        st.caption("St. John's pilot streets")
 
         selected = st.multiselect(
             "Search and select streets",
             options=street_names,
             placeholder="Type a street name…",
+            key="selected_streets",
         )
 
         st.subheader("Legend")
@@ -314,16 +325,17 @@ def main():
                 f"<span style='color:{color}'>▬▬</span> {label}",
                 unsafe_allow_html=True,
             )
-        st.caption(
-            "Priorities verified via the City of St. John's "
-            "[street priority lookup](https://apps.stjohns.ca/snowclearing/StreetPriority.aspx). "
-            "Geometry from the City's public ArcGIS road layer."
-        )
+        st.caption("Mixed priorities vary by section. Grey means priority unavailable.")
 
     # ---- Main area: map + details ----
-    col_map, col_details = st.columns([3, 1])
+    col_map, col_details = st.columns([2, 1], gap="large")
 
     with col_map:
+        st.header("Pilot street map")
+        st.caption(
+            "Search and select streets in the sidebar. Selected streets use thicker "
+            "lines; their priority and section details are also available as text."
+        )
         st_folium(
             build_map(geojson, priorities, selected),
             use_container_width=True,
@@ -332,24 +344,56 @@ def main():
         )
 
     with col_details:
-        st.subheader("Selected streets")
+        st.header("Selected streets")
+        st.caption(f"{len(selected)} of {len(street_names)} pilot streets selected")
         if not selected:
             st.info("Use the sidebar to search and select streets.")
         for name in selected:
             info = priorities.get(name, {})
             with st.expander(name, expanded=True):
                 st.markdown(f"**{priority_text(info)}**")
-                if info.get("approx_length_m"):
+                if info.get("approx_length_m") is not None:
                     st.markdown(f"Approx. length: **{info['approx_length_m']:,} m**")
-                st.markdown(f"Segments: {info.get('segments', '?')}")
+                else:
+                    st.write("Length unavailable")
+                if info.get("segments") is not None:
+                    st.write(f"Segments: {info['segments']:,}")
+                else:
+                    st.write("Segment count unavailable")
                 for s in info.get("sections", []):
-                    st.caption(f"P{s['priority']}: {s['section']}")
+                    st.write(f"Priority {s['priority']}: {s['section']}")
+                source = info.get("priority_source")
+                if (
+                    isinstance(source, str)
+                    and source == "https://apps.stjohns.ca/snowclearing/StreetPriority.aspx"
+                ):
+                    st.link_button("View recorded priority source", source)
+                else:
+                    st.caption("Priority source unavailable")
+
+    with st.expander("Data sources and limitations", expanded=True):
+        st.markdown(
+            "**Road geometry:** [City of St. John's public ArcGIS road layer]"
+            "(https://map.stjohns.ca/mapsrv/rest/services/community/Basemap/MapServer/0). "
+            "The map displays a locally prepared pilot dataset, not a live road feed."
+        )
+        st.markdown(
+            "**Snow-clearing priorities:** source links recorded in the local street "
+            "dataset appear with selected streets. Verification dates are not recorded. "
+            "Mixed priorities are listed by section; the map uses one mixed-priority "
+            "colour for the whole street."
+        )
+        st.write(
+            "Missing attributes are labelled unavailable. Approximate lengths describe "
+            "the prepared pilot geometry and may not cover an entire street. "
+            "The basemap is provided by OpenStreetMap contributors."
+        )
 
     # ---- Reserved area for future simulation output ----
     st.divider()
-    st.subheader("Snow-depth simulation")
+    st.header("Snow-depth simulation")
     st.info(
-        "⏳ Simulated snow-depth graphs and a storm time selector will appear "
+        "Simulated snow-depth graphs and a storm time selector will appear "
         "here in a later phase. No simulation data exists yet."
     )
 
