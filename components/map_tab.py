@@ -16,6 +16,13 @@ PRIORITY_COLORS = {
 MIXED_COLOR = "#8c6d31"  # olive — different priorities on different sections
 UNKNOWN_COLOR = "#7f7f7f"  # gray — priority unavailable
 
+# ArcGIS PointAddress match for 25 Blackler Avenue; not a verified vehicle entrance.
+DEPOT_LOCATION = (47.546909, -52.741242)
+DEPOT_LABEL = "Assumed starting depot — 25 Blackler Avenue"
+DEPOT_ASSUMPTION = (
+    "All simulated plows start here. Actual dispatch locations are unverified."
+)
+
 PRIORITY_LABELS = {
     1: "Priority 1 — major and minor arterials",
     2: "Priority 2 — collector streets",
@@ -72,7 +79,19 @@ def build_map(geojson: dict, priorities: dict, selected: list[str]) -> folium.Ma
     """
     m = folium.Map(location=[47.566, -52.72], zoom_start=13, tiles="OpenStreetMap")
 
-    bounds = []
+    folium.CircleMarker(
+        location=DEPOT_LOCATION,
+        radius=12,
+        color="#ffffff",
+        weight=3,
+        fill=True,
+        fill_color="#172b4d",
+        fill_opacity=1.0,
+        tooltip=DEPOT_LABEL,
+        popup=f"{DEPOT_LABEL}<br>{DEPOT_ASSUMPTION}",
+    ).add_to(m)
+
+    bounds = [DEPOT_LOCATION]
     for feature in geojson["features"]:
         name = feature["properties"].get("STREETNAME", "")
         info = priorities.get(name, {})
@@ -99,7 +118,7 @@ def build_map(geojson: dict, priorities: dict, selected: list[str]) -> folium.Ma
                 tooltip=f"{name} — {priority_text(info)}",
             ).add_to(m)
 
-    if bounds:
+    if selected:
         m.fit_bounds([
             [min(b[0] for b in bounds), min(b[1] for b in bounds)],
             [max(b[0] for b in bounds), max(b[1] for b in bounds)],
@@ -185,6 +204,7 @@ def render():
             "Search and select streets in the sidebar. Selected streets use thicker "
             "lines; their priority and section details are also available as text."
         )
+        st.caption(f"Large dark dot: {DEPOT_LABEL}. {DEPOT_ASSUMPTION}")
         st_folium(
             build_map(geojson, priorities, selected),
             use_container_width=True,

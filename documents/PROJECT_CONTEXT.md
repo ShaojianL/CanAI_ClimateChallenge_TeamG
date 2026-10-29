@@ -1,425 +1,230 @@
-# SnowStorm AI Project Context
+# CanAI Hackathon Project Context
 
-Last updated: 2026-10-28
+Working title: Community Crisis Reporting Map
+Version: 3.1
+Updated: October 29, 2026
+Pilot: St. John's, Newfoundland and Labrador
+Delivery target: Eight-hour hackathon MVP
+Status: Confirmed product direction; new capabilities and integrations remain unverified.
 
-## Approved scope update — 2026-10-29
+## 1. Product baseline
 
-Amanda approved connecting the existing one-street simulation engine to the
-Simulation tab. The tab now accepts manually entered hourly snowfall, street
-length, and assumed clearing capacity, and displays a remaining-snow graph and
-hourly results table. This approval supersedes the map-only exclusions below
-only for this standalone simulation. Map selection integration, forecasting,
-plow routing, and AI recommendations remain outside this change.
+Build a community hazard-reporting tool that connects resident submissions, staff approval, a public road-segment map, and street-based notifications.
 
-Current known assumptions: zero initial snow, uniform snow along the street,
-constant clearing capacity, snowfall added before hourly clearing, and no carryover
-of unused capacity. Individual plows, routing, traffic, melting, drifting,
-compaction, and equipment failures are excluded. Results do not assess road safety.
-The calculation ends at the final supplied hour; zero-snowfall hours can extend
-the scenario to model subsequent clearing.
+Residents report local problems such as flooding, blocked drains, or snow obstructions. Staff review submissions before anything appears publicly. Approved reports contribute to segment-level report counts and summaries. Residents can subscribe to an entire street and receive updates about newly approved reports on that street.
 
-## Project status and authority
+The primary demonstration is:
 
-Amanda selected SnowStorm AI as the CanAI Hackathon project. This file consolidates the existing project context and `SnowStorm_AI_Map_Copilot_Context.md` into one maintained reference.
+**Submit a synthetic report -> staff approve publication -> the correct map segment updates -> a subscribed destination receives a relevant update.**
 
-**Current implementation focus: the map-only MVP.** Build a small, real St. John's road map with searchable multi-street selection, verified priority information where available, and clear handling of unknown data. Simulation, forecasting, and AI preparedness recommendations belong to a later phase.
+A pending or rejected report must never change public counts, appear in a public summary, or enter a subscriber update. Approval permits publication; it does not verify the hazard or imply municipal action.
 
-The original `SnowStorm_AI_8_Hour_MVP_Plan.docx` informed the broader simulator plan retained below. Its eight-hour schedule and simulator completion criteria apply to that future scope, not the current map phase. Where the two scopes differ, follow the map-only requirements for current work. Proposed technologies and file layouts remain guidance, not approved dependency or architecture changes.
+This prototype supports investigation and awareness. It is independent of official municipal emergency systems, is not an emergency-reporting service, and does not establish road safety.
 
-Implementation, data extraction, source access, and validation remain unverified. Consolidating these documents does not mark any feature complete or independently verify their sources.
+## 2. Confirmed decisions and working defaults
 
-## Current phase: map-only MVP
-
-### Project overview
-
-SnowStorm AI is a proposed decision-support tool for exploring how severe winter weather could affect snow-clearing operations in St. John's, Newfoundland and Labrador. The broader product may eventually simulate hourly snowfall, road-clearing progress, and preparedness options.
-
-**Current focus: the map only.** Build a usable interactive view of a small, real St. John's road network. Users should be able to explore streets, understand their published snow-clearing priorities where verified, and select multiple streets for later snow-depth comparisons.
-
-No snowstorm simulation, forecast model, or AI recommendation engine is being implemented in this phase.
-
-### Desired user experience
-
-Picture a single-page application with:
-
-- A **large, interactive map** of St. John's displaying road geometries from a public data source.
-- A **street search and multi-selection control** near the map (for example, in a sidebar).
-- **Visual highlighting** of selected streets; selecting a street should highlight its relevant segments rather than just one piece of geometry.
-- A **street information area** showing available attributes such as name, verified snow-clearing priority, and approximate length.
-- A simple **road-priority legend** and an obvious indication when priority data is unknown.
-- A reserved area for **future simulated snow-depth graphs and a time selector**. Until a simulation is connected, show a clear unavailable/coming-later state; do not invent values.
-
-Map-based street selection is desirable, but a reliable searchable selector is the first priority. Add click-to-select only if it works consistently with the chosen mapping library.
-
-### Scope and boundaries
-
-#### In scope now
-
-- Retrieve or load actual public road geometries for a manageable subset of St. John's streets.
-- Render those streets on an interactive map with zoom and pan.
-- Display street names and any verified road-clearing priorities.
-- Support selecting and deselecting multiple streets.
-- Highlight selected streets and show their details.
-- Keep map data and selected-street state organized for future simulation integration.
-- Handle missing or ambiguous source data clearly.
-
-#### Out of scope now
-
-- Predicting snowfall, actual road safety, or real-world clearing completion times.
-- Snow accumulation or snowplow activity simulation.
-- Snowplow routing, crew/resource optimization, or live dispatch.
-- AI-generated preparedness recommendations.
-- Real-time road-condition integrations, historical GPS reconstruction, or a production-grade government deployment.
-- Building snow-depth charts before simulation output exists.
-
-### Public data sources to investigate
-
-| Source | Why it is useful | Data-access caution |
-|---|---|---|
-| [City of St. John's ArcGIS road layer](https://map.stjohns.ca/mapsrv/rest/services/community/Basemap/MapServer/0) | Street geometries, names, and possible street/segment identifiers for the map | Confirm the endpoint and relevant fields with a small live query before relying on them. A street may span many segments; check for incomplete or duplicated geometry. |
-| [City of St. John's snow-clearing service levels](https://www.stjohns.ca/resident-services/snow-clearing/service-levels-priority/) | Public explanation of how municipal roads are prioritized for snow clearing | This is the policy context, not necessarily a downloadable street-by-street dataset. |
-| [City street-priority lookup](https://apps.stjohns.ca/snowclearing/StreetPriority.aspx) | Verify the actual priority of streets selected for the pilot | A public lookup is not proof of a bulk API. Manual verification for a small subset is acceptable. |
-| [OpenStreetMap](https://www.openstreetmap.org/) | Potential backup for road geometry/basemap data | Source and attribution differ from the City's GIS; do not silently mix identifiers or treat OSM road classes as City snow-clearing priorities. |
-
-**Important distinction:** A GIS field describing road *class* does not automatically establish the City's official *snow-clearing priority*. Only label priorities as official if they have been verified using an authoritative source. Otherwise, display “Priority unavailable.”
-
-Public data might be available for viewing without providing an immediately usable bulk export. Test access before planning around automated extraction.
-
-### Initial data concepts
-
-Keep the internal representation simple and adaptable to the data actually retrieved.
-
-- **Road segment:** A mapped piece of street geometry with a source identifier, street name, and optional attributes.
-- **Street:** A logical grouping of one or more road segments that users can select together.
-- **Priority:** An optional, verified municipal snow-clearing priority associated with a street or segment, with a note about its source.
-- **Selection state:** The set of streets currently selected by the user.
-- **Future snow state:** Optional simulation results tied to a road or segment and a time point; this does not exist yet.
-
-Do not assume all features have names, that names uniquely identify streets, or that every segment has the same priority. Where grouping by street name is ambiguous, inspect identifiers and make a deliberate pilot-specific choice.
-
-For the initial pilot, a small, manually reviewed collection of approximately **5–10 streets** is preferable to an unverified city-wide import.
-
-### Suggested implementation approach
-
-A lightweight Python application using **Streamlit** and a mapping library such as **Folium** is a reasonable starting point. GeoJSON works well for transferring geometries and keeping data separate from presentation. These are recommendations rather than hard requirements; use an alternative if it offers cleaner and more reliable map interaction.
-
-#### Phase A — Verify and prepare the streets
-
-1. Inspect the public road GIS endpoint and retrieve a small sample of named streets.
-2. Check geometry, street names, identifiers, and coordinate conventions.
-3. Group related road segments into selectable streets; review ambiguous cases.
-4. Look up the priority for each pilot street using the City source. Record unknown values explicitly.
-5. Save a locally usable copy of the prepared pilot roads so the UI does not depend on a fresh GIS request for every interaction.
-
-**Conceptual pseudocode:**
-
-```text
-find a small area or list of candidate streets
-retrieve real road features from a public source
-inspect names, IDs, and geometries
-for each candidate street:
-    group its relevant road segments
-    look up its official clearing priority if possible
-    otherwise mark priority as unavailable
-save reviewed street and segment information locally
-```
-
-#### Phase B — Draw the map
-
-1. Display a basemap centered on the pilot area.
-2. Draw the retrieved road geometries.
-3. Use a simple, documented colour scheme to distinguish **verified** priority classes; use a neutral style for unknown priorities.
-4. Add hover or click details where practical.
-5. Provide a legend and make data provenance visible.
-
-```text
-load prepared road geometries
-create the interactive map
-for each segment:
-    choose style from verified priority or unknown status
-    draw geometry with street name and available metadata
-show legend and map
-```
-
-These colours represent road priority only—not hazard severity or snow depth.
-
-#### Phase C — Street selection and details
-
-1. Populate a searchable street list from the prepared road data.
-2. Support selecting multiple streets and removing them individually.
-3. Highlight **all relevant segments** belonging to each selected street.
-4. Show available details for selected streets; avoid filling missing fields with guessed values.
-5. If straightforward, make selecting a road on the map update the same selection state.
-
-```text
-when selection changes:
-    update selected street IDs
-    find all segments belonging to those streets
-    highlight their geometries
-    refresh the street details panel
-
-when a road segment is clicked (optional):
-    resolve it to its selectable street
-    update the same selected-street collection
-```
-
-Prefer stable IDs over names where the source makes that practical. Keep the experience understandable if different streets share a similar name.
-
-#### Phase D — Prepare for later simulation integration
-
-Keep the map component conceptually separate from the simulation engine:
-
-```text
-map view receives:
-    prepared roads
-    selected streets
-    optional selected time
-    optional simulated snow states
-
-if simulated snow states exist:
-    allow time-based colouring and comparison
-else:
-    show the priority map and a clear “simulation data unavailable” message
-```
-
-Future behaviour may include a time slider, snow-depth colours, and line charts for selected streets. Do not create or hard-code synthetic snow results to make the present interface appear functional.
-
-If a street has multiple segments, the later snow-depth comparison will need a documented aggregation method; that is a future design decision, not a requirement for this map MVP.
-
-### Suggested repository organization
-
-Use whatever conventions fit the repository. A possible small-project layout is:
-
-```text
-snowstorm-ai/
-├── app.py                    # UI assembly and application state
-├── data/
-│   ├── roads.geojson         # Reviewed pilot road geometries
-│   └── road_priorities.csv   # Verified priorities where available
-├── src/
-│   ├── roads_source.py       # Retrieving public road data
-│   ├── prepare_roads.py      # Normalization and street grouping
-│   ├── map_view.py           # Map rendering and styling
-│   └── street_selection.py   # Selection and detail helpers
-└── README.md                 # Setup, provenance, limitations
-```
-
-This is an organizational suggestion, not a prescribed file list or naming convention. Split or consolidate modules as needed.
-
-### What to verify while building
-
-- The selected streets are genuinely present in the downloaded St. John's GIS data.
-- Coordinates and geometries render in the correct locations.
-- Multi-segment streets are selected and highlighted consistently.
-- Priority labels match the City's lookup or remain explicitly unavailable.
-- Multi-street selection persists across normal UI rerenders.
-- A missing GIS response or empty dataset produces a clear message; a verified local copy may be used if available.
-- Nothing on the map suggests that simulated snow depth, clearing completion, or travel safety has been calculated yet.
-- If using OpenStreetMap as a basemap, preserve its attribution.
-
-### Definition of done for the map-only MVP
-
-A user can open the application, inspect a **real, small St. John's street network**, search for and select several streets, see them highlighted, and read accurate available street details and snow-clearing priority information. The interface makes unknown data explicit and has a clear integration boundary for future hourly simulation results.
-
-### How coding assistants should use this context
-
-- Start by inspecting the existing project and reusing its patterns where possible.
-- Prefer a small, working vertical slice over a broad or overly engineered build.
-- Verify data availability instead of assuming undocumented endpoints, fields, or historical records exist.
-- Use straightforward implementation choices and explain trade-offs when data or interactive map behavior is uncertain.
-- Treat pseudocode and suggested structure as guidance, not mandatory source-code contracts.
-- Keep the current feature focused on the map; do not implement the full SnowStorm AI simulator unless explicitly requested.
-
-## Future phase: storm simulation and preparedness
-
-The following preserves the broader product plan for later work. It does not expand the current map implementation scope. Its data, interpretation, and privacy safeguards also apply whenever relevant to the map.
-
-### Broader product purpose
-
-Build a winter storm simulation and preparedness planner for selected streets in St. John's, Newfoundland and Labrador.
-Help public works and emergency-planning teams compare snowfall timing, street priorities, and assumed snow-clearing resources.
-The minimum viable product (MVP) targets an eight-hour proof of concept.
-
-Illustrative comparison: one 200 cm storm on Friday versus two 100 cm storms on Thursday and Saturday.
-Six plows illustrate an assumed resource setting.
-These values are examples, not observations or confirmed fleet availability.
-
-### Core user flow
-
-1. Select the pilot streets and review their sources.
-2. Configure two hourly snowfall scenarios.
-3. Enter assumed clearing resources, operating hours, productivity, and clearing target.
-4. Run both simulations using clearly disclosed assumptions.
-5. Compare hourly remaining snow, clearing progress, and plow-hours.
-6. Review a preparedness brief grounded in the simulation results.
-
-### Future simulator MVP scope
-
-| Feature | Required behavior | Output |
+| Topic | Baseline | Status |
 | --- | --- | --- |
-| Storm scenario builder | Accept user-defined snowfall totals, timing, and hourly profiles. | Two editable scenarios. |
-| Plow workload simulator | Allocate available plow-hours in street priority order. | Hourly remaining snow, work used, and clearing progress. |
-| AI preparedness brief | Interpret structured results and disclose assumptions. | A traceable comparison and preparedness suggestions. |
+| Product direction | Community crisis reporting and street updates | Confirmed by Amanda, October 29, 2026 |
+| Publication | Staff approval required before public display or subscriber delivery | Confirmed |
+| Notification preference | Free outbound SMS to a chosen real phone number; email if free SMS is not feasible | Confirmed |
+| Report submission channel | To be selected during feasibility; inbound SMS is not established by outbound SMS support | Open |
+| Geography | Reuse existing road geometries; count at segment level | Preferred first implementation approach |
+| Subscription coverage | All mapped segments belonging to the selected street | Discussion baseline |
+| Map reporting window | Previous 60 minutes, based on report receipt time | Proposed demo default |
+| Volume thresholds | Grey: 0; blue: 1-4; orange: 5-14; red: 15 or more | Proposed demo defaults |
+| Delivery interval | Hourly, only when newly approved relevant reports exist | Proposed demo default |
+| Public title | Community Crisis Reporting Map | Working title; current app title is Flurry |
 
-Use 5–10 verified streets for the pilot.
-In the original eight-hour simulator plan, a map was optional when geometry preparation threatened the time budget. The current map phase below takes precedence for present work.
-The app must support scenario changes without code edits.
+Confirmed direction does not mean the integrations, schema, access controls, or deployment are approved or implemented. Defaults are explicit starting points, not validated hazard thresholds.
 
-### Non-negotiable interpretation rules
+## 3. Four MVP features
 
-- Label every model estimate `SIMULATED`.
-- Label every user-defined operational parameter `ASSUMED`.
-- Distinguish sourced street information from assumptions and synthetic examples.
-- Never present simulated clearing time as actual municipal recovery time.
-- Never infer verified accessibility, road safety, or actual equipment availability.
-- Never fabricate missing observations, source values, or historical validation results.
-- Treat all mockup values, road colours, and forecast curves as synthetic design placeholders.
-- Keep assumptions and data provenance visible in the interface.
+### A. Hazard submission
 
-### Data contract
+- Capture a description, receipt timestamp, hazard type, and location.
+- Store one report record per submission; deduplicate messaging retries by provider message identifier when applicable.
+- Resolve the report to one mapped road segment. An ambiguous location remains private until clarified.
+- Acknowledge receipt as pending review, without promising publication, verification, or response.
+- Keep raw text and reporter contact references private. Prepare a redacted public description.
 
-| Input | Required fields | Requirements |
+The intake channel remains open. Incoming SMS requires its own feasibility test. An app-based form with explicit segment selection is a possible fallback, not a confirmed implementation choice. Do not silently guess a segment.
+
+### B. Minimal staff review
+
+- Show a private queue containing the report description, time, hazard type, and proposed segment.
+- Let staff approve or reject publication after checking location and the public description for inappropriate or personal content.
+- Block publication when the segment is unresolved or the public description is unsuitable.
+- Record review outcome and review/publication times with a private reviewer reference where available.
+- Keep hazard verification separate: approving publication leaves the report unverified unless staff separately confirm it.
+
+A minimal review interface is required. A fuller moderation dashboard is deferred. Staff controls must not be available to public users; the access approach is an unresolved implementation decision and must be settled before exposing the prototype publicly.
+
+### C. Public reporting map
+
+- Reuse the existing pilot road geometries, street search, and suitable selection interactions.
+- Colour each segment using its approved recent-report count, replacing the old snow-clearing-priority meaning in the reporting view.
+- Provide segment details: street/segment label, count, hazard types, grounded summary, reporting window, latest update, and verification status.
+- Refresh counts when reports are approved and when they age out of the window.
+- Support readable text information alongside the map; colour alone must not carry meaning.
+
+Individual segment selection and its details interaction require implementation; they are not established as existing features.
+
+### D. Street subscriptions and notifications
+
+- Let a resident choose a mapped street and explicitly consent to updates at a private notification destination.
+- Cover all mapped segments belonging to that street.
+- Attempt free outbound SMS first. If that is not feasible, deliver by email.
+- Send only when newly approved relevant reports exist; omit unrelated streets, pending reports, and rejected reports.
+- Support unsubscribe and check active subscription status before delivery.
+- Record delivery outcomes. Advance successful-delivery tracking only after success; retain failures for retry.
+- Permit a clearly labelled manual trigger for the hourly workflow during the demo. A manual trigger can send a real message; simulated delivery must be labelled separately.
+
+## 4. User journeys
+
+### Resident
+
+1. Browse the map without subscribing and search for a pilot street.
+2. Read approved report counts, summaries, timestamps, and unverified labels.
+3. Choose a street, enter the destination for the selected notification channel, and explicitly opt in.
+4. Submit a report through the confirmed intake channel and provide enough detail to resolve its segment.
+5. Receive a pending-review acknowledgement; the report is not yet public.
+6. After staff approval, see the segment update if the report is still within the reporting window.
+7. Receive a street update when newly approved relevant reports are available.
+8. Unsubscribe to stop future updates.
+
+### Staff
+
+1. Open the private review queue.
+2. Inspect location, description, hazard type, time, and proposed public wording.
+3. Resolve ambiguity before approval, or reject the submission.
+4. Approve publication while preserving the separate verification status.
+5. Inspect approved report concentrations on the map and investigate before making operational decisions.
+
+## 5. Report lifecycle and publication rules
+
+**Received -> pending clarification when needed -> pending staff review -> approved or rejected.**
+
+Only valid, location-resolved, staff-approved reports may enter public outputs. Automated filtering alone never approves a report. In this document, "approved" means approved for publication, not verified as fact.
+
+Map counts use approved reports whose receipt times fall in the configured window. A report approved after that window may therefore be absent from the recent-volume count. Subscriber eligibility uses publication time rather than receipt time so delayed approval does not silently skip a report. Updates must show reporting times and avoid presenting old reports as new incidents. Any further notification age limit remains an explicit decision.
+
+Deduplication prevents duplicate processing of the same submission or provider retry. Counts describe reports, not unique residents or independently verified incidents.
+
+## 6. Geographic and map contract
+
+Use a logical street identifier for subscriptions and a segment identifier for report assignment. Each segment belongs to a reviewed street grouping; do not join reports and subscriptions using street-name text alone.
+
+The saved geometry includes OBJECTID, STREET_ID, and STREETNAME. STREET_ID varies among features named Water Street, so it must not be assumed to identify the entire subscription street. Validate source identifiers and build a reviewed whole-street mapping before integration. Avoid new neighbourhood or postal-code boundaries in this MVP.
+
+| Approved reports received in the previous 60 minutes | Colour | Label |
 | --- | --- | --- |
-| `roads.csv` | `road_id`, `road_name`, `length_km`, `priority` | Verify lengths from GIS and priorities through public sources. |
-| `scenario_a.csv` | `hour`, `snowfall_cm` | User-defined hourly profile for the first scenario. |
-| `scenario_b.csv` | `hour`, `snowfall_cm` | User-defined hourly profile for the second scenario. |
-| UI settings | `plows`, `plow_speed_or_rate`, `operating_hours`, `clearing_target` | Disclose every operational value as an assumption. |
+| 0 | Grey | No recent reports |
+| 1-4 | Blue | Low report volume |
+| 5-14 | Orange | Moderate report volume |
+| 15 or more | Red | High report volume |
 
-The example scenario profiles each total 200 cm.
-Users must retain control over exact duration and hourly intensity.
-Record source URLs, download dates, verification status, and transformations in the README.
-Do not interpret missing snowfall observations as zero snowfall.
+Legend: **Recent report volume**. These are proposed demonstration thresholds. Volume reflects participation as well as potential impact; it is not severity, safety, or an official incident rating. No recent reports does not mean no hazards exist.
 
-### Source inventory
+## 7. Conceptual data requirements
 
-These statuses come from the baseline plan.
-This context file does not independently verify current source access.
+This is a logical contract for planning, not an implemented database schema or a choice of database technology.
 
-| Source | Intended use | Baseline status |
-| --- | --- | --- |
-| [ECCC Historical Climate Data](https://climate.meteo.gc.ca/) | Historical weather context and sample storm selection. | Station coverage and complete hourly snowfall remain unverified. |
-| [City roads GIS](https://map.stjohns.ca/mapsrv/rest/services/community/Basemap/MapServer/0) | Street names, geometry, and lengths. | Plan reports GeoJSON support; pilot extraction needs testing. |
-| [City service levels and priority](https://www.stjohns.ca/resident-services/snow-clearing/service-levels-priority/) | Published priority definitions and service context. | Plan lists P1 arterial, P2 collector, P3 local, and P4 city-maintained private lanes. |
-| [Street Priority Lookup](https://apps.stjohns.ca/snowclearing/StreetPriority.aspx) | Verify selected streets individually. | Public lookup reported; bulk download remains unverified. |
-| [511NL Road Conditions API](https://511nl.ca/help/endpoint/winterroads) | Possible future external reference. | Developer key required; current provincial conditions, not municipal history. |
-| [Where the Plow](https://plow.jackharrhy.dev/) | Possible historical plow coverage. | Export, coverage, and reuse conditions remain untested. |
-| [City AVL tracker](https://map.stjohns.ca/avl/) | Possible live plow reference. | Archive export and fleet count remain unverified. |
-
-Use manually entered snowfall profiles when complete observations are unavailable.
-Skip GPS ingestion when sample access fails.
-Use hand-selected verified streets if automated road extraction fails.
-Historical municipal road conditions are unavailable for validation within the baseline plan.
-
-### Simulation contract
-
-Use an hourly, rule-based simulation.
-For each hour:
-
-1. Load the hour's snowfall and available operating time.
-2. Add snowfall to every pilot road segment.
-3. Assign available plow-hours in published priority order.
-4. Limit clearing by equipment count, productivity, operating time, and road length.
-5. Update remaining snow and record work performed.
-6. Store hourly results for scenario comparison.
-
-Conceptual update rule:
-
-```text
-remaining_next = max(0, remaining_current + hourly_snowfall - simulated_clearing)
-```
-
-Never allow negative remaining snow or work beyond available plow-hours.
-Use consistent units when converting productivity into segment clearing depth.
-Define the clearing target before reporting time to target.
-Report an unmet target explicitly when the simulation ends before reaching it.
-
-#### Decisions required before coding
-
-- Select and verify the 5–10 pilot streets.
-- Define productivity units and their relationship to road length and snow depth.
-- Define the clearing target and network-level completion rule.
-- Define operating schedules and treatment of partial plow-hours.
-- Define ordering among streets with equal priority.
-- Define the shared scenario timeline, timezone, and simulation end condition.
-- Decide whether both scenarios share operational settings or expose differences explicitly.
-
-The baseline plan does not fully specify these mechanics.
-Document each choice before interpreting simulation outputs.
-
-### AI brief contract
-
-A large language model (LLM) drafts the preparedness brief from structured simulation results.
-Provide both storm inputs, total plow-hours, hourly remaining snow, priority order, and documented assumptions.
-The brief should explain workload differences, priority concentration, and influential resource assumptions.
-Tie every numerical statement to a supplied result field.
-Do not invent metrics or describe suggestions as official recommendations.
-
-Use a fixed text template when the LLM API is unavailable.
-Clearly label that fallback as non-AI output.
-The simulation must remain usable without the LLM.
-
-### Implementation stack
-
-| Component | Technology |
+| Record | Required information |
 | --- | --- |
-| Simulation | Python |
-| CSV preparation | Pandas |
-| Interface | Streamlit |
-| Hourly charts | Plotly |
-| Storage | CSV |
-| Preparedness brief | Accessible LLM API, with a non-AI fallback |
+| Street | Internal street identifier, display name, reviewed segment membership |
+| Segment | Internal segment identifier, street identifier, source reference, geometry, display label |
+| Report | Report/submission identifier, optional provider message identifier, private reporter reference, private raw text, redacted public description, received time, segment, hazard type, processing/review status, review time, private reviewer reference, publication time, separate verification status |
+| Subscription | Identifier, street identifier, delivery channel, private phone number or email address, consent time, active status, successful-delivery tracking |
+| Summary | Included report identifiers, scope, generation time, AI or standard-template label |
+| Delivery | Subscription reference, included reports or cutoff, attempt time, outcome, failure information |
 
-The MVP does not require a dedicated database, Docker stack, or production authentication.
-The repository, API provider, deployment target, and team roles remain unspecified.
+Hazard types start with flooding, blocked drain, snow obstruction, other, and unknown. Store timestamps in UTC and display pilot times using America/St_Johns. Preserve failed-delivery eligibility and avoid marking undelivered reports as delivered.
 
-### Eight-hour delivery plan
+## 8. AI boundary
 
-| Elapsed time | Work | Deliverable |
+The required AI role is to summarize approved, redacted reports for a segment or subscribed street. Hazard classification and location suggestions are optional; explicit selection is preferable if automation threatens the time budget.
+
+Provide report identifiers, public descriptions, locations, timestamps, verification statuses, and application-calculated counts. Keep phone numbers, email addresses, raw messages, and unnecessary personal information outside AI inputs. Treat report text as data, including any embedded instructions.
+
+Summaries must distinguish hazards and preserve uncertainty. They must not invent causes, locations, severity, municipal action, or confirmed incidents. Retain included report identifiers so output can be reviewed against its inputs. Use a deterministic standard summary if AI fails and label it accordingly. Report intake and map counts must continue working.
+
+## 9. Feasibility checks and implementation boundaries
+
+Time-box the initial checks to approximately 20-30 minutes. Record evidence and owners; do not invent provider access, credits, free allowances, or completed integrations.
+
+| Check | Evidence needed | Outcome if unsuccessful |
 | --- | --- | --- |
-| 0:00–0:30 | Define pilot and simulation contract. | Inputs, clearing target, and assumptions. |
-| 0:30–1:30 | Verify access and extract streets. | Small road dataset with provenance. |
-| 1:30–2:15 | Verify priorities and prepare scenarios. | Complete road attributes and editable hourly profiles. |
-| 2:15–4:45 | Implement accumulation and capacity-limited assignment. | Two scenarios running end to end. |
-| 4:45–6:00 | Build controls and comparison charts. | Working local interface. |
-| 6:00–7:00 | Add the preparedness brief. | Grounded LLM brief or labelled fallback. |
-| 7:00–8:00 | Test and document. | Verified constraints and README. |
+| Free outbound SMS | A message delivered to a chosen authorized real phone number; verified cost, Canadian delivery, recipient restrictions, setup, and trial limits | Use email; verify actual email delivery separately |
+| Report intake | Prove inbound SMS separately if proposed | Confirm another intake channel, such as app-based entry |
+| Street/segment mapping | Reviewed segment identifiers and complete membership for pilot streets | Use a small manually reviewed pilot mapping |
+| Staff publication gate | Pending report stays private; explicit approval permits public output | Resolve before claiming the core flow works |
+| Map update | One approved stored report changes only the assigned segment | Explicit refresh is acceptable for the demo |
+| AI summary | Several synthetic reports yield an accurate, traceable summary | Deterministic standard summary |
+| Subscription delivery | Relevant approved reports arrive at an authorized destination | Diagnose actual delivery; labelled simulation is a demo limitation, not completion evidence |
+| Scheduling | Hosting supports hourly execution or a manual trigger runs the same workflow | Labelled manual demo trigger |
 
-### Completion criteria
+Reuse the current frontend and project conventions. Select the simplest suitable persistence and backend approach after inspection. Provider, database, staff-access mechanism, AI service, scheduler, and hosting choices remain open. New dependencies, schema changes, permissions, infrastructure, deployment, and external data transfers require their applicable approvals.
 
-- Users run and compare two scenarios without changing code.
-- Every hour respects available plow-hours and clearing capacity.
-- Remaining snow never becomes negative.
-- Outputs distinguish public street information from operational assumptions.
-- Results include an hourly comparison and traceable preparedness summary.
-- Charts and briefs avoid validated safety and actual recovery claims.
-- The README records sources, assumptions, model choices, limitations, and run instructions.
+## 10. Proposed eight-hour execution sequence
 
-Minimum checks cover zero snowfall, split storms, and constrained capacity.
-Also verify priority allocation, operating-hour limits, and an unreachable clearing target.
-Check that the fallback brief works when the LLM API fails.
+| Time | Work | Completion evidence |
+| --- | --- | --- |
+| 0:00-0:30 | Verify messaging options, intake path, geography, and scope | Chosen paths with evidence and explicit limitations |
+| 0:30-1:30 | Persistence and report lifecycle | Synthetic report stored once against a valid segment |
+| 1:30-3:00 | Intake and minimal staff review | Pending/rejected reports remain private; approved report becomes eligible |
+| 3:00-4:15 | Segment counts, map colours, and details | Correct segment updates and age-out works |
+| 4:15-5:15 | Grounded summaries and fallback | Supported summary and working AI-failure fallback |
+| 5:15-6:15 | Consent, street subscriptions, delivery, unsubscribe | Relevant real update delivered through selected channel |
+| 6:15-7:15 | End-to-end and failure checks | Core journey and publication boundaries verified |
+| 7:15-8:00 | Repeatable demo and documentation | Setup, limitations, and demonstration steps recorded |
 
-### Explicit exclusions
+This schedule is a proposal, not a commitment or completion record. Assign owners from actual team availability. Protect the full reporting-to-review-to-map-to-update journey before adding analytics.
 
-- Trained machine-learning models.
-- Real-time dispatch or detailed vehicle routing.
-- City-wide coverage.
-- Validated hazard forecasts or road-safety classifications.
-- Claims about real plow availability.
-- Unverified historical road-recovery results.
-- Drifting snow, compaction, melting, freezing rain, traffic, and equipment failure.
+## 11. Acceptance and verification
 
-### Working conventions
+- The same submission/provider retry persists once and does not inflate counts.
+- Pending, rejected, and unresolved reports never appear in public counts, summaries, or updates.
+- Explicit staff approval publishes only the intended resolved report and does not automatically verify its hazard.
+- The first, fifth, and fifteenth recent approved reports produce blue, orange, and red respectively under the proposed thresholds.
+- Reports aging out reduce counts and can change colours.
+- Segment details show hazard information, timestamps, verification status, and reporting window.
+- A subscription includes other mapped segments of the same street and excludes unrelated streets.
+- A delayed approval is not lost behind a previous notification cutoff.
+- No new eligible reports means no scheduled message.
+- Failed delivery does not advance successful-delivery tracking; unsubscribe prevents future delivery attempts.
+- AI output contains only supported information and distinguishes different hazards; AI failure produces a labelled standard summary.
+- Public responses and AI inputs exclude private contact information and raw messages.
+- Real delivery is demonstrated through the selected SMS or email channel; manual triggers and simulations are labelled accurately.
 
-For the future simulator phase, keep the eight-hour scope central when evaluating new features. For current work, follow the map-only scope.
-Resolve model definitions before expanding the interface.
-Preserve the separation between simulation calculations and AI interpretation.
-Update this file when scope, model contracts, source verification, or completion status changes.
-Record implementation evidence before marking a feature complete.
-Keep CanAI project discussions and artifacts private unless Amanda explicitly authorizes sharing.
+These are required checks, not claims that tests have run or features are complete.
 
-### Future simulator next steps
+## 12. Privacy, trust, and accessibility
 
-1. Confirm pilot streets and complete the simulation contract decisions.
-2. Test road extraction and verify priorities.
-3. Prepare the two hourly profiles and operational assumptions.
-4. Implement and verify the simulation before adding AI interpretation.
+Use synthetic reports and authorized test destinations for demonstrations. Keep CanAI artifacts private; do not send protected material to external services without specific authorization. Define retention and deletion before collecting real public reports. Keep secrets outside source control.
+
+Obtain explicit subscription consent, provide unsubscribe, and suppress delivery after unsubscribe is processed. Restrict raw submissions, contact information, and staff controls. Public summaries use redacted approved descriptions only.
+
+Show unverified labels, report times, data sources, the reporting window, and the latest update. Distinguish empty results from stale data or loading failure. Provide keyboard access, readable contrast, and text alternatives to map information. Target WCAG 2.2 AA without claiming compliance before evaluation.
+
+## 13. Existing implementation and documentation
+
+Inspected repository evidence establishes a Streamlit/Folium map, saved pilot geometries, street search, multi-street selection, and recorded snow-clearing priority details. The old map colours represent snow-clearing priority. Individual segment selection, reporting, staff review, notification subscriptions, AI summaries, and delivery have not been established as implemented for the pivot.
+
+Reuse suitable code in app.py, components/map_tab.py, services/street_data.py, and the saved data rather than replacing the frontend to match an earlier planning proposal. Verify identifiers and interactions before relying on them.
+
+README.md, documents/DESIGN.md, and documents/MAP_IMPLEMENTATION_PLAN.md still describe the previous scope. Where they conflict, this context governs the product direction. They need reconciliation before pivot implementation. Update setup, environment-variable names, provider restrictions, fallback behaviour, and validation evidence as implementation becomes established.
+
+## 14. Exclusions and remaining decisions
+
+Outside the MVP: snowfall simulation, plow workloads or routing, fleet allocation, automated dispatch, hazard prediction, validated severity scores, new geographic boundaries, city-wide rollout, production municipal integration, and claims of operational readiness. A full moderation system and production identity management are deferred; minimal staff approval and an appropriate access boundary remain required.
+
+Remaining decisions are the report-intake channel; SMS/email provider and verified restrictions; pilot street/segment mapping; staff access approach; persistence and hosting; AI service; final reporting window, thresholds, and interval; and any notification age limit. The product direction and staff-publication gate are settled.
+
+Later possibilities include expanded moderation and incident confirmation, hazard filters, additional subscription areas, bilingual interfaces, and participation analytics kept separate from impact or safety claims.
+
+## Previous direction - deprecated October 29, 2026
+
+The previous direction was SnowStorm AI (application title: Flurry), a snowstorm planning and preparedness tool for St. John's. Its map-only phase focused on real pilot roads, searchable multi-street selection, recorded municipal snow-clearing priorities, and explicit unknown-data states. The broader plan proposed snowfall-scenario comparisons, plow-workload simulation, and an AI preparedness brief. Before this merge, main connected the existing standalone one-street simulation engine to the Simulation tab, with manually entered hourly snowfall, street length, assumed clearing capacity, a remaining-snow graph, and an hourly results table. This existing simulation is legacy functionality, outside the confirmed reporting MVP; the merge preserves its code. Map-selection integration, forecasting, routing, and AI recommendations were not included in that standalone change.
+
+That direction was deprecated on October 29, 2026 in favour of community crisis reporting, staff-reviewed publication, and street notifications. Reuse useful map code and geometry where practical. Snowfall simulation, plow estimates, routing, and preparedness recommendations are outside the confirmed MVP. Earlier context remains available in Git history.

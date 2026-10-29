@@ -102,6 +102,14 @@ labels for missing attributes. Verification dates are not recorded in the curren
 dataset. The source and limitations panel explains pilot coverage, mixed priorities,
 and the distinction between clearing priorities and current road conditions.
 
+A large dark dot marks the assumed starting depot at 25 Blackler Avenue
+(47.546909, -52.741242). The address is listed in the
+[City contact directory](https://www.stjohns.ca/contacts-directory/); coordinates
+come from an ArcGIS PointAddress match checked on 2026-10-29, not a verified
+vehicle entrance. All simulated plows are assumed to start here; actual dispatch
+locations remain unverified. The marker is planning context only: the current
+simulation does not use it or calculate routes.
+
 ### Validation
 
 Run the tab and map regression checks from the repository root.
