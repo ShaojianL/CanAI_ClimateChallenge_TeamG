@@ -1,273 +1,275 @@
-# Implementation Plan
+﻿# Implementation Plan
 
-SnowStorm AI: map-only MVP  
-Prepared: 2026-10-28  
-Classification: CanAI Garage  
-Status: proposed; this document authorizes no application implementation or dependency installation.
+SnowStorm AI: map-only MVP (application title: Flurry)
+Prepared: 2026-10-28
+Status reviewed: 2026-10-28
+Classification: CanAI Garage
+Overall status: map functionality substantially implemented; data assurance and final acceptance remain open.
+
+This document records observed implementation progress. It does not establish retrospective approval or authorize new dependencies, architecture changes, data refreshes, deployment, or publication.
 
 ## 1. Requested Outcome
 
-Build a local application showing 5–10 real St. John's streets. Users can search for and select several streets, see all their relevant segments highlighted, and inspect verified snow-clearing priorities or an explicit unknown state.
+Deliver a local map of 5–10 real St. John's streets with searchable multi-selection, all-segment highlighting, recorded municipal snow-clearing priorities, source information, and explicit unavailable states.
 
-Deliver the map before adding simulation, forecasts, or AI recommendations.
+Finish the map phase before adding simulation, forecasts, or AI recommendations. The Simulation tab remains a placeholder.
 
 ## 2. Current-State Findings
 
-- The repository contains `README.md`, `PROJECT_CONTEXT.md`, and `SnowStorm_AI_Map_Copilot_Context.md`.
-- No application source, dependency manifest, tests, or local road dataset was present in the inspected working directory.
-- `PROJECT_CONTEXT.md` establishes the map-only scope and takes precedence over the older simulator plan.
-- Python, Streamlit, Folium, and GeoJSON are suggested technologies, not an existing installed application architecture.
-- The City road-layer metadata retrieved through the browser identifies a polyline layer, projected coordinate reference EPSG:32181, and fields including `OBJECTID`, `STREETNAME`, `STREETPREF`, `STREETSUFF`, `STREETCODE`, and `LENGTH`. Metadata access does not establish a successful feature download, grouping rule, length units, or permission for every reuse.
-- Official snow-clearing priorities must be verified separately; road class is insufficient evidence.
-- The colleague is building the map. His unpublished code, branch, chosen streets, and technology decisions have not been inspected.
+Status legend:
+
+- [x] **Done:** supported by inspected code, saved records, or executed automated checks. This does not imply browser acceptance or live-source verification.
+- [ ] **In progress:** partly implemented or awaiting validation. This does not imply someone is actively assigned.
+- [ ] **Not started:** no implementation or completion evidence was found in this review. Historical activities without records remain unverified.
+
+| Phase | Status | Evidence and remaining work |
+| --- | --- | --- |
+| 0. Coordination and approval | In progress / records unverified | Existing implementation and pilot inspected; ownership agreement and prior approval records were not established by this review. |
+| 1. Road geometry | In progress | Eight-street snapshot and fetcher exist; source completeness, grouping, provenance, and length units need validation. |
+| 2. Priority verification | In progress | Section priorities, mixed values, and source links are saved; dated verification and conflict checks remain open. |
+| 3. Map rendering | In progress | Rendering, legend, labels, and styling exist; source comparison, viewport behaviour, and tooltip escaping remain open. |
+| 4. Selection and failure handling | In progress | Core selection and session-refresh behaviour pass focused tests; data-contract and edge-case gaps remain. |
+| 5. Validation and handover | In progress | Five automated tests pass; browser acceptance, remaining data checks, and final handover are incomplete. |
+
+The actual structure uses `components/`, `services/`, and JSON priority records. Earlier `src/` and CSV paths were proposals and should not be created merely to match the original plan.
 
 ## 3. Files Inspected
 
-| Source | Purpose |
-| --- | --- |
-| Repository root listing and tracked-file discovery | Establish available implementation and documentation |
-| `PROJECT_CONTEXT.md` | Authoritative scope, data boundaries, and completion criteria |
-| `SnowStorm_AI_Map_Copilot_Context.md` | Supporting map requirements |
-| `README.md` | Existing project introduction |
-| Amanda's supplied global instructions | Approval, privacy, and collaboration boundaries |
-| Business-project profile and shared `PRODUCT_PRINCIPLES.md` | Applicable project standards |
-| Amanda's Planner and developing-with-streamlit skills | Planning structure and implementation reference workflow |
+- `README.md`: setup, operation, sources, and limitations.
+- `documents/PROJECT_CONTEXT.md`: current map-only scope and future simulator boundaries.
+- `documents/MAP_IMPLEMENTATION_PLAN.md`: original requirements and acceptance criteria.
+- `app.py`: Map, Simulation, and Dev note composition.
+- `components/map_tab.py`: map rendering, searchable selection, details, and legend.
+- `components/data_refresh.py`: session refresh, validation, and failure feedback.
+- `components/simulation_tab.py`: explicit unavailable-data placeholder.
+- `services/street_data.py`: local loading and geometry/attribute validation.
+- `scripts/fetch_pilot_streets.py`: City requests, priority parsing, and saved-file output.
+- `data/street_priorities.json`: eight pilot records, sections, source URLs, counts, and approximate lengths.
+- `tests/test_app.py` and `tests/test_data_refresh.py`: regression coverage.
+- `requirements.txt`: existing unpinned Streamlit, Folium, streamlit-folium, and requests dependencies.
 
-External references checked during planning:
-
-- [City road-layer metadata](https://map.stjohns.ca/mapsrv/rest/services/community/Basemap/MapServer/0?f=pjson).
-- [Streamlit multiselect documentation](https://docs.streamlit.io/develop/api-reference/widgets/st.multiselect).
-- [streamlit-folium project](https://github.com/randyzwitch/streamlit-folium).
-
-Verify documentation against the versions selected during implementation. No feature extraction or application validation has been performed for this plan.
+The review ran local automated tests. It did not make live City requests or conduct a browser accessibility review. Saved geometry is exercised by the loader and map tests; complete extents and source identity were not independently verified.
 
 ## 4. Scope
 
-### In Scope
+### In scope
 
-- Small, reviewed public road dataset with provenance.
-- Interactive road map with zoom, pan, labels, and attribution.
-- Searchable multiple-street selection and synchronized highlighting/details.
-- Verified priority labels, neutral unknown styling, and a legend.
-- Clear loading, missing-data, and invalid-data messages.
-- Local run instructions and focused validation.
+- Real pilot geometry, reviewed provenance, and recorded municipal priorities.
+- Interactive map, searchable multi-selection, highlighting, details, and legend.
+- Honest unknown/mixed states and controlled data-loading failures.
+- Local operation, focused tests, manual acceptance, and handover.
 
-### Out of Scope
+### Outside the current phase
 
-- Snowfall simulation, charts, time controls, AI briefs, and safety predictions.
-- Plow routing, live tracking, city-wide ingestion, accounts, databases, deployment, and publication.
-- Mandatory map-click selection; add only after the searchable selection works reliably and its scope is approved.
+- Snowfall simulation, charts, time controls, forecasts, or AI recommendations.
+- Plow routing, live tracking, city-wide ingestion, accounts, databases, deployment, or publication.
+- Mandatory click-to-select. The map is currently display-only; the sidebar is the selection control.
 
-## 5. Assumptions and Open Questions
+## 5. Confirmed Facts and Open Questions
 
-### Confirmed Facts
+- [x] **Done:** the pilot list is WATER ST, DUCKWORTH ST, GOWER ST, MILITARY RD, KENMOUNT RD, PRINCE PHILIP DR, SIGNAL HILL RD, and FRESHWATER RD.
+- [x] **Done:** the application loads saved data and supports session-only refresh.
+- [x] **Done:** mixed priorities are recorded by published section; the map colours the whole street with a mixed-priority colour.
+- [ ] **In progress:** confirm complete intended geometry, unique source segment IDs, and the suitability of grouping by street name.
+- [ ] **Not started:** record extraction and priority-verification dates; do not infer them from this document's review date.
+- [ ] **Not started:** verify the source `LENGTH` units and aggregation method before accepting displayed metre values.
+- [ ] **Not started / unverified:** reconcile contributor ownership, dependency approval, and architecture approval with existing team records. Code presence is not evidence of approval.
 
-The current objective is the map-only MVP. A small pilot and explicit unknown priorities are acceptable. The colleague owns map development.
+## 6. Current Approach and Data Contract
 
-### Assumptions
-
-- The first deliverable runs locally in a browser.
-- Public road information can be prepared as a local snapshot after checking reuse conditions.
-- The team will choose one compact pilot area rather than disconnected streets across the entire city.
-- Missing length or priority values may remain unavailable.
-
-### Open Questions
-
-| Question | Importance | Resolution |
-| --- | --- | --- |
-| Does the colleague already have code or a chosen stack? | Blocking before scaffolding | Inspect and reuse his work before creating competing files |
-| Which 5–10 streets form the pilot? | Blocking before final extraction | Agree one list and identify street extents |
-| Are proposed dependencies and architecture approved? | Blocking before installation/build | Review the exact manifest and implementation scope |
-| Does street priority vary by segment? | Important but non-blocking | Preserve segment-specific evidence; show mixed/unavailable when necessary |
-| Are approximate road lengths required for the first demo? | Optional clarification | Omit until measurement method and units are verified |
-
-## 6. Recommended Approach
-
-If no implementation already exists, propose Python + Streamlit + Folium with `streamlit-folium` for embedding. Streamlit supplies the searchable selector and details area; Folium renders line geometry. Confirm compatible versions before approval. Use standard-library JSON, CSV, HTTP, and unittest capabilities where sufficient; do not add Pandas or GeoPandas solely for this small dataset.
-
-Prefer the colleague's existing working stack if it satisfies the requirements. A custom JavaScript frontend or backend service would add unnecessary setup for this pilot.
-
-### Data flow
+Reuse the existing Python, Streamlit, Folium, and streamlit-folium implementation. No replacement frontend, new dependency, CSV migration, or directory restructuring is proposed by this status update.
 
 ```text
-City road query -> reviewed local GeoJSON -> validated street index
-City priority verification -------------> reviewed priority CSV
-                                               |
-                           selected street IDs |
-                                               v
-                             map + details + legend
+City road query ----------> pilot_streets.geojson ---+
+City priority form -------> street_priorities.json -+--> validated loader
+                                                    --> map + selection + details
+Session refresh ----------> validation -------------> session dataset only
 ```
 
-### Proposed data contract
+Current selection and priority joins use street names. The original plan preferred reviewed stable street IDs; duplicate-name ambiguity has not been resolved or tested. Preserve source identity and review the grouping before deciding whether an ID migration is necessary. Any such change requires its own exact proposal.
 
-Each road feature retains its source segment ID and geometry, plus a reviewed `street_id` and display name. Store GeoJSON coordinates as WGS84 longitude/latitude. Folium map centers and explicit bounds use latitude/longitude: do not reverse GeoJSON coordinates globally.
+GeoJSON remains longitude/latitude; rendering converts points to latitude/longitude for Folium. Multipart sections are drawn separately. Session state holds the canonical `selected_streets` list. Approximate lengths currently sum the source `LENGTH` values and label them metres; the units remain unverified.
 
-Use `OBJECTID` as source segment identity within the downloaded snapshot, not a promise of permanent identity. Inspect `STREETCODE` before deciding whether it supports grouping. Otherwise assign reviewed local street IDs and retain the mapping to source segments. Do not group solely by display name without reviewing ambiguity.
+Priority records contain section text, priority levels, source links, segment counts, and approximate lengths. They lack dated verification metadata. Source links establish recorded provenance, not independent verification in this review.
 
-Priority CSV columns: `street_id`, optional `segment_id`, `priority`, `verification_status`, `source_url`, `verified_on`, and `notes`. Use empty priority plus an explicit unavailable status when unverified. Define whether a row applies to the whole street or one segment; conflicting rows must produce a validation error rather than silently overriding evidence.
+## 7. Phased Implementation Checklist
 
-Keep one canonical set of selected street IDs in Streamlit state. The selector, highlighted geometry, and details read from that set. Use human-readable labels for ID options and disambiguate duplicate names.
+### Phase 0: Coordinate ownership and approval
 
-The UI shows a large map, a labelled searchable selector, selected-street details, a priority legend, and source/verification notes. Differentiate selection with a thicker contrasting outline so it remains distinguishable from priority colour. Display “Simulation data unavailable” as text; do not add nonfunctional time controls.
+- [x] **Done:** inspect the current local implementation, stack, and pilot configuration.
+- [ ] **In progress:** reconcile the implemented name-based contract with the original stable-ID proposal.
+- [ ] **Not started / unverified:** confirm contributor file ownership and recorded approvals.
+- [ ] **Not started:** establish a reproducible, tested dependency-version record; `requirements.txt` is unpinned. Dependency changes require approval.
 
-## 7. Phased Implementation Plan
+### Phase 1: Retrieve and review real road geometry
 
-### Phase 0 — Coordinate ownership and approve the build
+- [x] **Done:** implement City queries requesting GeoJSON with `outSR=4326` and explicit request timeouts.
+- [x] **Done:** save a pilot snapshot and load it locally.
+- [x] **Done:** preserve separate multipart road sections and validate supported, nonempty geometry and coordinate ranges.
+- [ ] **In progress:** review source fields, service limits, intended extents, grouping ambiguity, and reuse conditions. Historical metadata findings do not prove complete extraction.
+- [ ] **Not started:** reconcile expected source IDs/counts, handle transfer limits with paging or ID batches, and detect duplicate IDs.
+- [ ] **Not started:** escape apostrophes in query literals before accepting arbitrary street names. The current pilot is fixed.
+- [ ] **Not started:** record extraction date, query, grouping decisions, and length units.
+- [ ] **In progress:** protect saved snapshots. Session refresh validates before replacement; command-line output currently writes both saved files without the shared validation or an atomic replacement strategy.
 
-- Inspect the colleague's branch/code and dependency choices.
-- Agree pilot streets, file ownership, and one data contract.
-- Present exact dependency versions and proposed file content for approval before implementation.
-- Files: no application changes in this phase.
-- Dependency: team agreement and Amanda's approval.
-- Validation/completion: both contributors use the same street IDs and know which files they own.
+Files: `scripts/fetch_pilot_streets.py`, `services/street_data.py`, `data/pilot_streets.geojson`. Data provenance documentation remains outstanding.
 
-### Phase 1 — Retrieve and review real road geometry
+Completion: complete intended extents, unique source IDs, reviewed grouping, valid coordinates, recorded provenance, and safe snapshot replacement.
 
-- Inspect layer metadata and query capabilities; confirm field names and service limits.
-- Make a small sample query before requesting the pilot.
-- Request GeoJSON with `outSR=4326`, relevant fields, and geometry. Construct parameters with URL encoding and escape apostrophes in any SQL string literals.
-- Query object IDs/counts for the selected streets first; retrieve all corresponding segments using supported paging or ID batches. Check transfer-limit indicators and reconcile returned IDs to expected IDs.
-- Preserve multipart geometry; reject empty or unsupported geometries. Review the map against the source for missing pieces and ambiguous street names.
-- Save the reviewed snapshot and provenance. Use timeouts and explicit HTTP/ArcGIS error handling; never replace a valid snapshot with a failed or empty response.
-- Files: `scripts/prepare_roads.py`, `data/roads.geojson`, `data/README.md`.
-- Dependencies: approved stack, access/reuse checks, pilot list.
-- Validation/completion: 5–10 reviewed streets, unique segment IDs, complete intended extents, valid WGS84 coordinates, and recorded extraction date/query.
+### Phase 2: Verify priorities
 
-### Phase 2 — Verify priorities in parallel
+- [x] **Done:** implement City form lookup and save section descriptions, source URLs, priority levels, and mixed values.
+- [x] **Done:** represent missing priorities explicitly; do not infer priorities from GIS road class.
+- [ ] **In progress:** independently review published sections and their coverage against the pilot geometry and service-level definitions.
+- [ ] **Not started:** record verification dates and scope notes for each reviewed priority.
+- [ ] **Not started:** validate unmatched street records and contradictory priority/section information rather than silently accepting them.
 
-- Amanda checks the agreed streets in the [City lookup](https://apps.stjohns.ca/snowclearing/StreetPriority.aspx) and reviews [service-level definitions](https://www.stjohns.ca/resident-services/snow-clearing/service-levels-priority/).
-- Record exact scope, source, date, and unavailable or mixed values. Do not assume bulk API access or derive priority from road class.
-- Map developer continues with unknown priorities while verification proceeds.
-- Files: `data/road_priorities.csv`; data-source notes coordinated with the map owner.
-- Dependency: agreed IDs and pilot list; geometry preparation need not finish first.
-- Validation/completion: every published priority is traceable; unmatched IDs and conflicts are reported.
+Files: `data/street_priorities.json`, `scripts/fetch_pilot_streets.py`, `services/street_data.py`.
 
-### Phase 3 — Render one real street, then the pilot
+Completion: every displayed priority has reviewed, dated evidence; unknown or mixed scope remains explicit; mismatches and conflicts are reported.
 
-- Build a local data loader and a Folium rendering function.
-- Start with one reviewed street; check position and every segment before loading all pilot roads.
-- Fit initial bounds to the pilot. Avoid resetting pan/zoom on every ordinary interaction where the selected embedding supports retaining viewport state.
-- Style verified classes consistently and unknown values neutrally; include text labels and attribution.
-- Escape external text used in HTML tooltips/popups.
-- Files: `src/roads.py`, `src/map_view.py`, `app.py`, approved dependency manifest.
-- Dependency: Phase 1 snapshot; Phase 2 optional until labels are verified.
-- Validation/completion: pilot appears in St. John's with readable names and honest priority labels.
+### Phase 3: Render the pilot map
 
-### Phase 4 — Add selection, details, and failure handling
+- [x] **Done:** implement cached local data loading and a Folium rendering function.
+- [x] **Done:** render road parts with text tooltips, priority colours, neutral unknown styling, mixed styling, legend, and source information.
+- [x] **Done:** fit bounds to selected streets and distinguish selection with thicker, more opaque lines.
+- [ ] **In progress:** compare all pilot positions and extents with the authoritative source in a browser.
+- [ ] **Not started:** validate initial pilot-wide bounds and viewport retention. The current map starts at a fixed centre and refits when streets are selected.
+- [ ] **Not started:** explicitly escape external text in HTML tooltips/popups.
 
-- Populate `st.multiselect` with stable street IDs and formatted labels.
-- Use a stable widget key; highlight every feature with a selected ID and update details from the same state.
-- Support no selection, multiple selections, individual removal, and clearing all selections.
-- Preserve selection through normal rerenders; discard IDs absent from a newly loaded snapshot with a clear notice.
-- Show approximate lengths only if units and computation are validated. Never calculate kilometres by summing degree distances or assume an undocumented `LENGTH` unit.
-- Show controlled messages for missing, malformed, empty, or conflicting input; keep search/details usable if basemap tiles fail.
-- Files: `app.py`, `src/roads.py`, `src/map_view.py`.
-- Dependency: Phase 3.
-- Validation/completion: selection, highlights, and details stay synchronized without rerun loops.
+Files: `components/map_tab.py`, `services/street_data.py`, `app.py`.
 
-### Phase 5 — Validate and hand over
+Completion: correct pilot location and coverage, readable labels, honest priorities, safe tooltip content, and accepted viewport behaviour.
 
-- Run the checks below, record outcomes, and fix failures within approved scope.
-- Amanda runs acceptance checks while the developer owns repairs.
-- Document installation, local launch, provenance, limitations, and troubleshooting.
-- Files: `tests/test_roads.py`, `README.md`, `data/README.md`.
-- Dependency: Phases 2–4.
-- Completion: acceptance criteria pass or remaining limitations are explicitly accepted.
+### Phase 4: Selection, details, and failure handling
 
-## 8. Proposed File Changes
+- [x] **Done:** provide searchable multi-selection with a stable widget key and shared session state.
+- [x] **Done:** highlight every mapped part of selected streets and render matching detail panels.
+- [x] **Done:** support empty and multiple selections; automated checks exercise selecting two streets and clearing selection.
+- [x] **Done:** preserve valid selection through successful refresh and keep session data after mocked request/validation failures.
+- [x] **Done:** show controlled local-data errors without blocking other tabs.
+- [x] **Done:** show source links, unavailable attributes, and an explicit simulation placeholder.
+- [ ] **In progress:** removal of absent street names is implemented, but no clear notice is shown; changed-dataset behaviour needs focused validation.
+- [ ] **Not started:** resolve name-based grouping/selection ambiguity against the stable-ID requirement.
+- [ ] **Not started:** validate displayed length units or propose withholding unverified lengths.
+- [ ] **Not started:** verify individual removal, normal browser rerenders, and usability when basemap tiles fail.
+- [ ] **In progress:** basic malformed-data validation exists; conflict, duplicate-ID, and geometry/priority join checks remain incomplete.
 
-Paths are proposals to reconcile with the colleague's implementation before creating files.
+Files: `components/map_tab.py`, `components/data_refresh.py`, `services/street_data.py`, `tests/`.
 
-| File | Action | Purpose | Risk |
-| --- | --- | --- | --- |
-| `requirements.txt` | Create after approval | Pin tested direct dependencies | Dependency/compatibility approval required |
-| `app.py` | Create | Compose widgets, state, map, and details | UI behavior |
-| `src/roads.py` | Create | Validate data, group segments, join verified attributes | Data integrity |
-| `src/map_view.py` | Create | Render geometry and selection styles | Coordinate and display correctness |
-| `scripts/prepare_roads.py` | Create | Explicit public-data retrieval/preparation | Incomplete extraction or source changes |
-| `data/roads.geojson` | Create | Reviewed geometry snapshot | Source quality and reuse conditions |
-| `data/road_priorities.csv` | Create | Independently verified priority evidence | Incorrect priority or scope |
-| `data/README.md` | Create | Provenance, transformation, grouping, and units | Documentation accuracy |
-| `tests/test_roads.py` | Create | Verify grouping, joins, and invalid inputs | Low |
-| `README.md` | Modify after approval | Setup, operation, and limitations | Low |
-| `PROJECT_CONTEXT.md` | No change required now | Remains scope authority | Update later only with verified implementation status |
+Completion: selection, highlights, and details stay synchronized; invalid/conflicting inputs are handled; failures preserve valid data; displayed measurements are supported.
+
+### Phase 5: Validate and hand over
+
+- [x] **Done:** run all five existing automated tests on 2026-10-28; all pass.
+- [x] **Done:** document local setup, sources, refresh semantics, colour meanings, and key limitations in README.
+- [x] **Done:** update this implementation plan to reflect observed status.
+- [ ] **In progress:** expand meaningful data-validation coverage for the remaining gaps below.
+- [ ] **Not started:** complete and record browser acceptance, keyboard accessibility, contrast, narrow-screen layout, and attribution checks.
+- [ ] **Not started:** reconcile stale project-context status and README test-coverage statements.
+- [ ] **Not started:** complete dated provenance, validated run instructions, and final handover/acceptance records.
+
+Files: `tests/test_app.py`, `tests/test_data_refresh.py`, `README.md`, `documents/PROJECT_CONTEXT.md`; location of additional provenance notes remains to be agreed.
+
+Completion: acceptance criteria pass or Amanda explicitly accepts documented limitations.
+
+## 8. File Status and Remaining Work
+
+| File | Current state | Remaining work |
+| --- | --- | --- |
+| `requirements.txt` | Exists; unpinned | Review reproducibility and approvals before any dependency changes. |
+| `app.py` | Implemented | No entry-point restructuring required. |
+| `components/map_tab.py` | Implemented | Viewport, tooltip escaping, selection notices, and manual acceptance. |
+| `components/data_refresh.py` | Implemented; mocked regression coverage | Retain validation and preservation behaviour as checks improve. |
+| `services/street_data.py` | Implemented | Duplicate IDs, joins, consistency, and contract validation. |
+| `scripts/fetch_pilot_streets.py` | Implemented | Completeness, provenance, source errors, query escaping, and safe saved-file replacement. |
+| `data/pilot_streets.geojson` | Saved snapshot exists | Review identities, grouping, and complete intended extents. |
+| `data/street_priorities.json` | Eight records exist | Dated verification, scope, and validated lengths. |
+| `tests/test_app.py` | Four tests pass | Add relevant data and selection edge cases. |
+| `tests/test_data_refresh.py` | One test passes with multiple failure subcases | Add changed-dataset cases where needed. |
+| `README.md` | Operational documentation exists | Correct stale refresh-test coverage and record final validation. |
+| `documents/PROJECT_CONTEXT.md` | Scope authority exists | Reconcile outdated implementation-status language. |
+| `documents/MAP_IMPLEMENTATION_PLAN.md` | Updated in this task | Maintain evidence-based progress markers. |
+
+These are remaining work areas, not authorization to modify every listed file.
 
 ## 9. Testing and Validation
 
-Use standard-library `unittest` for meaningful data logic. Tests must verify multi-segment grouping, duplicate-name separation, missing priorities, segment-specific/mixed priorities, conflicting joins, malformed geometry, duplicate IDs, and selection containing absent IDs.
-
-Proposed commands after implementation and dependency approval:
+Executed during the progress review on 2026-10-28:
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe -m unittest discover -s tests
-.\.venv\Scripts\python.exe -m streamlit run app.py
+.\.venv\Scripts\python.exe -B -m unittest discover -s tests -v
 ```
 
-Manual acceptance procedure:
+Result: **5 tests passed**. Coverage includes tab composition, multiple-street selection and clearing, selected-part highlighting, empty geometry rejection, isolated map-load failure, and mocked refresh success/failure with session-data preservation. Python reported a temporary-directory cleanup `PermissionError` after the successful test summary; the process exit code was 0. This cleanup issue remains unresolved.
 
-1. Open the app and compare street positions/extents to the authoritative map.
-2. Search for a pilot street using the keyboard; select three streets.
-3. Verify every segment highlights and details match the selected IDs.
-4. Remove one street, clear all, and repeat after normal rerenders.
-5. Verify unavailable and mixed priorities remain explicit in the map and details.
-6. Test an empty/malformed dataset and failed GIS preparation; the previous reviewed snapshot must survive.
-7. Test missing basemap tiles; document that cached road geometry does not guarantee offline basemap availability.
-8. Check keyboard operation, visible labels, contrast, narrow-window layout, attribution, and colour-independent selected-state cues.
+Remaining automated checks:
 
-No application tests have been run: no implementation exists in the inspected workspace.
+- [ ] **Not started:** duplicate source IDs and duplicate-name separation.
+- [ ] **In progress:** malformed geometry and missing/mixed priorities; existing coverage is limited.
+- [ ] **Not started:** inconsistent section priorities, conflicting joins, and unmatched geometry/priority records.
+- [ ] **Not started:** changed snapshots containing absent selections and expected user notices.
+- [ ] **Not started:** truncated source responses and safe command-line snapshot writes.
+
+Manual acceptance checklist (not performed in this review):
+
+- [ ] **Not started:** launch with documented commands and compare positions/extents against the source.
+- [ ] **Not started:** use the keyboard to search and select three streets; verify all parts and details.
+- [ ] **Not started:** remove one selection, clear all, and repeat after rerenders; check viewport behaviour.
+- [ ] **Not started:** verify mixed/unavailable labels and published section coverage.
+- [ ] **Not started:** check malformed input, failed preparation, and preservation of saved snapshots.
+- [ ] **Not started:** check blocked/missing tiles and continued access to text details.
+- [ ] **Not started:** check keyboard focus, labels, contrast, narrow-screen stacking, attribution, and colour-independent selection cues.
 
 ## 10. Risks and Controls
 
-| Risk | Likelihood / impact | Control and fallback |
-| --- | --- | --- |
-| Overlapping teammate edits | Medium / high | Agree ownership first; integrate small reviewed changes without replacing his code |
-| Truncated or incorrectly grouped roads | Medium / high | Reconcile source IDs/counts, inspect extents, and reduce pilot scope if ambiguous |
-| Projected coordinates treated as degrees | Medium / high | Request EPSG:4326 and verify actual locations before styling |
-| Unverified or conflicting priorities | Medium / high | Preserve provenance; show unavailable/mixed instead of guessing |
-| Unsupported dependency combination | Medium / medium | Test and pin approved versions in an isolated environment |
-| Map rerenders reset state or loop | Medium / medium | Selector is canonical; defer click selection and test rerenders |
-| Source or tile outage | Medium / medium | Keep reviewed local roads, usable text details, and clear tile limitations |
-| External content rendered as HTML | Low / medium | Escape source text; avoid rendering arbitrary HTML |
+- Incomplete or incorrectly grouped geometry: reconcile source counts/IDs and review extents before acceptance.
+- Unsupported length labels: verify units and computation; propose withholding values if evidence is unavailable.
+- Incorrect priority scope: retain published sections and mixed/unavailable labels; add dated human verification.
+- Saved-data loss: validate complete replacements before writing; retain the previous valid snapshot. Session preservation does not establish command-line safety.
+- Unpinned dependencies: record the tested environment and seek approval for any manifest changes.
+- Viewport resets or inaccessible interaction: complete browser checks before readiness sign-off.
+- Source markup changes: the priority fetcher automates an ASP.NET form rather than a documented priority API; parser behaviour needs source verification.
+- External tooltip text: escape source content before HTML rendering.
 
-Keep project materials local. Runtime basemap providers receive network requests that may reveal the viewed area; disclose this behavior and preserve attribution. Do not upload project source or deploy the app without separate approval. No AI service is needed.
+Keep protected project material local. Basemap assets require network access; source access and tile attribution/reuse requirements still apply. No AI service is required for this phase. Deployment and publication remain separately controlled.
 
-Rollback: retain the prior reviewed dataset and restore it if refresh validation fails. Keep implementation on a separate branch and reverse approved changes without deleting a colleague's work. Never overwrite a snapshot until validation succeeds.
+Rollback for future repairs: retain the prior valid dataset and make focused reversible code changes without overwriting teammate work. This documentation update changes no runtime behaviour or data.
 
-## 11. Documentation Updates
+## 11. Documentation Checklist
 
-Update README setup and launch commands only after they work. Record Python/package versions, data refresh procedure, extraction dates, source URLs, attribution/reuse checks, segment grouping decisions, priority verification dates, and any verified length method in `data/README.md`.
-
-Document that priority is not road safety or live clearing status, the pilot is limited, basemap tiles need network access, and simulation is unavailable. Include troubleshooting for missing files, malformed data, no roads displayed, and failed tile loading.
+- [x] **Done:** README describes local startup, components/services layout, session refresh, sources, colours, and limitations.
+- [x] **Done:** this plan reflects implementation and validation evidence.
+- [ ] **Not started:** update project context's stale unverified-implementation statement.
+- [ ] **Not started:** correct README's statement that refresh error paths lack tests; mocked coverage now exists, live-source validation remains open.
+- [ ] **Not started:** record extraction dates, verified priority dates, grouping rationale, reuse checks, length method/units, and tested package versions.
+- [ ] **Not started:** record browser acceptance outcomes, unresolved limitations, and handover decisions.
 
 ## 12. Acceptance Criteria
 
-- App launches locally with documented commands and approved dependencies.
-- It displays 5–10 real, reviewed streets in St. John's with complete intended pilot geometry.
-- Users search, select several streets, remove them individually, and clear selection.
-- All relevant segments highlight, with matching details and persistent normal-rerender selection.
-- Every official priority label has evidence; unknown and mixed values are explicit.
-- No interface claims current road safety, actual snow depth, or clearing completion.
-- Legend, readable labels, keyboard-accessible selection, and attribution are present.
-- Invalid data produces understandable errors; failed refreshes preserve the last reviewed snapshot.
-- Focused tests and manual acceptance results are recorded with honest limitations.
+- [ ] **In progress:** documented local launch and approved dependencies; AppTest executes the app, but browser launch/approval records were not verified.
+- [ ] **In progress:** eight real pilot streets are represented; complete reviewed geometry remains unverified.
+- [ ] **In progress:** search, multi-selection, and clearing are implemented/tested; individual removal and keyboard/browser acceptance remain open.
+- [x] **Done:** all mapped parts of selected streets highlight and matching details render in automated checks; successful mocked refresh preserves valid selection.
+- [ ] **In progress:** priority source links and explicit unknown/mixed states exist; dated verification and scope assurance remain open.
+- [x] **Done:** the interface distinguishes planning priorities from current road safety, snow depth, and clearing completion; simulation output is explicitly unavailable.
+- [ ] **In progress:** legend, labels, attribution, and thicker selection lines exist; browser accessibility checks remain open.
+- [ ] **In progress:** controlled load errors and failed session-refresh preservation are tested; conflict detection and safe saved-file replacement remain open.
+- [ ] **In progress:** five automated tests pass; manual acceptance and accepted limitations are not yet recorded.
 
 ## 13. Recommended Execution Order
 
-1. Confirm the colleague's current implementation and ownership.
-2. Agree pilot streets and the street-ID contract.
-3. Approve exact architecture, dependencies, and implementation changes.
-4. Developer retrieves/reviews geometry; Amanda verifies priorities in parallel.
-5. Developer renders one street, then all pilot streets.
-6. Developer adds searchable selection and details, then integrates Amanda's verified priorities.
-7. Amanda runs acceptance checks and drafts the demo explanation; developer fixes issues.
-8. Finalize verified run instructions and review completion together.
+1. Validate pilot completeness, source identity, grouping, priority scope, and length units. Record evidence and dates.
+2. Prepare exact, focused repairs for any confirmed gaps; obtain approval where required before applying them.
+3. Add meaningful regression coverage for approved data/fetch/selection repairs and rerun the suite.
+4. Complete browser, accessibility, viewport, and tile-failure acceptance checks.
+5. Reconcile README and project context, record provenance and handover evidence, and review remaining limitations with Amanda.
+6. Close the map MVP only after acceptance. Plan simulation separately if requested.
 
-The developer owns application, geometry, and dependency files. Amanda owns the priority-verification draft, acceptance checklist, and demo copy. Coordinate changes to shared documentation and final CSV integration through one owner. This division does not require either person to edit the other's in-progress files.
+Confirm ownership before assigning the remaining work. Source assurance and manual acceptance may be coordinated separately, but final sign-off depends on both.
 
-## 14. Approval Checkpoint
+## 14. Approval and Next Action
 
-Planning is complete. No implementation changes have been made. Review and approve the plan before implementation begins.
+This status update was requested by Amanda. Only this implementation-plan document is changed; no application, dependency, dataset, deployment, or publication change is authorized by the update.
 
-After approval, begin Phase 0 by reconciling this proposal with the colleague's code and presenting the exact dependency manifest and first implementation patch. Saving this requested planning document does not approve the proposed build, data refresh, deployment, or publication.
+**Next implementation work:** the data-assurance pass in step 1 above, followed by exact repair proposals where needed. Existing implementation is not being restarted at Phase 0. Missing historical approval or validation evidence remains open rather than being checked off retroactively.
