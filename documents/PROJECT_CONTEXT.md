@@ -1,3 +1,7 @@
+## Problem
+
+Governments lack timely visibility into incidents happening around the city, and traditional reporting can be too slow when hazards need immediate attention. Residents also lack clear, up-to-date information about local conditions, causing last-minute confusion during natural disasters. For example, during a snowstorm, an uprooted tree blocking a road may leave commuters—especially essential workers trying to get to work after the storm—unaware until they reach the obstruction.
+
 # CanAI Hackathon Project Context
 
 Working title: Community Crisis Reporting Map
@@ -9,34 +13,35 @@ Status: Confirmed product direction; new capabilities and integrations remain un
 
 ## 1. Product baseline
 
-Build a community hazard-reporting tool that connects resident submissions, staff approval, a public road-segment map, and street-based notifications.
+Build a community crisis-reporting tool that connects resident submissions, AI-assisted validation and consolidation, a public alert map, and region-based notifications.
 
-Residents report local problems such as flooding, blocked drains, or snow obstructions. Staff review submissions before anything appears publicly. Approved reports contribute to segment-level report counts and summaries. Residents can subscribe to an entire street and receive updates about newly approved reports on that street.
+Residents report local problems such as crashes, blocked roads, flooding, fallen trees, or snow obstructions. AI processes incoming reports, checks them for consistency and likely duplicates, consolidates related information, assigns a Low, Medium, or High severity, and publishes a clear alert to the map and relevant subscribers. There is no staff review or approval layer. Alerts must communicate uncertainty; automated checks do not prove that an incident is true.
+
+Residents can subscribe to streets, pilot districts, or all pilot districts, and select which severity levels they want to receive. The pilot covers only St. John's Center, St. John's East, and St. John's West, using streets assigned to those districts in the specified street-directory data.
 
 The primary demonstration is:
 
-**Submit a synthetic report -> staff approve publication -> the correct map segment updates -> a subscribed destination receives a relevant update.**
+**Submit a synthetic report -> AI checks, classifies, and consolidates it -> the public map updates -> subscribers to the affected street or district receive a severity-filtered alert.**
 
-A pending or rejected report must never change public counts, appear in a public summary, or enter a subscriber update. Approval permits publication; it does not verify the hazard or imply municipal action.
-
-This prototype supports investigation and awareness. It is independent of official municipal emergency systems, is not an emergency-reporting service, and does not establish road safety.
+This prototype supports situational awareness. It is independent of official municipal emergency systems, is not an emergency-reporting service, and does not establish road safety or guarantee municipal action.
 
 ## 2. Confirmed decisions and working defaults
 
 | Topic | Baseline | Status |
 | --- | --- | --- |
 | Product direction | Community crisis reporting and street updates | Confirmed by Amanda, October 29, 2026 |
-| Publication | Staff approval required before public display or subscriber delivery | Confirmed |
+| Publication | No staff review; AI processes and publishes alerts, with uncertainty made visible | Confirmed |
 | Notification preference | Free outbound SMS to a chosen real phone number; email if free SMS is not feasible | Confirmed |
 | Report submission channel | To be selected during feasibility; inbound SMS is not established by outbound SMS support | Open |
-| Geography | Reuse existing road geometries; count at segment level | Preferred first implementation approach |
-| Subscription coverage | All mapped segments belonging to the selected street | Discussion baseline |
-| Map reporting window | Previous 60 minutes, based on report receipt time | Proposed demo default |
-| Volume thresholds | Grey: 0; blue: 1-4; orange: 5-14; red: 15 or more | Proposed demo defaults |
-| Delivery interval | Hourly, only when newly approved relevant reports exist | Proposed demo default |
+| Pilot geography | St. John's Center, St. John's East, and St. John's West only; include streets assigned to these districts by the supplied street-directory data | Confirmed scope; source data must be checked |
+| Subscription coverage | A street, one pilot district, or all three pilot districts; match using reviewed street/segment membership | Confirmed product direction |
+| Severity | Low, Medium, or High; users can filter the alert levels they receive | Confirmed product direction; AI assignment needs validation |
+| Map reporting window | Show current alerts and their report/update times; any expiry window is to be selected during feasibility | Open |
+| Map display | Show alert severity and status; do not use report volume as a proxy for severity | Confirmed product direction |
+| Delivery interval | Send a relevant update when AI has processed an alert for an active subscription; delivery batching/interval is to be selected during feasibility | Open |
 | Public title | Community Crisis Reporting Map | Working title; current app title is Flurry |
 
-Confirmed direction does not mean the integrations, schema, access controls, or deployment are approved or implemented. Defaults are explicit starting points, not validated hazard thresholds.
+Confirmed direction does not mean the integrations, schema, controls, source data, or deployment are implemented. Severity labels are informational classifications, not validated safety ratings.
 
 ## 3. Four MVP features
 
@@ -44,87 +49,85 @@ Confirmed direction does not mean the integrations, schema, access controls, or 
 
 - Capture a description, receipt timestamp, hazard type, and location.
 - Store one report record per submission; deduplicate messaging retries by provider message identifier when applicable.
-- Resolve the report to one mapped road segment. An ambiguous location remains private until clarified.
-- Acknowledge receipt as pending review, without promising publication, verification, or response.
+- Resolve the report to a pilot street, district, and mapped segment where possible. If location is ambiguous, ask for clarification or publish only with an explicit location-uncertain label; never silently guess.
+- Acknowledge receipt and explain that AI will process the report. Do not promise that the hazard is verified or that authorities will respond.
 - Keep raw text and reporter contact references private. Prepare a redacted public description.
 
-The intake channel remains open. Incoming SMS requires its own feasibility test. An app-based form with explicit segment selection is a possible fallback, not a confirmed implementation choice. Do not silently guess a segment.
+The intake channel remains open. Incoming SMS requires its own feasibility test. An app-based form with explicit location selection is a possible fallback, not a confirmed implementation choice.
 
-### B. Minimal staff review
+### B. AI triage and alert consolidation
 
-- Show a private queue containing the report description, time, hazard type, and proposed segment.
-- Let staff approve or reject publication after checking location and the public description for inappropriate or personal content.
-- Block publication when the segment is unresolved or the public description is unsuitable.
-- Record review outcome and review/publication times with a private reviewer reference where available.
-- Keep hazard verification separate: approving publication leaves the report unverified unless staff separately confirm it.
+- Automatically check incoming reports for duplicates, missing or inconsistent location details, and unsuitable personal information.
+- Assign a Low, Medium, or High informational severity and an incident/operations category, including snow-clearing updates where supported.
+- Consolidate related reports into a concise alert with location, reported conditions, timestamp, severity, and uncertainty.
+- Publish AI-processed alerts to the map and send them to matching active subscriptions without staff review.
+- Preserve the source report references and AI processing outcome so alerts can be traced and corrected. Do not describe an automated plausibility check as factual verification.
+- Mark conflicting, weakly supported, or ambiguous information as uncertain; do not invent facts or municipal actions.
 
-A minimal review interface is required. A fuller moderation dashboard is deferred. Staff controls must not be available to public users; the access approach is an unresolved implementation decision and must be settled before exposing the prototype publicly.
+No staff approval queue or manual publication gate is part of the pilot. AI service, processing safeguards, correction/withdrawal handling, and access controls for any administrative functions remain implementation questions; they must not recreate a staff review requirement.
 
 ### C. Public reporting map
 
 - Reuse the existing pilot road geometries, street search, and suitable selection interactions.
-- Colour each segment using its approved recent-report count, replacing the old snow-clearing-priority meaning in the reporting view.
-- Provide segment details: street/segment label, count, hazard types, grounded summary, reporting window, latest update, and verification status.
-- Refresh counts when reports are approved and when they age out of the window.
+- Display AI-processed alerts by location and severity; do not encode report counts as severity.
+- Provide alert details: street/district, incident or operations type, severity, grounded summary, report/update time, and an uncertainty/verification label.
+- Refresh the map when alerts are processed, corrected, withdrawn, or expire under the chosen retention/display policy.
+- Provide authorized municipal users a view of all flagged reports and alerts for situational awareness and follow-up; this view does not add a review or publication gate.
 - Support readable text information alongside the map; colour alone must not carry meaning.
 
 Individual segment selection and its details interaction require implementation; they are not established as existing features.
 
 ### D. Street subscriptions and notifications
 
-- Let a resident choose a mapped street and explicitly consent to updates at a private notification destination.
-- Cover all mapped segments belonging to that street.
+- Let a resident subscribe to a mapped street, one of the three pilot districts, or all pilot districts, and explicitly consent to updates at a private notification destination.
+- Let residents filter notifications by Low, Medium, and High severity and by supported alert category (for example, snow clearing).
+- Match alerts to subscriptions through reviewed street, segment, and district membership, not street-name text alone.
 - Attempt free outbound SMS first. If that is not feasible, deliver by email.
-- Send only when newly approved relevant reports exist; omit unrelated streets, pending reports, and rejected reports.
+- Send only relevant AI-processed alerts that match the resident's selected area, severity, and category filters.
+- Example crash alert: "Reported crash at the intersection of Water Street and Duckworth Street. Traffic is slowed and only allowing traffic in one lane. Please be advised if travelling through this area."
+- Example snow-clearing alert: "It has been reported that snow ploughs have started work in the streets in downtown. Please move your cars (if parked outside) or they may be towed." Include a towing warning only when supported by a reliable source; AI must not invent enforcement actions.
 - Support unsubscribe and check active subscription status before delivery.
-- Record delivery outcomes. Advance successful-delivery tracking only after success; retain failures for retry.
-- Permit a clearly labelled manual trigger for the hourly workflow during the demo. A manual trigger can send a real message; simulated delivery must be labelled separately.
+- Record delivery outcomes. Avoid duplicate alerts and retain failed deliveries for retry where supported.
+- Permit a clearly labelled manual trigger for the demo workflow. A manual trigger can send a real message; simulated delivery must be labelled separately.
 
 ## 4. User journeys
 
 ### Resident
 
 1. Browse the map without subscribing and search for a pilot street.
-2. Read approved report counts, summaries, timestamps, and unverified labels.
-3. Choose a street, enter the destination for the selected notification channel, and explicitly opt in.
+2. Read alerts, severity, summaries, timestamps, and uncertainty labels.
+3. Choose a street, pilot district, or all pilot districts; select severity/category filters; enter a notification destination and explicitly opt in.
 4. Submit a report through the confirmed intake channel and provide enough detail to resolve its segment.
-5. Receive a pending-review acknowledgement; the report is not yet public.
-6. After staff approval, see the segment update if the report is still within the reporting window.
-7. Receive a street update when newly approved relevant reports are available.
+5. Receive acknowledgement that AI processing will occur; do not imply staff review.
+6. See the relevant public map alert after AI processing, with uncertainty communicated where appropriate.
+7. Receive an update when an alert matches the selected area and severity/category filters.
 8. Unsubscribe to stop future updates.
-
-### Staff
-
-1. Open the private review queue.
-2. Inspect location, description, hazard type, time, and proposed public wording.
-3. Resolve ambiguity before approval, or reject the submission.
-4. Approve publication while preserving the separate verification status.
-5. Inspect approved report concentrations on the map and investigate before making operational decisions.
 
 ## 5. Report lifecycle and publication rules
 
-**Received -> pending clarification when needed -> pending staff review -> approved or rejected.**
+**Received -> automated validation and deduplication -> AI classification and consolidation -> published alert and matching subscriber update.**
 
-Only valid, location-resolved, staff-approved reports may enter public outputs. Automated filtering alone never approves a report. In this document, "approved" means approved for publication, not verified as fact.
+There is no staff review or approval stage. AI processing produces informational alerts; it does not establish that a report is true. Preserve report provenance and make uncertainty visible. Do not publish private contact details or unredacted personal information. Clearly unsuitable or unprocessable submissions may be withheld or returned for clarification through automated handling, with an explicit outcome rather than a success-shaped alert.
 
-Map counts use approved reports whose receipt times fall in the configured window. A report approved after that window may therefore be absent from the recent-volume count. Subscriber eligibility uses publication time rather than receipt time so delayed approval does not silently skip a report. Updates must show reporting times and avoid presenting old reports as new incidents. Any further notification age limit remains an explicit decision.
+Show when reports were received and alerts processed or updated; do not present old reports as new incidents. Alert display and notification age limits remain explicit decisions. Consolidated alerts must retain references to their source reports so corrections or withdrawals can be propagated.
 
-Deduplication prevents duplicate processing of the same submission or provider retry. Counts describe reports, not unique residents or independently verified incidents.
+Deduplication prevents duplicate processing of the same submission or provider retry. A consolidated alert may represent multiple reports, but report volume is not a measure of severity, confirmation, or unique affected people.
 
 ## 6. Geographic and map contract
 
-Use a logical street identifier for subscriptions and a segment identifier for report assignment. Each segment belongs to a reviewed street grouping; do not join reports and subscriptions using street-name text alone.
+Use a logical street identifier for subscriptions, a segment identifier for report assignment, and a pilot district identifier for area subscriptions. Each segment belongs to a reviewed street grouping and pilot district; do not join reports and subscriptions using street-name text alone.
 
-The saved geometry includes OBJECTID, STREET_ID, and STREETNAME. STREET_ID varies among features named Water Street, so it must not be assumed to identify the entire subscription street. Validate source identifiers and build a reviewed whole-street mapping before integration. Avoid new neighbourhood or postal-code boundaries in this MVP.
+The saved geometry includes OBJECTID, STREET_ID, and STREETNAME. STREET_ID varies among features named Water Street, so it must not be assumed to identify the entire subscription street. Validate source identifiers and build a reviewed whole-street and district mapping before integration.
 
-| Approved reports received in the previous 60 minutes | Colour | Label |
+The pilot includes only streets assigned to these three districts: **St. John's Center, St. John's East, and St. John's West**. Use the official [Print-Version-Street-Dir-Apr-8-2025.pdf](https://www.elections.gov.nl.ca/files/Print-Version-Street-Dir-Apr-8-2025.pdf) and the project-provided `Print-Version-Street-Dir-Apr-8-2025 (1).csv` as the district/street source. The CSV is not currently present in the repository; obtain and validate it before building the pilot street list. Do not infer district membership or include streets from other districts.
+
+| Alert severity | Display guidance | Label |
 | --- | --- | --- |
-| 0 | Grey | No recent reports |
-| 1-4 | Blue | Low report volume |
-| 5-14 | Orange | Moderate report volume |
-| 15 or more | Red | High report volume |
+| Low | Distinct, accessible map style | Low |
+| Medium | Distinct, accessible map style | Medium |
+| High | Distinct, accessible map style | High |
 
-Legend: **Recent report volume**. These are proposed demonstration thresholds. Volume reflects participation as well as potential impact; it is not severity, safety, or an official incident rating. No recent reports does not mean no hazards exist.
+Legend: **AI-assigned informational severity**. Severity criteria and any colour palette require validation; the labels are not official ratings or safety guarantees. No displayed alert does not mean no hazards exist.
 
 ## 7. Conceptual data requirements
 
@@ -132,22 +135,24 @@ This is a logical contract for planning, not an implemented database schema or a
 
 | Record | Required information |
 | --- | --- |
-| Street | Internal street identifier, display name, reviewed segment membership |
-| Segment | Internal segment identifier, street identifier, source reference, geometry, display label |
-| Report | Report/submission identifier, optional provider message identifier, private reporter reference, private raw text, redacted public description, received time, segment, hazard type, processing/review status, review time, private reviewer reference, publication time, separate verification status |
-| Subscription | Identifier, street identifier, delivery channel, private phone number or email address, consent time, active status, successful-delivery tracking |
+| District | Internal pilot district identifier, display name, source reference |
+| Street | Internal street identifier, display name, district identifier, reviewed segment membership |
+| Segment | Internal segment identifier, street identifier, district identifier, source reference, geometry, display label |
+| Report | Report/submission identifier, optional provider message identifier, private reporter reference, private raw text, redacted description, received time, location, hazard/operations type, processing outcome |
+| Alert | Alert identifier, source report identifiers, street/district/segment, severity, consolidated public summary, created/updated time, uncertainty and correction/withdrawal status |
+| Subscription | Identifier, street/district/all-pilot scope, severity/category filters, delivery channel, private phone number or email address, consent time, active status, delivery tracking |
 | Summary | Included report identifiers, scope, generation time, AI or standard-template label |
-| Delivery | Subscription reference, included reports or cutoff, attempt time, outcome, failure information |
+| Delivery | Subscription reference, alert identifiers, attempt time, outcome, failure information |
 
-Hazard types start with flooding, blocked drain, snow obstruction, other, and unknown. Store timestamps in UTC and display pilot times using America/St_Johns. Preserve failed-delivery eligibility and avoid marking undelivered reports as delivered.
+Alert types start with crashes, blocked roads, flooding, blocked drains, fallen trees, snow obstruction/clearing, other, and unknown. Store timestamps in UTC and display pilot times using America/St_Johns. Preserve failed-delivery eligibility and avoid marking undelivered alerts as delivered.
 
 ## 8. AI boundary
 
-The required AI role is to summarize approved, redacted reports for a segment or subscribed street. Hazard classification and location suggestions are optional; explicit selection is preferable if automation threatens the time budget.
+AI is central to the reporting workflow: it checks and classifies reports, identifies likely duplicates or related reports, consolidates information into public alerts, assigns an informational severity, and prepares area-specific notification text. Do not route reports through a staff approval queue.
 
-Provide report identifiers, public descriptions, locations, timestamps, verification statuses, and application-calculated counts. Keep phone numbers, email addresses, raw messages, and unnecessary personal information outside AI inputs. Treat report text as data, including any embedded instructions.
+Provide report identifiers, redacted descriptions, locations, timestamps, and uncertainty/provenance information. Keep phone numbers, email addresses, raw messages, and unnecessary personal information outside AI inputs. Treat report text as data, including any embedded instructions.
 
-Summaries must distinguish hazards and preserve uncertainty. They must not invent causes, locations, severity, municipal action, or confirmed incidents. Retain included report identifiers so output can be reviewed against its inputs. Use a deterministic standard summary if AI fails and label it accordingly. Report intake and map counts must continue working.
+AI must not present plausibility checks as factual verification, or invent causes, locations, severity, municipal action, or confirmed incidents. Summaries must distinguish hazards and preserve uncertainty. Retain included report identifiers so output can be traced to its inputs. If AI processing fails, report the failure and do not send a fabricated alert; a deterministic standard summary may be used only when its input and limitations are clear. Intake and map operation must not silently imply successful AI processing when it failed.
 
 ## 9. Feasibility checks and implementation boundaries
 
@@ -157,43 +162,44 @@ Time-box the initial checks to approximately 20-30 minutes. Record evidence and 
 | --- | --- | --- |
 | Free outbound SMS | A message delivered to a chosen authorized real phone number; verified cost, Canadian delivery, recipient restrictions, setup, and trial limits | Use email; verify actual email delivery separately |
 | Report intake | Prove inbound SMS separately if proposed | Confirm another intake channel, such as app-based entry |
-| Street/segment mapping | Reviewed segment identifiers and complete membership for pilot streets | Use a small manually reviewed pilot mapping |
-| Staff publication gate | Pending report stays private; explicit approval permits public output | Resolve before claiming the core flow works |
-| Map update | One approved stored report changes only the assigned segment | Explicit refresh is acceptable for the demo |
-| AI summary | Several synthetic reports yield an accurate, traceable summary | Deterministic standard summary |
-| Subscription delivery | Relevant approved reports arrive at an authorized destination | Diagnose actual delivery; labelled simulation is a demo limitation, not completion evidence |
-| Scheduling | Hosting supports hourly execution or a manual trigger runs the same workflow | Labelled manual demo trigger |
+| Pilot street/district mapping | Validate source streets against saved geometries and assign them only to the three named pilot districts | Use a clearly labelled, validated subset; do not imply complete district coverage |
+| AI processing | Synthetic reports yield accurate, traceable classifications, severities, and consolidated alerts; uncertain/conflicting inputs remain labelled | Surface processing failure or use a clearly labelled standard summary |
+| Map update | One processed report updates only its assigned pilot location | Explicit refresh is acceptable for the demo |
+| Subscription delivery | Matching alerts arrive at an authorized destination with severity filters respected | Diagnose actual delivery; labelled simulation is a demo limitation, not completion evidence |
+| Alert correction | Corrected/withdrawn source information updates the public alert and subsequent delivery behavior | Document the limitation and avoid claiming confirmed status |
+| Scheduling | Hosting supports prompt processing/delivery or a manual trigger runs the same workflow | Labelled manual demo trigger |
 
-Reuse the current frontend and project conventions. Select the simplest suitable persistence and backend approach after inspection. Provider, database, staff-access mechanism, AI service, scheduler, and hosting choices remain open. New dependencies, schema changes, permissions, infrastructure, deployment, and external data transfers require their applicable approvals.
+Reuse the current frontend and project conventions. Select the simplest suitable persistence and backend approach after inspection. Provider, database, municipal-view access mechanism, AI service, scheduler, and hosting choices remain open. New dependencies, schema changes, permissions, infrastructure, deployment, and external data transfers require their applicable approvals.
 
 ## 10. Proposed eight-hour execution sequence
 
 | Time | Work | Completion evidence |
 | --- | --- | --- |
 | 0:00-0:30 | Verify messaging options, intake path, geography, and scope | Chosen paths with evidence and explicit limitations |
-| 0:30-1:30 | Persistence and report lifecycle | Synthetic report stored once against a valid segment |
-| 1:30-3:00 | Intake and minimal staff review | Pending/rejected reports remain private; approved report becomes eligible |
-| 3:00-4:15 | Segment counts, map colours, and details | Correct segment updates and age-out works |
-| 4:15-5:15 | Grounded summaries and fallback | Supported summary and working AI-failure fallback |
-| 5:15-6:15 | Consent, street subscriptions, delivery, unsubscribe | Relevant real update delivered through selected channel |
-| 6:15-7:15 | End-to-end and failure checks | Core journey and publication boundaries verified |
+| 0:30-1:30 | Validate pilot streets/districts, persistence, and report lifecycle | Synthetic report stored once and mapped to an in-scope location |
+| 1:30-3:00 | Intake and AI processing | Report is classified, consolidated, and published without staff approval |
+| 3:00-4:15 | Map alerts, severity, and details | Correct location and severity update; uncertainty is visible |
+| 4:15-5:15 | Grounded summaries and AI failure behavior | Traceable alert and explicit failure/fallback behavior |
+| 5:15-6:15 | Area/severity subscriptions, delivery, unsubscribe | Relevant real update delivered through selected channel |
+| 6:15-7:15 | End-to-end and failure checks | Core journey, privacy, and alert-correction boundaries verified |
 | 7:15-8:00 | Repeatable demo and documentation | Setup, limitations, and demonstration steps recorded |
 
-This schedule is a proposal, not a commitment or completion record. Assign owners from actual team availability. Protect the full reporting-to-review-to-map-to-update journey before adding analytics.
+This schedule is a proposal, not a commitment or completion record. Assign owners from actual team availability. Protect the full reporting-to-AI-processing-to-map-to-update journey before adding analytics.
 
 ## 11. Acceptance and verification
 
-- The same submission/provider retry persists once and does not inflate counts.
-- Pending, rejected, and unresolved reports never appear in public counts, summaries, or updates.
-- Explicit staff approval publishes only the intended resolved report and does not automatically verify its hazard.
-- The first, fifth, and fifteenth recent approved reports produce blue, orange, and red respectively under the proposed thresholds.
-- Reports aging out reduce counts and can change colours.
-- Segment details show hazard information, timestamps, verification status, and reporting window.
-- A subscription includes other mapped segments of the same street and excludes unrelated streets.
-- A delayed approval is not lost behind a previous notification cutoff.
-- No new eligible reports means no scheduled message.
+- The same submission/provider retry persists once and does not create duplicate alerts.
+- Duplicate submissions do not create duplicate reports or alerts.
+- AI processing produces a traceable, grounded alert; uncertain, conflicting, or unprocessable reports are explicitly identified rather than presented as verified facts.
+- Alerts are published without staff approval and include a Low, Medium, or High informational severity.
+- Only streets in St. John's Center, St. John's East, and St. John's West are included in the pilot.
+- Alert details show hazard/operations type, location, timestamps, uncertainty, and source references.
+- Street and district subscriptions include only mapped in-scope locations; all-pilot subscriptions cover the three districts only.
+- Severity/category filters are respected and unrelated alerts are excluded.
+- Reprocessing, correction, and withdrawal do not create duplicate or stale subscriber updates.
+- No matching new alert means no notification.
 - Failed delivery does not advance successful-delivery tracking; unsubscribe prevents future delivery attempts.
-- AI output contains only supported information and distinguishes different hazards; AI failure produces a labelled standard summary.
+- AI output contains only supported information, preserves uncertainty, distinguishes incident from operations updates, and does not claim unsupported municipal action.
 - Public responses and AI inputs exclude private contact information and raw messages.
 - Real delivery is demonstrated through the selected SMS or email channel; manual triggers and simulations are labelled accurately.
 
@@ -203,13 +209,13 @@ These are required checks, not claims that tests have run or features are comple
 
 Use synthetic reports and authorized test destinations for demonstrations. Keep CanAI artifacts private; do not send protected material to external services without specific authorization. Define retention and deletion before collecting real public reports. Keep secrets outside source control.
 
-Obtain explicit subscription consent, provide unsubscribe, and suppress delivery after unsubscribe is processed. Restrict raw submissions, contact information, and staff controls. Public summaries use redacted approved descriptions only.
+Obtain explicit subscription consent, provide unsubscribe, and suppress delivery after unsubscribe is processed. Restrict raw submissions and contact information. Public summaries use redacted descriptions and identify uncertainty; do not imply staff approval or factual verification.
 
 Show unverified labels, report times, data sources, the reporting window, and the latest update. Distinguish empty results from stale data or loading failure. Provide keyboard access, readable contrast, and text alternatives to map information. Target WCAG 2.2 AA without claiming compliance before evaluation.
 
 ## 13. Existing implementation and documentation
 
-Inspected repository evidence establishes a Streamlit/Folium map, saved pilot geometries, street search, multi-street selection, and recorded snow-clearing priority details. The old map colours represent snow-clearing priority. Individual segment selection, reporting, staff review, notification subscriptions, AI summaries, and delivery have not been established as implemented for the pivot.
+Inspected repository evidence establishes a Streamlit/Folium map, saved pilot geometries, street search, multi-street selection, and recorded snow-clearing priority details. The old map colours represent snow-clearing priority. Individual segment selection, district mapping, reporting, automated AI processing, notification subscriptions, AI summaries, and delivery have not been established as implemented for the pivot. The named CSV is not present in the repository at this update.
 
 Reuse suitable code in app.py, components/map_tab.py, services/street_data.py, and the saved data rather than replacing the frontend to match an earlier planning proposal. Verify identifiers and interactions before relying on them.
 
@@ -217,14 +223,14 @@ README.md, documents/DESIGN.md, and documents/MAP_IMPLEMENTATION_PLAN.md still d
 
 ## 14. Exclusions and remaining decisions
 
-Outside the MVP: snowfall simulation, plow workloads or routing, fleet allocation, automated dispatch, hazard prediction, validated severity scores, new geographic boundaries, city-wide rollout, production municipal integration, and claims of operational readiness. A full moderation system and production identity management are deferred; minimal staff approval and an appropriate access boundary remain required.
+Outside the MVP: snowfall simulation, plow workloads or routing, fleet allocation, automated dispatch, hazard prediction, officially validated severity scores, additional districts, city-wide rollout beyond the three pilot districts, production municipal integration, and claims of operational readiness. Staff review is explicitly removed from the workflow. Production identity management and correction/withdrawal controls remain implementation considerations.
 
-Remaining decisions are the report-intake channel; SMS/email provider and verified restrictions; pilot street/segment mapping; staff access approach; persistence and hosting; AI service; final reporting window, thresholds, and interval; and any notification age limit. The product direction and staff-publication gate are settled.
+Remaining decisions are the report-intake channel; SMS/email provider and verified restrictions; validated pilot street/segment/district mapping; persistence and hosting; AI service and its failure/correction handling; severity criteria and visual design; alert display/expiry policy; delivery timing and any notification age limit. The three-district pilot scope and removal of staff review are settled.
 
-Later possibilities include expanded moderation and incident confirmation, hazard filters, additional subscription areas, bilingual interfaces, and participation analytics kept separate from impact or safety claims.
+Later possibilities include improved incident confirmation and correction workflows, additional subscription areas beyond the pilot, bilingual interfaces, and participation analytics kept separate from impact or safety claims.
 
 ## Previous direction - deprecated October 29, 2026
 
 The previous direction was SnowStorm AI (application title: Flurry), a snowstorm planning and preparedness tool for St. John's. Its map-only phase focused on real pilot roads, searchable multi-street selection, recorded municipal snow-clearing priorities, and explicit unknown-data states. The broader plan proposed snowfall-scenario comparisons, plow-workload simulation, and an AI preparedness brief. Before this merge, main connected the existing standalone one-street simulation engine to the Simulation tab, with manually entered hourly snowfall, street length, assumed clearing capacity, a remaining-snow graph, and an hourly results table. This existing simulation is legacy functionality, outside the confirmed reporting MVP; the merge preserves its code. Map-selection integration, forecasting, routing, and AI recommendations were not included in that standalone change.
 
-That direction was deprecated on October 29, 2026 in favour of community crisis reporting, staff-reviewed publication, and street notifications. Reuse useful map code and geometry where practical. Snowfall simulation, plow estimates, routing, and preparedness recommendations are outside the confirmed MVP. Earlier context remains available in Git history.
+That direction was deprecated on October 29, 2026 in favour of community crisis reporting, AI-processed alerts without staff review, and street/district notifications. Reuse useful map code and geometry where practical. Snowfall simulation, plow estimates, routing, and preparedness recommendations are outside the confirmed MVP. Earlier context remains available in Git history.
