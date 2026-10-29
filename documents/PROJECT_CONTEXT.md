@@ -219,7 +219,7 @@ Inspected repository evidence establishes a Streamlit/Folium map, saved pilot ge
 
 Reuse suitable code in app.py, components/map_tab.py, services/street_data.py, and the saved data rather than replacing the frontend to match an earlier planning proposal. Verify identifiers and interactions before relying on them.
 
-README.md, documents/DESIGN.md, and documents/MAP_IMPLEMENTATION_PLAN.md still describe the previous scope. Where they conflict, this context governs the product direction. They need reconciliation before pivot implementation. Update setup, environment-variable names, provider restrictions, fallback behaviour, and validation evidence as implementation becomes established.
+README.md, documents/DESIGN.md, and documents/IMPLEMENTATION_PLAN.md still describe the previous scope. Where they conflict, this context governs the product direction. They need reconciliation before pivot implementation. Update setup, environment-variable names, provider restrictions, fallback behaviour, and validation evidence as implementation becomes established.
 
 ## 14. Exclusions and remaining decisions
 
