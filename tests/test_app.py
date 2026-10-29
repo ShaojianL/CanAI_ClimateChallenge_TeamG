@@ -14,13 +14,38 @@ APP_PATH = Path(__file__).resolve().parents[1] / "app.py"
 
 
 class AppTests(unittest.TestCase):
+    def test_simulation_results_and_invalid_inputs(self):
+        """Check hand-calculated output, retained results, and invalid submissions."""
+        app = AppTest.from_file(str(APP_PATH)).run()
+        app.button(key="FormSubmitter:street_simulation-Run simulation").click().run()
+        self.assertFalse(app.exception)
+        self.assertEqual(
+            app.tabs[1].dataframe[0].value["remaining_cm"].tolist(), [2, 4, 6]
+        )
+        app.run()
+        self.assertEqual(len(app.tabs[1].dataframe), 1)
+        for invalid in ("", "5,,3", "abc", "-1", "nan", "inf"):
+            app.text_area[0].set_value(invalid)
+            app.button(key="FormSubmitter:street_simulation-Run simulation").click().run()
+            self.assertFalse(app.exception)
+            self.assertEqual(len(app.tabs[1].error), 1)
+            self.assertEqual(len(app.tabs[1].dataframe), 0)
+        app.text_area[0].set_value("5, 0")
+        app.number_input[0].set_value(2.0)
+        app.number_input[1].set_value(6.0)
+        app.button(key="FormSubmitter:street_simulation-Run simulation").click().run()
+        self.assertFalse(app.exception)
+        self.assertEqual(
+            app.tabs[1].dataframe[0].value["remaining_cm"].tolist(), [2, 0]
+        )
+
     def test_tabs_selection_and_sources(self):
         app = AppTest.from_file(str(APP_PATH)).run()
         self.assertFalse(app.exception)
         self.assertEqual(
             [tab.label for tab in app.tabs], ["Map", "Simulation", "Dev note"]
         )
-        self.assertIn("No simulation data exists yet.", app.tabs[1].info[0].value)
+        self.assertIn("Run simulation", app.tabs[1].info[0].value)
         notes = "\n".join(item.value for item in app.tabs[2].markdown)
         self.assertIn("Map component progress", app.tabs[2].subheader[0].value)
         self.assertIn("Eight is our MVP scope, not a City data limit.", notes)
@@ -51,7 +76,7 @@ class AppTests(unittest.TestCase):
             app = AppTest.from_file(str(APP_PATH)).run()
         self.assertFalse(app.exception)
         self.assertIn("Missing pilot data", app.tabs[0].error[0].value)
-        self.assertIn("No simulation data exists yet.", app.tabs[1].info[0].value)
+        self.assertIn("Run simulation", app.tabs[1].info[0].value)
         self.assertEqual(app.tabs[2].header[0].value, "Dev note")
 
     def test_map_highlights_every_selected_segment(self):

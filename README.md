@@ -12,8 +12,19 @@
 
 Explore eight pilot streets in St. John's, select multiple streets, and review recorded municipal snow-clearing priorities and their sources. Unknown priorities are labelled unavailable. See [project context](./documents/PROJECT_CONTEXT.md) for the current map-only scope.
 
-The **Map** tab contains Map Explorer. The **Simulation** tab is a placeholder;
-no snow-depth simulation or clearing-time prediction is currently implemented.
+The **Map** tab contains Map Explorer. The **Simulation** tab accepts hourly
+snowfall (comma-separated centimetres), a manually entered street length, and
+assumed clearing capacity (cm-km/hour). Select **Run simulation** to view a
+remaining-snow graph and hourly results table. Map selections do not set simulation
+inputs. Add zero-snowfall hours to model clearing after a storm.
+
+**Current known assumptions:** The simulation starts with zero snow, assumes
+uniform snow along the street and constant clearing capacity, adds snowfall
+before clearing each hour, and does not carry unused capacity forward. It excludes
+individual plows, routing, traffic, melting, drifting, compaction, and equipment
+failures. Results are simulated estimates, not observed conditions or road-safety
+assessments. The simulation ends after the last supplied hour.
+
 The **Dev note** tab briefly summarizes map progress and explains the eight-street pilot scope.
 
 ### Quickstart

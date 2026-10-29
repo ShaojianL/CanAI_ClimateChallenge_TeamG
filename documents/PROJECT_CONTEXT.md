@@ -2,6 +2,22 @@
 
 Last updated: 2026-10-28
 
+## Approved scope update — 2026-10-29
+
+Amanda approved connecting the existing one-street simulation engine to the
+Simulation tab. The tab now accepts manually entered hourly snowfall, street
+length, and assumed clearing capacity, and displays a remaining-snow graph and
+hourly results table. This approval supersedes the map-only exclusions below
+only for this standalone simulation. Map selection integration, forecasting,
+plow routing, and AI recommendations remain outside this change.
+
+Current known assumptions: zero initial snow, uniform snow along the street,
+constant clearing capacity, snowfall added before hourly clearing, and no carryover
+of unused capacity. Individual plows, routing, traffic, melting, drifting,
+compaction, and equipment failures are excluded. Results do not assess road safety.
+The calculation ends at the final supplied hour; zero-snowfall hours can extend
+the scenario to model subsequent clearing.
+
 ## Project status and authority
 
 Amanda selected SnowStorm AI as the CanAI Hackathon project. This file consolidates the existing project context and `SnowStorm_AI_Map_Copilot_Context.md` into one maintained reference.
