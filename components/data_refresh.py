@@ -17,15 +17,15 @@ def render():
         <style>
         .st-key-refresh_data button {
             min-height: 44px;
-            border: 2px solid #2847A1;
+            border: 2px solid #26374A;
         }
         .st-key-refresh_data button:hover {
-            background-color: #2847A1;
-            border-color: #2847A1;
+            background-color: #26374A;
+            border-color: #26374A;
             color: #FFFFFF;
         }
         .st-key-refresh_data button:focus-visible {
-            outline: 3px solid #26374A;
+            outline: 3px solid #0535D2;
             outline-offset: 3px;
         }
         </style>

@@ -1,11 +1,13 @@
 [theme]
 base = "light"
-primaryColor = "#2847A1"
-backgroundColor = "#F8F8F8"
-secondaryBackgroundColor = "#FFFFFF"
-textColor = "#26374A"
+primaryColor = "#26374A"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F5F5F5"
+textColor = "#333333"
+linkColor = "#284162"
 borderColor = "#D4D4D4"
 font = "'Noto Sans', Arial, sans-serif"
+headingFont = "'Lato', 'Noto Sans', Arial, sans-serif"
 baseFontSize = 16
 headingFontSizes = ["32px", "24px", "20px", "18px", "16px", "16px"]
 headingFontWeights = [700, 700, 700, 700, 700, 700]

@@ -5,12 +5,14 @@ Run: .venv/bin/streamlit run app.py
 
 import streamlit as st
 
-from components import dev_note_tab, map_tab, simulation_tab
+from components import dev_note_tab, map_tab, simulation_tab, theme
 
 
 def main():
     st.set_page_config(page_title="Flurry", layout="wide")
-    st.title("Flurry")
+
+    # The navy navigation bar styled here replaces a visible page title
+    theme.apply_theme()
 
     map_view, simulation_view, dev_note_view = st.tabs(["Map", "Simulation", "Dev note"])
     with map_view:

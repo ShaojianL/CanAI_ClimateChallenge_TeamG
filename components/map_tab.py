@@ -1,10 +1,10 @@
-"""Map tab: exploration, data refresh, priority styling, and source details."""
+"""Map tab: statistic cards, street controls, priority map, and source details."""
 
 import folium
 import streamlit as st
 from streamlit_folium import st_folium
 
-from components import data_refresh
+from components import data_refresh, theme
 from services.street_data import DataLoadError, load_data
 
 PRIORITY_COLORS = {
@@ -128,28 +128,13 @@ def build_map(geojson: dict, priorities: dict, selected: list[str]) -> folium.Ma
 
 def render():
     """
-    This program displays the street map, selection controls, and street details.
+    This program displays statistic cards, street controls, the map, and details.
 
     Parameters:
         None.
     Returns:
         None. Renders the Streamlit interface.
     """
-    st.header("Map Explorer")
-    st.write(
-        "Explore pilot streets in St. John's, review snow-clearing priorities, "
-        "and inspect available source information."
-    )
-    st.caption(
-        "Planning context only. Priority colours do not represent current road "
-        "conditions, travel safety, or simulated snow depth."
-    )
-
-    with st.sidebar:
-        st.header("SnowStorm AI")
-        st.caption("St. John's pilot streets")
-        data_refresh.render()
-
     # Stop before drawing a partial or misleading map when required data fails
     try:
         if "refreshed_data" in st.session_state:
@@ -161,62 +146,88 @@ def render():
         return
     street_names = sorted(priorities.keys())
 
-    # ---- Sidebar: search/selection, details, legend ----
-    with st.sidebar:
-        # Keep valid selections when the refreshed source changes its street list.
-        if "selected_streets" in st.session_state:
-            st.session_state["selected_streets"] = [
-                name for name in st.session_state["selected_streets"]
-                if name in street_names
-            ]
-        selected = st.multiselect(
-            "Search and select streets",
-            options=street_names,
-            placeholder="Type a street name…",
-            key="selected_streets",
-        )
+    # Keep valid selections when the refreshed source changes its street list.
+    if "selected_streets" in st.session_state:
+        st.session_state["selected_streets"] = [
+            name for name in st.session_state["selected_streets"]
+            if name in street_names
+        ]
 
-        st.subheader("Legend")
-        legend_rows = [(PRIORITY_COLORS[p], PRIORITY_LABELS[p]) for p in sorted(PRIORITY_COLORS)]
-        legend_rows.append((MIXED_COLOR, "Mixed — varies by section"))
-        legend_rows.append((UNKNOWN_COLOR, "Priority unavailable"))
-        for color, label in legend_rows:
-            st.markdown(
-                f"<span style='color:{color}'>▬▬</span> {label}",
-                unsafe_allow_html=True,
+    # Session state already holds this run's selection before widgets render,
+    # so the statistic cards above the controls stay in step with it
+    selected_count = len(st.session_state.get("selected_streets", []))
+    priority_one = sum(
+        1 for info in priorities.values() if info.get("priority") == 1
+    )
+    mixed = sum(
+        1 for info in priorities.values() if info.get("priority") == "mixed"
+    )
+    theme.render_kpi_row([
+        (len(street_names), "Pilot streets", theme.GC_ACCENT),
+        (selected_count, "Streets selected", theme.GC_LINK),
+        (priority_one, "Priority 1 arterials", theme.GC_ERROR_RED),
+        (mixed, "Mixed-priority streets", theme.GC_WARNING),
+    ])
+    st.caption(
+        "Planning context only. Priority colours do not represent current road "
+        "conditions, travel safety, or simulated snow depth."
+    )
+
+    # ---- Left controls and legend beside the large map card ----
+    controls_col, map_col = st.columns([1, 3], gap="medium")
+
+    with controls_col:
+        with st.container(border=True, key="card-controls"):
+            st.subheader("Street controls")
+            selected = st.multiselect(
+                "Search and select streets",
+                options=street_names,
+                placeholder="Type a street name…",
+                key="selected_streets",
             )
-        st.caption("Mixed priorities vary by section. Grey means priority unavailable.")
+            data_refresh.render()
 
-        st.subheader("Data sources")
-        st.markdown(
-            "- [City snow-clearing priority lookup form]"
-            "(https://apps.stjohns.ca/snowclearing/StreetPriority.aspx)\n"
-            "- [City road geometry (ArcGIS REST API)]"
-            "(https://map.stjohns.ca/mapsrv/rest/services/community/Basemap/MapServer/0)"
-        )
+        with st.container(border=True, key="card-legend"):
+            st.subheader("Legend")
+            legend_rows = [(PRIORITY_COLORS[p], PRIORITY_LABELS[p]) for p in sorted(PRIORITY_COLORS)]
+            legend_rows.append((MIXED_COLOR, "Mixed — varies by section"))
+            legend_rows.append((UNKNOWN_COLOR, "Priority unavailable"))
+            for color, label in legend_rows:
+                st.markdown(
+                    f"<span style='color:{color}'>▬▬</span> {label}",
+                    unsafe_allow_html=True,
+                )
+            st.caption("Mixed priorities vary by section. Grey means priority unavailable.")
 
-    # ---- Main area: map + details ----
-    col_map, col_details = st.columns([2, 1], gap="large")
+            st.subheader("Data sources")
+            st.markdown(
+                "- [City snow-clearing priority lookup form]"
+                "(https://apps.stjohns.ca/snowclearing/StreetPriority.aspx)\n"
+                "- [City road geometry (ArcGIS REST API)]"
+                "(https://map.stjohns.ca/mapsrv/rest/services/community/Basemap/MapServer/0)"
+            )
 
-    with col_map:
-        st.header("Pilot street map")
-        st.caption(
-            "Search and select streets in the sidebar. Selected streets use thicker "
-            "lines; their priority and section details are also available as text."
-        )
-        st.caption(f"Large dark dot: {DEPOT_LABEL}. {DEPOT_ASSUMPTION}")
-        st_folium(
-            build_map(geojson, priorities, selected),
-            use_container_width=True,
-            height=600,
-            returned_objects=[],  # display-only: avoids reruns on map interaction
-        )
+    with map_col:
+        with st.container(border=True, key="card-map"):
+            st.subheader("Interactive pilot street map")
+            st.caption(
+                "Search and select streets in Street controls. Selected streets use "
+                "thicker lines; their priority and section details are also available "
+                "as text."
+            )
+            st.caption(f"Large dark dot: {DEPOT_LABEL}. {DEPOT_ASSUMPTION}")
+            st_folium(
+                build_map(geojson, priorities, selected),
+                use_container_width=True,
+                height=620,
+                returned_objects=[],  # display-only: avoids reruns on map interaction
+            )
 
-    with col_details:
-        st.header("Selected streets")
+    with st.container(border=True, key="card-selected"):
+        st.subheader("Selected streets")
         st.caption(f"{len(selected)} of {len(street_names)} pilot streets selected")
         if not selected:
-            st.info("Use the sidebar to search and select streets.")
+            st.info("Use Street controls to search and select streets.")
         for name in selected:
             info = priorities.get(name, {})
             with st.expander(name, expanded=True):
@@ -240,13 +251,14 @@ def render():
                 else:
                     st.caption("Priority source unavailable")
 
-    with st.container(border=True):
+    with st.container(border=True, key="card-limitations"):
         st.subheader("Data sources and limitations")
         st.markdown(
             "**Road geometry:** [City of St. John's public ArcGIS road layer]"
             "(https://map.stjohns.ca/mapsrv/rest/services/community/Basemap/MapServer/0). "
             "The map displays a pilot snapshot loaded from saved files or fetched "
-            "using the sidebar refresh button, not a live road-conditions feed."
+            "using the refresh button in Street controls, not a live road-conditions "
+            "feed."
         )
         st.markdown(
             "**Snow-clearing priorities:** source links recorded in the local street "

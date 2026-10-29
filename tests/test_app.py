@@ -50,7 +50,7 @@ class AppTests(unittest.TestCase):
         self.assertIn("Map component progress", app.tabs[2].subheader[0].value)
         self.assertIn("Eight is our MVP scope, not a City data limit.", notes)
         self.assertIn("five-hour hackathon", notes)
-        links = "\n".join(item.value for item in app.sidebar.markdown)
+        links = "\n".join(item.value for item in app.tabs[0].markdown)
         self.assertIn(
             "https://apps.stjohns.ca/snowclearing/StreetPriority.aspx", links
         )
@@ -59,12 +59,12 @@ class AppTests(unittest.TestCase):
             links,
         )
 
-        app.sidebar.multiselect[0].set_value(["WATER ST", "MILITARY RD"]).run()
+        app.tabs[0].multiselect[0].set_value(["WATER ST", "MILITARY RD"]).run()
         self.assertFalse(app.exception)
         self.assertEqual(
             [item.label for item in app.tabs[0].expander], ["WATER ST", "MILITARY RD"]
         )
-        app.sidebar.multiselect[0].set_value([]).run()
+        app.tabs[0].multiselect[0].set_value([]).run()
         self.assertFalse(app.exception)
         self.assertEqual(len(app.tabs[0].expander), 0)
 

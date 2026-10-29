@@ -19,12 +19,12 @@ class RefreshTests(unittest.TestCase):
         """Accept valid data and keep it after network or validation failures."""
         app = AppTest.from_file(str(APP_PATH), default_timeout=30).run()
         self.assertFalse(app.exception)
-        app.sidebar.multiselect[0].set_value(["WATER ST"]).run()
+        app.tabs[0].multiselect[0].set_value(["WATER ST"]).run()
         dataset = load_data()
         with patch("components.data_refresh.fetch_pilot_data", return_value=dataset):
             app.button(key="refresh_data").click().run()
         self.assertFalse(app.exception)
-        self.assertEqual(len(app.sidebar.success), 1)
+        self.assertEqual(len(app.tabs[0].success), 1)
         self.assertEqual(app.session_state["refreshed_data"], dataset)
         self.assertEqual(app.session_state["selected_streets"], ["WATER ST"])
 
@@ -42,14 +42,14 @@ class RefreshTests(unittest.TestCase):
                 with patch("components.data_refresh.fetch_pilot_data", side_effect=error):
                     app.button(key="refresh_data").click().run()
                 self.assertFalse(app.exception)
-                self.assertIn(message, app.sidebar.error[0].value)
+                self.assertIn(message, app.tabs[0].error[0].value)
                 self.assertEqual(app.session_state["refreshed_data"], dataset)
                 self.assertEqual(app.session_state["selected_streets"], ["WATER ST"])
 
         with patch("components.data_refresh.fetch_pilot_data", return_value=({}, {})):
             app.button(key="refresh_data").click().run()
         self.assertFalse(app.exception)
-        self.assertIn("incomplete or invalid", app.sidebar.error[0].value)
+        self.assertIn("incomplete or invalid", app.tabs[0].error[0].value)
         self.assertEqual(app.session_state["refreshed_data"], dataset)
 
 
