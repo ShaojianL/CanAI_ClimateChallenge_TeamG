@@ -20,11 +20,11 @@ The project is a crisis-reporting tool where residents can report hazards and vi
 
 The pilot is limited to streets in **St. John's Center, St. John's East, and St. John's West**, based on the district street-directory data. The supplied CSV must be validated against the existing road geometries before defining the in-scope street list. The product is for situational awareness, not an emergency-reporting service or a guarantee of road safety.
 
-**Implementation status:** These reporting, AI, district-subscription, and notification capabilities are product direction, not features currently implemented in this repository. The current Streamlit app is a legacy SnowStorm AI prototype with a street-priority map and a hypothetical snow-depth simulation. Use [project context](./documents/PROJECT_CONTEXT.md) as the source of truth for the current product scope.
+**Implementation status:** These reporting, AI, district-subscription, and notification capabilities are product direction, not features currently implemented in this repository. The current Streamlit app is a legacy SnowStorm AI prototype with a mock report-count map and a hypothetical snow-depth simulation. Report submission is not implemented. Use [project context](./documents/PROJECT_CONTEXT.md) as the source of truth for the current product scope.
 
 ## Existing application (legacy SnowStorm AI prototype)
 
-The current app lets users explore eight configured pilot streets in St. John's, select multiple streets, and review recorded municipal snow-clearing priorities and their sources. Unknown priorities are labelled unavailable. These streets are not the three-district crisis-reporting pilot list.
+The current app lets users explore eight configured pilot streets in St. John's, preview synthetic report counts, select multiple streets, and review recorded municipal snow-clearing priorities and their sources. Unknown priorities are labelled unavailable. These streets are not the three-district crisis-reporting pilot list.
 
 The **Map** tab contains Map Explorer. The **Simulation** tab accepts hourly
 snowfall (comma-separated centimetres), a manually entered street length, and
@@ -69,7 +69,9 @@ review their highlighted geometries and details.
 ### Project layout
 
 - `app.py` — single-page Streamlit entry point with Map, Simulation, and Dev note tabs
-- `components/map_tab.py` — map rendering, session data refresh, street search/selection, priority legend, source links, and details
+- `components/map_tab.py` — mock report-count map and KPIs, session data refresh, street search/selection, source links, and details
+- `services/mock_reports.py` — deterministic fixture of 200 reports from 200 fictional people
+- `scripts/generate_mock_reports.py` — command-line JSON export of the same mock reports
 - `components/simulation_tab.py` — legacy hypothetical snow-depth simulation UI
 - `components/dev_note_tab.py` — brief map progress, pilot scope rationale, and limitations
 - `services/street_data.py` — cached local data loading and validation, shared independently of the tabs
@@ -114,18 +116,48 @@ The theme in `.streamlit/config.toml` follows the colours and typography in
 no external font download is configured. Map and street details appear side by
 side on wider screens and stack on narrow screens using Streamlit's native layout.
 
-Selected streets show recorded priority-source links and explicit unavailable
-labels for missing attributes. Verification dates are not recorded in the current
-dataset. The source and limitations panel explains pilot coverage, mixed priorities,
-and the distinction between clearing priorities and current road conditions.
+The map is explicitly labelled **Mock data preview**. Each of 200 fictional people
+submits one report. The shared fixture is regenerated identically on every run:
 
-A large dark dot marks the assumed starting depot at 25 Blackler Avenue
-(47.546909, -52.741242). The address is listed in the
-[City contact directory](https://www.stjohns.ca/contacts-directory/); coordinates
-come from an ArcGIS PointAddress match checked on 2026-10-29, not a verified
-vehicle entrance. All simulated plows are assumed to start here; actual dispatch
-locations remain unverified. The marker is planning context only: the current
-simulation does not use it or calculate routes.
+| Pilot road | Mock reports |
+|---|---:|
+| WATER ST | 65 |
+| DUCKWORTH ST | 50 |
+| KENMOUNT RD | 35 |
+| MILITARY RD | 25 |
+| PRINCE PHILIP DR | 15 |
+| FRESHWATER RD | 7 |
+| GOWER ST | 3 |
+| SIGNAL HILL RD | 0 |
+
+Road colours use **light red for 1–9**, **medium red for 10–29**, and **dark red
+for 30+ reports**. Gray means zero reports, not a clear road. Counts apply to whole
+streets, not individual geometry segments. Selection changes line thickness, not
+the colour scale. These are reporting-activity counts, not snow severity, measured
+impact, live observations, or safety assessments.
+
+The four KPI cards show total reports, distinct reporters, pilot roads with
+reports, and the most-reported road with its count. They always summarize the
+entire mock dataset, regardless of street selection. Refresh updates City geometry
+and priority metadata, not report counts.
+
+Print the synthetic records as JSON from the repository root (no new packages):
+
+```bash
+.venv/bin/python -m scripts.generate_mock_reports
+```
+
+The script prints JSON to standard output; the UI uses the same generator directly
+and does not require saving or importing its output. Records have synthetic report
+and reporter IDs and no real personal information or fabricated observation times.
+
+Selected streets show mock counts, recorded priority-source links and explicit unavailable
+labels for missing attributes. Verification dates are not recorded in the current
+dataset. The source and limitations panel explains pilot coverage, mock data, and
+mixed priorities. Clearing priorities remain available as metadata, not map colours.
+
+The map does not show a starting depot. The current simulation does not assume a
+dispatch location or calculate routes.
 
 ### Validation
 

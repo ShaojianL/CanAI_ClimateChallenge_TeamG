@@ -1,27 +1,17 @@
-"""Map tab: statistic cards, street controls, priority map, and source details."""
+"""Map tab: mock report counts, street controls, map, and source details."""
+
+from collections import Counter
 
 import folium
 import streamlit as st
 from streamlit_folium import st_folium
 
 from components import data_refresh, theme
+from services.mock_reports import generate_mock_reports
 from services.street_data import DataLoadError, load_data
 
-PRIORITY_COLORS = {
-    1: "#d62728",  # red — major/minor arterials
-    2: "#ff7f0e",  # orange — collector streets
-    3: "#1f77b4",  # blue — minor streets and cul-de-sacs
-    4: "#9467bd",  # purple — city-maintained private lanes
-}
-MIXED_COLOR = "#8c6d31"  # olive — different priorities on different sections
-UNKNOWN_COLOR = "#7f7f7f"  # gray — priority unavailable
-
-# ArcGIS PointAddress match for 25 Blackler Avenue; not a verified vehicle entrance.
-DEPOT_LOCATION = (47.546909, -52.741242)
-DEPOT_LABEL = "Assumed starting depot — 25 Blackler Avenue"
-DEPOT_ASSUMPTION = (
-    "All simulated plows start here. Actual dispatch locations are unverified."
-)
+REPORT_COLORS = ("#fcae91", "#ef3b2c", "#99000d")
+NO_REPORTS_COLOR = "#7f7f7f"
 
 PRIORITY_LABELS = {
     1: "Priority 1 — major and minor arterials",
@@ -31,21 +21,15 @@ PRIORITY_LABELS = {
 }
 
 
-def street_color(info: dict) -> str:
-    """
-    This program chooses the map color for a street's priority.
-
-    Parameters:
-        info: Available priority information for the street.
-    Returns:
-        The color for a known, mixed, or unavailable priority.
-    """
-    p = info.get("priority")
-    if p == "mixed":
-        return MIXED_COLOR
-    if p in PRIORITY_COLORS:
-        return PRIORITY_COLORS[p]
-    return UNKNOWN_COLOR
+def street_color(report_count: int) -> str:
+    """Choose one of three red shades by report count; zero is gray."""
+    if report_count == 0:
+        return NO_REPORTS_COLOR
+    if report_count < 10:
+        return REPORT_COLORS[0]
+    if report_count < 30:
+        return REPORT_COLORS[1]
+    return REPORT_COLORS[2]
 
 
 def priority_text(info: dict) -> str:
@@ -66,35 +50,25 @@ def priority_text(info: dict) -> str:
     return "Priority unavailable"
 
 
-def build_map(geojson: dict, priorities: dict, selected: list[str]) -> folium.Map:
+def build_map(
+    geojson: dict, report_counts: dict[str, int], selected: list[str]
+) -> folium.Map:
     """
     This program draws all road parts and highlights the selected streets.
 
     Parameters:
         geojson: Validated road FeatureCollection.
-        priorities: Validated priority information by street name.
+        report_counts: Number of mock reports by street name.
         selected: Names of streets to highlight and include in map bounds.
     Returns:
         A Folium map containing the pilot roads.
     """
     m = folium.Map(location=[47.566, -52.72], zoom_start=13, tiles="OpenStreetMap")
 
-    folium.CircleMarker(
-        location=DEPOT_LOCATION,
-        radius=12,
-        color="#ffffff",
-        weight=3,
-        fill=True,
-        fill_color="#172b4d",
-        fill_opacity=1.0,
-        tooltip=DEPOT_LABEL,
-        popup=f"{DEPOT_LABEL}<br>{DEPOT_ASSUMPTION}",
-    ).add_to(m)
-
-    bounds = [DEPOT_LOCATION]
+    bounds = []
     for feature in geojson["features"]:
         name = feature["properties"].get("STREETNAME", "")
-        info = priorities.get(name, {})
+        count = report_counts.get(name, 0)
         is_selected = name in selected
         geometry = feature["geometry"]
 
@@ -112,13 +86,13 @@ def build_map(geojson: dict, priorities: dict, selected: list[str]) -> folium.Ma
                 bounds.extend(coords)
             folium.PolyLine(
                 coords,
-                color=street_color(info),
+                color=street_color(count),
                 weight=8 if is_selected else 3,
-                opacity=1.0 if is_selected else 0.55,
-                tooltip=f"{name} — {priority_text(info)}",
+                opacity=1.0,
+                tooltip=f"{name} — {count} mock reports",
             ).add_to(m)
 
-    if selected:
+    if selected and bounds:
         m.fit_bounds([
             [min(b[0] for b in bounds), min(b[1] for b in bounds)],
             [max(b[0] for b in bounds), max(b[1] for b in bounds)],
@@ -153,24 +127,23 @@ def render():
             if name in street_names
         ]
 
-    # Session state already holds this run's selection before widgets render,
-    # so the statistic cards above the controls stay in step with it
-    selected_count = len(st.session_state.get("selected_streets", []))
-    priority_one = sum(
-        1 for info in priorities.values() if info.get("priority") == 1
-    )
-    mixed = sum(
-        1 for info in priorities.values() if info.get("priority") == "mixed"
-    )
+    reports = [
+        report for report in generate_mock_reports()
+        if report["street_name"] in priorities
+    ]
+    report_counts = Counter(report["street_name"] for report in reports)
+    most_reported = max(street_names, key=lambda name: report_counts[name])
+    st.info("Mock data preview: fictional people and reports, not live submissions.")
     theme.render_kpi_row([
-        (len(street_names), "Pilot streets", theme.GC_ACCENT),
-        (selected_count, "Streets selected", theme.GC_LINK),
-        (priority_one, "Priority 1 arterials", theme.GC_ERROR_RED),
-        (mixed, "Mixed-priority streets", theme.GC_WARNING),
+        (str(len(reports)), "Total reports", theme.GC_ACCENT),
+        (str(len({r["reporter_id"] for r in reports})), "Distinct reporters", theme.GC_ACCENT),
+        (f"{len(report_counts)} / {len(street_names)}", "Pilot roads with reports", theme.GC_ACCENT),
+        (str(report_counts[most_reported]), f"Most reported road: {most_reported}", REPORT_COLORS[2]),
     ])
     st.caption(
-        "Planning context only. Priority colours do not represent current road "
-        "conditions, travel safety, or simulated snow depth."
+        "Counts cover the entire mock dataset, not just selected streets. "
+        "Darker red means more reports, not worse snow or greater danger. "
+        "Gray means no reports, not a clear road."
     )
 
     # ---- Left controls and legend beside the large map card ----
@@ -189,15 +162,18 @@ def render():
 
         with st.container(border=True, key="card-legend"):
             st.subheader("Legend")
-            legend_rows = [(PRIORITY_COLORS[p], PRIORITY_LABELS[p]) for p in sorted(PRIORITY_COLORS)]
-            legend_rows.append((MIXED_COLOR, "Mixed — varies by section"))
-            legend_rows.append((UNKNOWN_COLOR, "Priority unavailable"))
+            legend_rows = [
+                (REPORT_COLORS[0], "1–9 reports"),
+                (REPORT_COLORS[1], "10–29 reports"),
+                (REPORT_COLORS[2], "30+ reports"),
+                (NO_REPORTS_COLOR, "0 reports — no information"),
+            ]
             for color, label in legend_rows:
                 st.markdown(
                     f"<span style='color:{color}'>▬▬</span> {label}",
                     unsafe_allow_html=True,
                 )
-            st.caption("Mixed priorities vary by section. Grey means priority unavailable.")
+            st.caption("Mock report counts per whole street, not snow severity.")
 
             st.subheader("Data sources")
             st.markdown(
@@ -212,12 +188,11 @@ def render():
             st.subheader("Interactive pilot street map")
             st.caption(
                 "Search and select streets in Street controls. Selected streets use "
-                "thicker lines; their priority and section details are also available "
-                "as text."
+                "thicker lines. Hover for mock report counts; select streets for "
+                "counts and recorded priority details as text."
             )
-            st.caption(f"Large dark dot: {DEPOT_LABEL}. {DEPOT_ASSUMPTION}")
             st_folium(
-                build_map(geojson, priorities, selected),
+                build_map(geojson, report_counts, selected),
                 use_container_width=True,
                 height=620,
                 returned_objects=[],  # display-only: avoids reruns on map interaction
@@ -231,6 +206,7 @@ def render():
         for name in selected:
             info = priorities.get(name, {})
             with st.expander(name, expanded=True):
+                st.markdown(f"**Mock reports: {report_counts[name]}**")
                 st.markdown(f"**{priority_text(info)}**")
                 if info.get("approx_length_m") is not None:
                     st.markdown(f"Approx. length: **{info['approx_length_m']:,} m**")
@@ -263,8 +239,14 @@ def render():
         st.markdown(
             "**Snow-clearing priorities:** source links recorded in the local street "
             "dataset appear with selected streets. Verification dates are not recorded. "
-            "Mixed priorities are listed by section; the map uses one mixed-priority "
-            "colour for the whole street."
+            "Mixed priorities are listed by section; they do not determine map colours."
+        )
+        st.markdown(
+            "**Mock reports:** 200 fictional people submit one report each across "
+            "the configured pilot streets. Counts are deterministic UI fixtures, "
+            "not measured impact, verified conditions, or a live reporting feed. "
+            "A whole-street count is repeated on its geometry parts; it does not "
+            "locate an incident on an individual segment."
         )
         st.write(
             "Missing attributes are labelled unavailable. Approximate lengths describe "

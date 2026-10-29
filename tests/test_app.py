@@ -1,13 +1,17 @@
 """Regression checks for the tab layout and extracted map functionality."""
 
 import unittest
+from collections import Counter
 from pathlib import Path
 from unittest.mock import patch
 
 import folium
 from streamlit.testing.v1 import AppTest
 
-from components.map_tab import build_map, street_color, UNKNOWN_COLOR, MIXED_COLOR
+from components.map_tab import (
+    NO_REPORTS_COLOR, REPORT_COLORS, build_map, street_color,
+)
+from services.mock_reports import generate_mock_reports
 from services.street_data import DataLoadError, load_data, validate_data
 
 APP_PATH = Path(__file__).resolve().parents[1] / "app.py"
@@ -81,7 +85,14 @@ class AppTests(unittest.TestCase):
 
     def test_map_highlights_every_selected_segment(self):
         geojson, priorities = load_data()
-        road_map = build_map(geojson, priorities, ["WATER ST"])
+        counts = Counter(report["street_name"] for report in generate_mock_reports())
+        road_map = build_map(geojson, counts, ["WATER ST"])
+        self.assertFalse(
+            any(
+                isinstance(child, folium.CircleMarker)
+                for child in road_map._children.values()
+            )
+        )
         lines = [
             child for child in road_map._children.values()
             if isinstance(child, folium.PolyLine)
@@ -101,8 +112,52 @@ class AppTests(unittest.TestCase):
         highlighted = [line for line in lines if line.options["weight"] == 8]
         self.assertEqual(len(highlighted), selected_count)
         self.assertTrue(all(line.options["opacity"] == 1.0 for line in highlighted))
-        self.assertEqual(street_color({}), UNKNOWN_COLOR)
-        self.assertEqual(street_color({"priority": "mixed"}), MIXED_COLOR)
+        self.assertEqual(
+            {line.options["color"] for line in lines},
+            {NO_REPORTS_COLOR, *REPORT_COLORS},
+        )
+        for line in lines:
+            tooltip = next(
+                child.text for child in line._children.values()
+                if isinstance(child, folium.Tooltip)
+            )
+            name, _ = tooltip.split(" — ")
+            self.assertIn(f"{counts[name]} mock reports", tooltip)
+            self.assertEqual(line.options["color"], street_color(counts[name]))
+
+    def test_report_colour_thresholds(self):
+        for count, expected in (
+            (0, NO_REPORTS_COLOR), (1, REPORT_COLORS[0]), (9, REPORT_COLORS[0]),
+            (10, REPORT_COLORS[1]), (29, REPORT_COLORS[1]),
+            (30, REPORT_COLORS[2]), (65, REPORT_COLORS[2]),
+        ):
+            with self.subTest(count=count):
+                self.assertEqual(street_color(count), expected)
+
+    def test_mock_report_kpis_and_selected_details(self):
+        expected_cards = [
+            ("200", "Total reports"),
+            ("200", "Distinct reporters"),
+            ("7 / 8", "Pilot roads with reports"),
+            ("65", "Most reported road: WATER ST"),
+        ]
+        with patch("components.map_tab.theme.render_kpi_row") as render_kpis:
+            app = AppTest.from_file(str(APP_PATH)).run()
+            self.assertFalse(app.exception)
+            self.assertEqual(
+                [(value, label) for value, label, _ in render_kpis.call_args.args[0]],
+                expected_cards,
+            )
+            app.tabs[0].multiselect[0].set_value(["WATER ST", "SIGNAL HILL RD"]).run()
+            self.assertFalse(app.exception)
+            self.assertEqual(
+                [(value, label) for value, label, _ in render_kpis.call_args.args[0]],
+                expected_cards,
+            )
+        details = "\n".join(item.value for item in app.tabs[0].markdown)
+        self.assertIn("Mock reports: 65", details)
+        self.assertIn("Mock reports: 0", details)
+        self.assertIn("Mock data preview", app.tabs[0].info[0].value)
 
     def test_invalid_geometry_is_rejected(self):
         with self.assertRaises(DataLoadError):

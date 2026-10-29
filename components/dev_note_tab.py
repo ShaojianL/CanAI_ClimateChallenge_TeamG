@@ -17,6 +17,8 @@ def render():
             "- Interactive OpenStreetMap basemap with City road geometry.\n"
             "- Search and multi-select eight pilot streets; highlight their segments "
             "and show published clearing priorities and street details.\n"
+            "- UI preview: 200 fictional reporters, report-count KPIs, and three "
+            "red road shades; gray marks zero reports. This is not live data.\n"
             "- City source links and session data refresh are available in the Map "
             "tab's Street controls and Legend cards.\n"
             "- Simulation is still a placeholder; no live snow depth or clearing-time "
@@ -32,6 +34,7 @@ def render():
             "Search and refresh currently cover only this configured pilot set. "
             "Broader coverage needs additional geometry, politely paced per-street "
             "lookup requests, and checks for unmatched names and priority sections. "
-            "Mixed-priority streets currently use one mixed color for the whole "
-            "street; section boundaries are not yet matched to road segments."
+            "Map colours now show mock report counts for each whole street, not "
+            "clearing priority; priority section boundaries are not yet matched "
+            "to road segments."
         )
