@@ -8,9 +8,23 @@
 
 </div>
 
-## SnowStorm AI — Map MVP
+## Community Crisis Reporting Map
 
-Explore eight pilot streets in St. John's, select multiple streets, and review recorded municipal snow-clearing priorities and their sources. Unknown priorities are labelled unavailable. See [project context](./documents/PROJECT_CONTEXT.md) for the current map-only scope.
+### Problem
+
+Governments lack timely visibility into incidents happening around the city, and traditional reporting can be too slow when hazards need immediate attention. Residents also lack clear, up-to-date information about local conditions, causing last-minute confusion during natural disasters. During a snowstorm, for example, an uprooted tree blocking a road can leave commuters—especially essential workers—unaware until they reach the obstruction.
+
+### Solution and pilot
+
+The project is a crisis-reporting tool where residents can report hazards and view public, map-based alerts. AI is intended to validate and consolidate reports, assign an informational severity (Low, Medium, or High), and send relevant updates to subscribers. Residents will be able to subscribe to a street, a pilot district, or the whole pilot area, and filter alerts by severity. There is no staff review or approval layer. Alerts must communicate uncertainty; AI processing does not prove that an incident is true or guarantee municipal action.
+
+The pilot is limited to streets in **St. John's Center, St. John's East, and St. John's West**, based on the district street-directory data. The supplied CSV must be validated against the existing road geometries before defining the in-scope street list. The product is for situational awareness, not an emergency-reporting service or a guarantee of road safety.
+
+**Implementation status:** These reporting, AI, district-subscription, and notification capabilities are product direction, not features currently implemented in this repository. The current Streamlit app is a legacy SnowStorm AI prototype with a street-priority map and a hypothetical snow-depth simulation. Use [project context](./documents/PROJECT_CONTEXT.md) as the source of truth for the current product scope.
+
+## Existing application (legacy SnowStorm AI prototype)
+
+The current app lets users explore eight configured pilot streets in St. John's, select multiple streets, and review recorded municipal snow-clearing priorities and their sources. Unknown priorities are labelled unavailable. These streets are not the three-district crisis-reporting pilot list.
 
 The **Map** tab contains Map Explorer. The **Simulation** tab accepts hourly
 snowfall (comma-separated centimetres), a manually entered street length, and
@@ -25,7 +39,7 @@ individual plows, routing, traffic, melting, drifting, compaction, and equipment
 failures. Results are simulated estimates, not observed conditions or road-safety
 assessments. The simulation ends after the last supplied hour.
 
-The **Dev note** tab briefly summarizes map progress and explains the eight-street pilot scope.
+The **Dev note** tab briefly summarizes legacy map progress and explains its eight-street scope.
 
 ### Quickstart
 
@@ -56,7 +70,7 @@ highlighted geometries and details in the Map tab.
 
 - `app.py` — single-page Streamlit entry point with Map, Simulation, and Dev note tabs
 - `components/map_tab.py` — map rendering, session data refresh, street search/selection, priority legend, source links, and details
-- `components/simulation_tab.py` — future simulation tab; currently an unavailable-data placeholder
+- `components/simulation_tab.py` — legacy hypothetical snow-depth simulation UI
 - `components/dev_note_tab.py` — brief map progress, pilot scope rationale, and limitations
 - `services/street_data.py` — cached local data loading and validation, shared independently of the tabs
 - `scripts/fetch_pilot_streets.py` — shared City-source fetching logic and command-line preparation of saved data files
